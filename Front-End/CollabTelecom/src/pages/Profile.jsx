@@ -6,7 +6,7 @@ const Profile = () => {
   return (
     <div className="bg-gray-300 h-screen">
       
-         <div className=" w-full h-176 bg-blue-800 pl-[369px] pr-[18px] pt-[21px] pb-[114px] flex justify-end items-center">
+         <div className=" w-full h-176 bg-blue-800  pr-[18px] pt-[21px] pb-[114px] flex justify-end items-center">
           <button className="bg-white rounded-3xl p-2.5 flex justify-center items-center">
            <SquarePen color="#0B4C8C"/>
           </button>
