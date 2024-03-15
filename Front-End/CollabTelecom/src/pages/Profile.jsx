@@ -12,7 +12,7 @@ const Profile = () => {
           </button>
           
          </div>
-          <div className="flex flex-col items-center pt-[127px] pb-[117px] pl-[20px] pr-[20px]">
+          <div className="flex flex-col items-center flex-col pt-[127px] pb-[117px] pl-[20px] pr-[20px]">
             <div className="mb-[10px]">
              <ProfileInfo icon={<User color="#0B4C8C"/>} text="Liste des amis"/>
             </div>
