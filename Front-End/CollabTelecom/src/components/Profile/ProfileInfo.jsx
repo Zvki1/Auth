@@ -1,4 +1,4 @@
-import Link from 'react-router-dom'
+
 
 const ProfileInfo =({ icon, text }) => {
     return (
@@ -7,6 +7,7 @@ const ProfileInfo =({ icon, text }) => {
            <span className="icon mr-[6px]">{icon}</span>
            <span className=" font-inter text-[19px]">{text}</span>
             </button> 
+            
         </>
     )
 }
