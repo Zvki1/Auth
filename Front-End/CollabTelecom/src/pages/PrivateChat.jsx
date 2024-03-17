@@ -27,7 +27,7 @@ const messages = [
 const PrivateChat = () => {
   return (
     <div className="h-screen flex flex-col">
-      <Header />.
+      <Header />
       <div className=" overflow-y-auto h-full pb-20">
       {messages.map((element, index) => (
         <Message

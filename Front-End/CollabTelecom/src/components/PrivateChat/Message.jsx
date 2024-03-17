@@ -3,11 +3,11 @@
 import Avatar from "react-string-avatar";
 const Message = ({sender,time,content}) => {
   return (
-    <div className="flex flex-row px-4 py-2 gap-2 items-center">
-        <Avatar
+    <div className="flex flex-row px-4 py-2 gap-2 items-start">
+        <Avatar 
             string={sender}
             autoColor={true}
-            width={42}
+            width={46}
             cornerRadius={5}
           />
           <div className="flex flex-col">
