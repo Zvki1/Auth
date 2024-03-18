@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -7,10 +8,12 @@ import HeroText from '../components/Auth/HeroText'
 import Header from '../components/Auth/Header'
 import Email from "../assets/SignUp/Email.svg"
 import { SquareAsterisk } from 'lucide-react'
+
 function Login() {
     // const [users, setUsers] = useState([])
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState({})
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,13 +24,28 @@ function Login() {
         axios
         .get('http://localhost:8000/register')
         .then((res) => {
-            console.log(res.data)
+            console.log("axios is workinggg")
         })
     }
 
 
     const handleLogin =  async (event) => {
+
         event.preventDefault();
+        const errors = {};
+        if (!email.trim()) {
+          errors.email = "Email is required";
+        
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+          errors.email = "Invalid email format";
+        }
+
+        if (!password.trim()) {
+          errors.password = "Password is required";
+        }
+
+        setErrors(errors);
+        if (Object.keys(errors).length > 0) return;
         try {
             const response = await axios
             .post('http://localhost:8000/login', { email, password })
@@ -41,7 +59,18 @@ function Login() {
             localStorage.setItem('token', token)
             
         } catch (error) {
-            console.log('Login Error', error)
+          const errors = {};
+          const errorResponse = error.response.data.error
+            console.log('Login Error', errorResponse)
+           
+            if(errorResponse.includes('email')){
+                errors.email = 'Email does not exist';
+                setErrors(errors);
+            }else if(errorResponse.includes('password')){
+                errors.password = 'Invalid password';
+                setErrors(errors);
+            }
+            
         }
     }
 
@@ -59,7 +88,7 @@ function Login() {
     
        <form className="w-full flex flex-col pt-16 lg:pt-8 gap-6" onSubmit={handleLogin}  >
          {/* email */}
-         {/* {errors.email && <p className="text-red-500 pt-1 -mb-[17px]">{errors.email}</p>} */}
+         {errors.email && <p className="text-red-500 pt-1 -mb-[17px]">{errors.email}</p>}
          <div className="relative">
            <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
            <img src={Email} alt="emailicon"  className="w-4 h-4 text-gray-500 " />
@@ -75,7 +104,7 @@ function Login() {
          </div>
        
          {/* password */}
-         {/* {errors.password && <p className="text-red-500 pt-1 -mb-[17px]">{errors.password}</p>} */}
+         {errors.password && <p className="text-red-500 pt-1 -mb-[17px]">{errors.password}</p>}
          <div className="relative">
            <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
            <SquareAsterisk size={20} strokeWidth={2}  color="#6b7280" />

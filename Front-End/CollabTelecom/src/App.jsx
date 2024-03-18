@@ -6,7 +6,7 @@ import Login from './pages/Login'
 import Splash from './pages/Splash'
 import MessagesList from './pages/MessagesList'
 
-import Navbar from './components/Navbar'
+
 import NotFound from './pages/NotFound'
 import PrivateChat from './pages/PrivateChat'
 import GeneralChat from './pages/GeneralChat'
@@ -19,25 +19,32 @@ function App() {
 // dont forgetr to remove the token from local storage when the user logs out
   return (
     <>
-    
     <Routes>
+      {/* Route pour la page d'accueil accessible à tous */}
       <Route path="/" element={<Splash />} />
-     {isUserSignedIn && <Route path="/GeneralChat" element={<GeneralChat/>} /> }
-     {isUserSignedIn && <Route path="/MessagesList" element={<MessagesList />} /> }
-     {isUserSignedIn && <Route path="/Notifications" element={<Notifications />} /> }
-     {isUserSignedIn && <Route path="/Profile" element={<Profile />} /> }
 
-
-
-     {isUserSignedIn && <Route path="/PrivateChat/:user" element={<PrivateChat/>} /> }
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      {/* i comment it just for testing the navbar  */}
-      {/* {isUserSignedIn && <Route path="*" element={<NotFound/>} />} */}
+      {/* Routes protégées accessibles uniquement aux utilisateurs connectés */}
+      {isUserSignedIn ? (
+        <>
+          <Route path="/GeneralChat" element={<GeneralChat />} />
+          <Route path="/MessagesList" element={<MessagesList />} />
+          <Route path="/Notifications" element={<Notifications />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/PrivateChat/:user" element={<PrivateChat />} />
+          {/* Route NotFound pour les routes non définies */}
+          <Route path="*" element={<NotFound />} />
+        </>
+      ) : (
+        <>
+          {/* Routes d'authentification accessibles aux utilisateurs non connectés */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          {/* Redirection vers la page d'accueil pour toutes les autres routes */}
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+      )}
     </Routes>
-    {/* {isUserSignedIn && <Navbar/>} */}
-    {!isUserSignedIn && <Navigate to="/login" />}
-    </>
+  </>
   )
 }
 

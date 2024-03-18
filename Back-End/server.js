@@ -68,7 +68,7 @@ app.post('/login',async (req,res)=>{
         const {email,password} = req.body;
         const user = await User.findOne({email});
         if(!user){
-            return res.status(401).send({error:'Invalid email '});
+            return res.status(401).send({error:'email deos not exist'});
         }
         const isMatch = await bcrypt.compare(password,user.password);
         if(!isMatch){
