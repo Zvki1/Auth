@@ -39,6 +39,10 @@ const SignUp = () => {
     } else if (password.length < 6) {
       errors.password = "Password must be at least 6 characters long";
     }
+    // else if the password containt numbers 
+    else if (!/\d/.test(password)) {
+      errors.password = "Password must contain at least one number";
+    }
 
     setErrors(errors);
     return Object.keys(errors).length === 0; // Returns true if there are no errors
