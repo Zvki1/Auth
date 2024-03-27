@@ -1,4 +1,5 @@
-import {Routes, Route, Navigate} from 'react-router-dom'
+import {Routes, Route, Navigate,} from 'react-router-dom'
+// import { useState } from 'react'
 import './App.css'
 import SignUp from './pages/SignUp'
 
@@ -15,10 +16,12 @@ import Profile from './pages/Profile'
 
 
 function App() {
+
   const isUserSignedIn = !!localStorage.getItem('token')
 // dont forgetr to remove the token from local storage when the user logs out
   return (
     <>
+   
     <Routes>
       {/* Route pour la page d'accueil accessible à tous */}
       <Route path="/" element={<Splash />} />
@@ -31,8 +34,9 @@ function App() {
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/PrivateChat/:user" element={<PrivateChat />} />
+          <Route path="/login" element={<Login />} />
           {/* Route NotFound pour les routes non définies */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound/>} />
         </>
       ) : (
         <>

@@ -3,7 +3,7 @@ import { SquarePen, SlidersHorizontal, DoorOpen, User } from "lucide-react";
 
 import ProfileInfo from "../components/Profile/ProfileInfo";
 import UserInfo from "../components/Profile/UserInfo";
-
+import Logout from "../components/Profile/Logout";
 
 const Profile = () => {
   return (
@@ -16,7 +16,7 @@ const Profile = () => {
       </div>
 
       {/* user information component */}
-      <UserInfo name="Zerrouki Hayet" status="senior developper" />
+      <UserInfo name="Mohamed Zerrouki" status="senior developper" />
       {/* menu div */}
       <div className="flex h-full w-full justify-center pb-48 pt-40 px-6 ">
         {/* buttons container */}
@@ -34,12 +34,15 @@ const Profile = () => {
               text="Paramètres"
             />
           </div>
-          <div className="w-full">
-            <ProfileInfo
+            <div className="w-full">
+            <Logout
               icon={<DoorOpen color="#D30000" size={32} />}
               text="Se déconnecter"
-            />
-          </div>
+               />
+               </div>
+         
+            
+          
         </div>
       </div>
     {/* navbar component */}

@@ -24,7 +24,7 @@ function Login() {
         axios
         .get('http://localhost:8000/register')
         .then((res) => {
-            console.log("axios is workinggg")
+            console.log("axios is workinggg in login page", res.data)
         })
     }
 
@@ -57,6 +57,7 @@ function Login() {
             navigate('/MessagesList')
             window.location.reload();
             localStorage.setItem('token', token)
+            
             
         } catch (error) {
           const errors = {};

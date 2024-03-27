@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
+// importing routes
+const registerRoutes = require('./routes/register');
+const loginRoutes = require('./routes/login');
 // IMPORTING THE USER MODEL
 const User = require('./models/userSchema');
 
@@ -33,53 +36,55 @@ app.use(cors());
 
 //routes
 // user registration
-app.post('/register',async (req,res)=>{
-    try{
-        const {email,username,password} = req.body;
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Email already in use' });
-        }
-        const hashedPassword = await bcrypt.hash(password,10);
-        const user = new User({
-            email,
-            username,
-            password:hashedPassword
-        });
-        const result = await user.save();
-        res.status(201).send(result);
-    }catch(err){
-        res.status(500).send({err:'Error in registration',err});
-    }
-});
+app.use('/register',registerRoutes)
+// app.post('/register',async (req,res)=>{
+//     try{
+//         const {email,username,password} = req.body;
+//         const existingUser = await User.findOne({ email });
+//         if (existingUser) {
+//             return res.status(400).json({ error: 'Email already in use' });
+//         }
+//         const hashedPassword = await bcrypt.hash(password,10);
+//         const user = new User({
+//             email,
+//             username,
+//             password:hashedPassword
+//         });
+//         const result = await user.save();
+//         res.status(201).send(result);
+//     }catch(err){
+//         res.status(500).send({err:'Error in registration',err});
+//     }
+// });
 
-app.get('/register',async (req,res)=>{
-    try{
-        const result = await User.find();
-        res.status(201).send(result);
-    }catch(err){
-        res.status(500).send({err:'unable to get users'});
-    }
-});
+// app.get('/register',async (req,res)=>{
+//     try{
+//         const result = await User.find();
+//         res.status(201).send(result);
+//     }catch(err){
+//         res.status(500).send({err:'unable to get users'});
+//     }
+// });
 
 // user login
-app.post('/login',async (req,res)=>{
-    try{
-        const {email,password} = req.body;
-        const user = await User.findOne({email});
-        if(!user){
-            return res.status(401).send({error:'email deos not exist'});
-        }
-        const isMatch = await bcrypt.compare(password,user.password);
-        if(!isMatch){
-            return res.status(401).send({error:'Invalid  password'});
-        }
-        const token = jwt.sign({userId:user._id},'Zvki1',{expiresIn:'8h'});
-        console.log(jwt.verify(token,'Zvki1'));
-         res.json({message:'Login success',token});
-    }catch (err){
-        res.status(500).send({err:'Login failed'});
+app.use('/login',loginRoutes)
+// app.post('/login',async (req,res)=>{
+//     try{
+//         const {email,password} = req.body;
+//         const user = await User.findOne({email});
+//         if(!user){
+//             return res.status(401).send({error:'email deos not exist'});
+//         }
+//         const isMatch = await bcrypt.compare(password,user.password);
+//         if(!isMatch){
+//             return res.status(401).send({error:'Invalid  password'});
+//         }
+//         const token = jwt.sign({userId:user._id},'Zvki1',{expiresIn:'8h'});
+//         console.log(jwt.verify(token,'Zvki1'));
+//          res.json({message:'Login success',token});
+//     }catch (err){
+//         res.status(500).send({err:'Login failed'});
 
-    }
+//     }
 
-});
+// });
