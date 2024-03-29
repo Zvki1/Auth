@@ -74,7 +74,7 @@ return (
                 </div>
                 ))}
             </div> 
-            <img className="pt-8" src={illustration} alt="search freinds"  width={180}/>
+            {/* <img className="pt-8" src={illustration} alt="search freinds"  width={180}/> */}
         </div>
     </div>
 </div>
