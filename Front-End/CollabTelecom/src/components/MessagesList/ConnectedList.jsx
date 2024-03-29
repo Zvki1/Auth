@@ -57,15 +57,15 @@ useEffect(() => {
    return (
      <div className="w-full px-5 pt-5 pb-3 flex flex-row items-center gap-3 overflow-x-auto">
       {freinds.length === 0 && <p className="text-gray-500">No freinds connected</p>}
-      {!freinds[0] && <p className="text-gray-500">loading...</p>}
+      
       {freinds.length > 0 
       && freinds[0] &&
-       freinds.map((freind,index) => (
+      freinds.map((freind,index) => (
           <ConnectedElement key={index} name={freind.username} />
         ))
         }
       
-       
+
     </div>
    )
  }

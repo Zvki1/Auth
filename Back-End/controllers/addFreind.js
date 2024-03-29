@@ -1,5 +1,5 @@
 const User = require("../models/userSchema");
-
+const jwt = require("jsonwebtoken");
 const searchUser = async (req, res) => {
 try {
       const searchTerm = req.query.searchTerm;
@@ -23,4 +23,27 @@ try {
   }
 };
 
-module.exports = searchUser;
+const addUser = async (req, res) => {
+   const { userId } = req.body;
+   try {
+      const token = req.headers.authorization.split(" ")[1];
+      const mainUser = jwt.verify(token,'Zvki1');
+      const mainUserId = mainUser.userId;
+      const friend = await User.findById(userId);
+      if (!friend) {
+         return res.status(404).json({ error: "Freind not found" });
+      }
+      const operation1= await User.findByIdAndUpdate(mainUserId, { $addToSet: { freinds: userId } });
+      const operation2=   await User.findByIdAndUpdate(userId, { $addToSet: { freinds: mainUserId } });
+      console.log('operation1:',operation1);
+      console.log('operation2:',operation2);
+      res.json({ message: "Friend added successfully", operation1, operation2});
+
+   } catch (error) {
+      console.error("Error adding friend:", error);
+      res.status(500).json({ error: "Failed to add friend" });
+   } 
+}
+
+module.exports = {searchUser, addUser};
+

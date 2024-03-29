@@ -21,10 +21,16 @@ const AddFreind = () => {
         setSearchTerm(value);
         handleSearch(value);
     };
-    const AddFreind = async (userId) => {
+    const addFreind = async (userId) => {
         try {
-            const response = await axios.post(`http://localhost:8000/addFreind`, { userId });
-            console.log('Friend added:', response.data);
+            console.log('Adding friend:', userId);
+            const token = localStorage.getItem('token');
+            const response = await axios.patch(
+                `http://localhost:8000/addFreind`, 
+                { userId },
+                {headers: { Authorization: `Bearer ${token}` }}
+                );
+                console.log('Ami ajouté avec succès:', response.data.message);
         } catch (error) {
             console.error('Error adding friend:', error);
         }
@@ -70,7 +76,7 @@ return (
                         <p className="text-[#2B363B] font-[400] text-lg font-Inter">{user.email}</p>
                     </div>
                     </div>
-                    <button onClick={()=>AddFreind(user._id)} type="button" className="text-white bg-[#112377] hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Ajouter</button>
+                    <button onClick={()=>addFreind(user._id)} type="button" className="text-white bg-[#112377] hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Ajouter</button>
                 </div>
                 ))}
             </div> 

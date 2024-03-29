@@ -22,7 +22,6 @@ function App() {
 // dont forgetr to remove the token from local storage when the user logs out
   return (
     <>
-   
     <Routes>
       {/* Route pour la page d'accueil accessible à tous */}
       <Route path="/" element={<Splash />} />
