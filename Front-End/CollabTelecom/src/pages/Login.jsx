@@ -50,14 +50,15 @@ function Login() {
             const response = await axios
             .post('http://localhost:8000/login', { email, password })
             const token = response.data.token
+            console.log('Login response', response.data);
             // alert('Login successful')
             setEmail('')
             setPassword('')
             fetchUsers();
-            navigate('/MessagesList')
-            window.location.reload();
-            localStorage.setItem('token', token)
-            
+                navigate('/MessagesList')
+                window.location.reload();
+                localStorage.setItem('token', token)
+                                                            // am not passing the id separated from the token in the response
             
         } catch (error) {
           const errors = {};

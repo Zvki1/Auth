@@ -13,6 +13,7 @@ import PrivateChat from './pages/PrivateChat'
 import GeneralChat from './pages/GeneralChat'
 import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
+import AddFreind from './pages/AddFreind'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/PrivateChat/:user" element={<PrivateChat />} />
+          <Route path='/AddFreind' element={<AddFreind/>} />
           <Route path="/login" element={<Login />} />
           {/* Route NotFound pour les routes non définies */}
           <Route path="*" element={<NotFound/>} />

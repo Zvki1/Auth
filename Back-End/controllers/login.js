@@ -15,7 +15,7 @@ const loginUser = async (req,res)=>{
             return res.status(401).send({error:'Invalid  password'});
         }
         const token = jwt.sign({userId:user._id},'Zvki1',{expiresIn:'8h'});
-        console.log(jwt.verify(token,'Zvki1'));
+        console.log(jwt.verify(token,'Zvki1'),"token");
         res.json({message:'Login success',token});
     }catch (err){
         res.status(500).send({err:'Login failed'});
