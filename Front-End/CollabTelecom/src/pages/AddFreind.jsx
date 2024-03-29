@@ -20,8 +20,15 @@ const AddFreind = () => {
         const value = e.target.value;
         setSearchTerm(value);
         handleSearch(value);
-      
     };
+    const AddFreind = async (userId) => {
+        try {
+            const response = await axios.post(`http://localhost:8000/addFreind`, { userId });
+            console.log('Friend added:', response.data);
+        } catch (error) {
+            console.error('Error adding friend:', error);
+        }
+    }
 return (
 <div className=" px-5">
     <Header/>
@@ -49,8 +56,8 @@ return (
             {/* users container */}
             <div  className="pt-3 flex flex-col w-full gap-3">
                 {/*  user elements */}
-                {searchResults.map((user, index)=> (
-                    <div key={index} className="flex flex-row justify-between w-full items-center">
+                {searchResults.map((user)=> (
+                    <div key={user._id} className="flex flex-row justify-between w-full items-center">
                     <div className="flex flex-row items-center gap-3">
                     <Avatar
                         string={user.username}
@@ -63,7 +70,7 @@ return (
                         <p className="text-[#2B363B] font-[400] text-lg font-Inter">{user.email}</p>
                     </div>
                     </div>
-                    <button type="button" className="text-white bg-[#112377] hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Ajouter</button>
+                    <button onClick={()=>AddFreind(user._id)} type="button" className="text-white bg-[#112377] hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Ajouter</button>
                 </div>
                 ))}
             </div> 
