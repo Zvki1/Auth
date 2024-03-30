@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Avatar from "react-string-avatar";
 // eslint-disable-next-line react/prop-types
 const ChatElement = ({sender,time,content}) => {
-  const truncatedContent = content.length >30 ? `${content.slice(0,30)}...` : content;
+  const truncatedContent = content.length >25 ? `${content.slice(0,25)}...` : content;
   return (
     <Link to="/PrivateChat/zaki" className="flex flex-row gap-4">
       <div className="flex flex-row gap-4 max-h-14 w-full">

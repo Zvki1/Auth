@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import ChatElement from "./ChatElement"
 const lastMessages = [
-  { sender: "Youssef BenAmmar", time: "9:00 am", content: "Hey, how's it going?" },
+  { sender: "Youssef Ben", time: "9:00 am", content: "Hey, how's it going?" },
   { sender: "Sofia ElKhattabi", time: "9:05 am", content: "Hi Youssef! I'm doing well, thanks. How about you?" },
   { sender: "Ahmed pouhajja", time: "9:10 am", content: "I'm good too. Did you watch the match last night?" },
   { sender: "Amina BenSalah", time: "9:15 am", content: "Yes, I did. It was incredible! What about you?" },
