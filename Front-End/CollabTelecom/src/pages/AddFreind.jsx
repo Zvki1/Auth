@@ -2,14 +2,52 @@ import { useState } from "react";
 import axios from "axios";
 import Header from "../components/AddFreind/Header"
 import Avatar from "react-string-avatar";
-import illustration from "../assets/searchPeople.svg"
+
 const AddFreind = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+
+    const [isAdding, setIsAdding] = useState(false);
+    const [timerId, setTimerId] = useState(null);
+
     
+
+    const handleAddFriend = (userId) => {
+        setIsAdding(true);
+        setTimerId(
+            setTimeout(async () => {
+                try {
+                    console.log('Adding friend:', userId);
+                    const token = localStorage.getItem('token');
+                    const response = await axios.patch(
+                        `http://localhost:8000/addFreind`, 
+                        { userId },
+                        {headers: { Authorization: `Bearer ${token}` }}
+                        );
+                        console.log('Ami ajouté avec succès:', response.data.message);
+                } catch (error) {
+                    console.error('Error adding friend:', error);
+                }finally {
+                    setIsAdding(false);
+                }
+            }, 3000) // Définir un délai de 3 secondes (3000 millisecondes)
+        );
+    };
+
+    const handleCancelAdd = () => {
+        clearTimeout(timerId); // Annuler le timer si l'utilisateur annule l'ajout dans les 3 secondes
+        setIsAdding(false);
+        console.log('Addition cancelled');
+    };
+
+
     const handleSearch = async (term) => {
         try {
-            const response = await axios.get(`http://localhost:8000/addFreind?searchTerm=${term}`);
+            const token = localStorage.getItem('token');
+            const response = await axios.get(
+                `http://localhost:8000/addFreind?searchTerm=${term}`
+                ,{headers: { Authorization: `Bearer ${token}` }}
+                );
             setSearchResults(response.data.users);
             console.log('Search results:', searchResults);
         } catch (error) {
@@ -21,20 +59,7 @@ const AddFreind = () => {
         setSearchTerm(value); 
         handleSearch(value);
     };
-    const addFreind = async (userId) => {
-        try {
-            console.log('Adding friend:', userId);
-            const token = localStorage.getItem('token');
-            const response = await axios.patch(
-                `http://localhost:8000/addFreind`, 
-                { userId },
-                {headers: { Authorization: `Bearer ${token}` }}
-                );
-                console.log('Ami ajouté avec succès:', response.data.message);
-        } catch (error) {
-            console.error('Error adding friend:', error);
-        }
-    }
+    
 return (
 <div className=" px-5">
     <Header/>
@@ -76,7 +101,8 @@ return (
                         <p className="text-[#2B363B] font-[400] text-lg font-Inter">{user.email}</p>
                     </div>
                     </div>
-                    <button onClick={()=>addFreind(user._id)} type="button" className="text-white bg-[#112377] hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Ajouter</button>
+                    {!isAdding && <button onClick={()=>handleAddFriend(user._id)} type="button" className="text-white bg-[#112377] hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Ajouter</button>}
+                    {isAdding && <button onClick={handleCancelAdd} type="button" className="text-white bg-gray-700 hover:bg-blue-800 focus:ring-4  font-medium rounded-lg text-sm px-2 py-4  focus:outline-none ">Anuller</button>}
                 </div>
                 ))}
             </div> 
