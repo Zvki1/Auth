@@ -1,17 +1,26 @@
 const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
+
 const searchUser = async (req, res) => {
 try {
       const searchTerm = req.query.searchTerm;
+      const token = req.headers.authorization.split(" ")[1];
+      const mainUser = jwt.verify(token,'Zvki1');
+      const mainUserId = mainUser.userId;
+      console.log('mainUserId:',mainUserId);
       if (!searchTerm) {
          return res.json({ users: [], message: "No search term provided"});
       }
-      const users = await User.find( { $or: [
-      {username: { $regex: searchTerm, $options: "i" }},
-      {email: { $regex: searchTerm, $options: "i" }}
-      ]},
-      { password: 0, __v: 0}
-      ).limit(7);
+      const users = await User.find({
+         $and: [
+            { $or: [
+               { username: { $regex: searchTerm, $options: "i" }},
+               { email: { $regex: searchTerm, $options: "i" }}
+            ]},
+            { _id: { $ne: mainUserId } }, // Exclure l'utilisateur principal de la recherche
+            { freinds: { $ne: mainUserId } } // Exclure les utilisateurs déjà amis avec l'utilisateur principal
+         ]
+      }, { password: 0, __v: 0 }).limit(7);
       // if no users found,inform the front end that no users were found
       // if(users.length <1){
       //    return res.json({message: "No users found"})

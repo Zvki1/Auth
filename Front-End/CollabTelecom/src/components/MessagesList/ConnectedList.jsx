@@ -55,7 +55,7 @@ useEffect(() => {
 }, []); 
 
    return (
-     <div className="w-full px-5 pt-5 pb-3 flex flex-row items-center gap-3 overflow-x-auto">
+    <div className="w-full px-5 pt-5 pb-3 flex flex-row items-center gap-3 overflow-x-auto">
       {freinds.length === 0 && <p className="text-gray-500">No freinds connected</p>}
       
       {freinds.length > 0 
