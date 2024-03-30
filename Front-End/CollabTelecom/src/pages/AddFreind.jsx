@@ -18,7 +18,7 @@ const AddFreind = () => {
     }; 
     const handleChange = (e) => {
         const value = e.target.value;
-        setSearchTerm(value);
+        setSearchTerm(value); 
         handleSearch(value);
     };
     const addFreind = async (userId) => {

@@ -4,6 +4,7 @@ import { SquarePen, SlidersHorizontal, DoorOpen, User } from "lucide-react";
 import ProfileInfo from "../components/Profile/ProfileInfo";
 import UserInfo from "../components/Profile/UserInfo";
 import Logout from "../components/Profile/Logout";
+
 import { useEffect,useState } from "react";
 import axios from "axios";
 const Profile = () => {
@@ -60,12 +61,14 @@ const Profile = () => {
             <ProfileInfo
               icon={<User color="#0B4C8C" size={32} />}
               text="Liste des amis"
+              linkTo="/ListAmis"
             />
           </div>
           <div className="w-full">
             <ProfileInfo
               icon={<SlidersHorizontal color="#0B4C8C" size={32} />}
               text="Paramètres"
+              linkTo="../ListAmis"
             />
           </div>
             <div className="w-full">
