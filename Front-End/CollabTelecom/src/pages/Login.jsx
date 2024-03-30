@@ -8,12 +8,14 @@ import HeroText from '../components/Auth/HeroText'
 import Header from '../components/Auth/Header'
 import Email from "../assets/SignUp/Email.svg"
 import { SquareAsterisk } from 'lucide-react'
+import { EyeOff,Eye } from 'lucide-react';
 
 function Login() {
     // const [users, setUsers] = useState([])
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState({})
+    const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,7 +26,7 @@ function Login() {
         axios
         .get('http://localhost:8000/register')
         .then((res) => {
-            console.log("axios is workinggg")
+            console.log("axios is workinggg in login page", res.data)
         })
     }
 
@@ -50,13 +52,15 @@ function Login() {
             const response = await axios
             .post('http://localhost:8000/login', { email, password })
             const token = response.data.token
+            console.log('Login response', response.data);
             // alert('Login successful')
             setEmail('')
             setPassword('')
             fetchUsers();
-            navigate('/MessagesList')
-            window.location.reload();
-            localStorage.setItem('token', token)
+                navigate('/MessagesList')
+                window.location.reload();
+                localStorage.setItem('token', token)
+                                                            // am not passing the id separated from the token in the response
             
         } catch (error) {
           const errors = {};
@@ -110,14 +114,22 @@ function Login() {
            <SquareAsterisk size={20} strokeWidth={2}  color="#6b7280" />
            </div>
            <input
-             type="password"
+             type={showPassword ? 'text' : 'password'}
              id="email-address-icon"
              className="bg-gray-50 border border-gray-300 text-gray-900 text-lg font-medium rounded-lg  block w-full ps-10 p-4     "
              placeholder="Password"
              value={password}
              onChange={(e)=>{setPassword(e.target.value)}}
            />
+          
          </div>
+         <button type='button' className='relative '>
+            {!showPassword 
+            ? 
+            <Eye size={20} strokeWidth={2} color="#6b7280" className='absolute -top-16 right-3' onClick={()=>setShowPassword(!showPassword)} /> 
+            : 
+            <EyeOff size={20} strokeWidth={2} color="#6b7280" className='absolute -top-16 right-3' onClick={()=>setShowPassword(!showPassword)} />}
+           </button>
          {/* button */}
          <button type="submit" className="text-white bg-[#112377] hover:bg-blue-800   rounded-lg text-2xl font-semibold  py-3  ">Login</button>
        </form>

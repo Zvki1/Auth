@@ -64,8 +64,8 @@ const SignUp = () => {
     const handleSubmit = (event) => {
       event.preventDefault();
      if (validateForm()) {
-      axios
-      .post('http://localhost:8000/register', { email, username, password })
+      console.log("the handle submit is working");
+      axios.post('http://localhost:8000/register', { email, username, password })
       .then(() => {
           alert('Registration Successful')
           setEmail('')
@@ -80,7 +80,7 @@ const SignUp = () => {
           errors.email = "Email is already in use.";
           setErrors(errors);
         } else {
-          console.log("Unable to register user. Please try again later.");
+          console.log("Unable to register user. Please try again later.",error);
         }
       })
     }

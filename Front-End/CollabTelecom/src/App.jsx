@@ -1,4 +1,5 @@
-import {Routes, Route, Navigate} from 'react-router-dom'
+import {Routes, Route, Navigate,} from 'react-router-dom'
+// import { useState } from 'react'
 import './App.css'
 import SignUp from './pages/SignUp'
 
@@ -12,9 +13,11 @@ import PrivateChat from './pages/PrivateChat'
 import GeneralChat from './pages/GeneralChat'
 import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
+import AddFreind from './pages/AddFreind'
 
 
 function App() {
+
   const isUserSignedIn = !!localStorage.getItem('token')
 // dont forgetr to remove the token from local storage when the user logs out
   return (
@@ -31,8 +34,10 @@ function App() {
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/PrivateChat/:user" element={<PrivateChat />} />
+          <Route path='/AddFreind' element={<AddFreind/>} />
+          <Route path="/login" element={<Login />} />
           {/* Route NotFound pour les routes non définies */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound/>} />
         </>
       ) : (
         <>

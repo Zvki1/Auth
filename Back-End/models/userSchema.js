@@ -13,6 +13,11 @@ const userSchema = new Schema({
     password : {
          type: String,
          required: true
-    }
+    },
+   
+    freinds: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User' 
+    }],
 });
 module.exports = mongoose.model('User', userSchema);
