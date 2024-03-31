@@ -9,6 +9,7 @@ const loginRoutes = require('./routes/login');
 const profileRoutes = require('./routes/Profile');
 const messagesRoutes = require('./routes/Messages');
 const addFreindRoutes = require('./routes/addFreind');
+const freindListRoutes = require('./routes/freindList');
 // IMPORTING THE USER MODEL
 const User = require('./models/userSchema');
 
@@ -48,5 +49,7 @@ app.use('/messages',messagesRoutes)
 
 // search for users to add
 app.use('/addFreind',addFreindRoutes)
-// add freind
+
+// freind list 
+app.use('/freindList',freindListRoutes)
 
