@@ -9,11 +9,11 @@ const getFreindList = async (req,res)=>{
         .populate({
             path:'freinds',
             select:'username email _id'
-        
         })
+        user.freinds.sort((a, b) => a.username.localeCompare(b.username));
         res.json({freinds:user.freinds});
     }catch(err){
-        res.status(500).send({error:'freind list not found'});
+        res.status(500).send({error:'friend list not found'});
     }
 }
 
