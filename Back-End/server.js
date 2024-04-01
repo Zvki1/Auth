@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const socketIO = require('socket.io');
 
 // importing routes
 const registerRoutes = require('./routes/register');
@@ -15,28 +16,13 @@ const User = require('./models/userSchema');
 
 // express connection
 const app = express();
-//connect to mongodb
-const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
-    async function mongoseConnect(){
-        try {
-            await mongoose.connect(dbURI)
-            console.log('connected to database')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    mongoseConnect()
-    app.listen(8000,()=>{
-        console.log('Server is running on port 8000');
-    });
-    
-//middleware
+
+                                    //middleware
 app.use(bodyParser.json());
 app.use(cors());
 
+                                    //routes
 
-
-//routes
 // user registration
 app.use('/register',registerRoutes)
 // user login
@@ -52,4 +38,33 @@ app.use('/addFreind',addFreindRoutes)
 
 // freind list 
 app.use('/freindList',freindListRoutes)
+
+
+//connect to mongodb
+const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
+    async function mongoseConnect(){
+        try {
+            await mongoose.connect(dbURI)
+            console.log('connected to database')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    mongoseConnect()
+
+    const server = require('http').createServer(app);
+    const io = socketIO(server);
+
+    io.on('connection', (socket) => {
+        console.log('User connected');
+        console.log('what is the socket',socket)
+        socket.on('disconnect', () => {
+            console.log('User disconnected');
+        });
+    });
+
+    server.listen(8000,()=>{
+        console.log('Server is running on port 8000');
+    });
+    
 
