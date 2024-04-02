@@ -11,6 +11,7 @@ const profileRoutes = require('./routes/Profile');
 const messagesRoutes = require('./routes/Messages');
 const addFreindRoutes = require('./routes/addFreind');
 const freindListRoutes = require('./routes/freindList');
+const privateChatRoutes = require('./routes/PrivateChat');
 // IMPORTING THE USER MODEL
 const User = require('./models/userSchema');
 
@@ -38,6 +39,9 @@ app.use('/addFreind',addFreindRoutes)
 
 // freind list 
 app.use('/freindList',freindListRoutes)
+
+//  private chat
+app.use('/PrivateChat',privateChatRoutes)
 
 
 //connect to mongodb

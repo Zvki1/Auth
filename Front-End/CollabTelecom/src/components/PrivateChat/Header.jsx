@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { ChevronLeft,Phone,Video,EllipsisVertical    } from "lucide-react";
 import Avatar from "react-string-avatar";
-const Header = () => {
+const Header = ({username}) => {
   return (
     <header className="py-4 px-5 flex justify-between items-center border-b-2">
       <div className="flex flex-row items-center gap-2">
@@ -11,7 +12,7 @@ const Header = () => {
 
         <div className="relative inline">
           <Avatar
-            string="Reguieg Zakaria"
+            string={username}
             autoColor={true}
             width={36}
             cornerRadius={5}
@@ -19,7 +20,7 @@ const Header = () => {
 
           <span className="absolute bottom-0 left-7 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
         </div>
-        <p className="font-lato text-[#2B363B] text-xl font-semibold">REGUIEG Zakaria</p>
+        <p className="font-lato text-[#2B363B] text-xl font-semibold">{username}</p>
       </div>
 
       <div className="flex items-center gap-3 justify-center">

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
 import Header from "../components/PrivateChat/Header";
 import Message from "../components/PrivateChat/Message";
 import MessageInput from "../components/PrivateChat/MessageInput";
 import SocketContext from '../context/SocketContext';
-import { useContext,useEffect } from 'react';
+import { useContext,useEffect,useState } from 'react';
 
 
 // Hardcoded data for demonstration purposes
@@ -30,15 +31,34 @@ const messages = [
 ];
 
 const PrivateChat = () => {
+  const  [username, setUsername] = useState('')
+
   const socket = useContext(SocketContext);
+  //  handle the message from the socket
   useEffect(() => {
     socket.on('chat message', (msg) => {
       console.log('Message from the socket :', msg);
     });
   }, [socket]);
+
+  // fetching id from the url
+  useEffect(() => {
+    const freindId = window.location.pathname.split('/')[2]
+    axios
+    .get(`http://localhost:8000/PrivateChat?freindId=${freindId}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then((response) => {
+      setUsername(response.data.freindInfos.username)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }),[]
   return (
     <div className="h-screen flex flex-col">
-      <Header />
+      <Header username={username} />
       <div className=" overflow-y-auto h-full pb-20">
       {messages.map((element, index) => (
         <Message
