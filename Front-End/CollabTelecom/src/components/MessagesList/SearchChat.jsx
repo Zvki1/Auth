@@ -1,11 +1,19 @@
-import { useState } from "react";
+
+import { useState  } from "react";
+
+
 const SearchChat = () => {
   const [searchFriend, setSearchFriend] = useState('');
+ 
+ 
+
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchFriend(value); 
     console.log(value); 
 };
+
+
 
   return (
    
