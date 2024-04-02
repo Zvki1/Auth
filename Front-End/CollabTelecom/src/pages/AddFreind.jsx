@@ -49,7 +49,7 @@ const AddFreind = () => {
                 ,{headers: { Authorization: `Bearer ${token}` }}
                 );
             setSearchResults(response.data.users);
-            console.log('Search results:', searchResults);
+           
         } catch (error) {
             console.error('Error searching for friends:', error);
         }

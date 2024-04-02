@@ -14,7 +14,7 @@ const getFreindsList = async (req,res)=>{
             email: freind.email,
             username: freind.username
         }));
-        res.json({freinds: freindsInfo});
+        res.json({freinds: freindsInfo,user: {username: user.username,id: user._id}});
     }catch(err){
         res.status(500).send({err:'Server error'});
     }

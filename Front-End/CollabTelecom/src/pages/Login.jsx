@@ -18,17 +18,6 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchUsers();
-    }, [])
-
-    const fetchUsers = () => {
-        axios
-        .get('http://localhost:8000/register')
-        .then((res) => {
-            console.log("axios is workinggg in login page", res.data)
-        })
-    }
 
 
     const handleLogin =  async (event) => {
@@ -52,14 +41,13 @@ function Login() {
             const response = await axios
             .post('http://localhost:8000/login', { email, password })
             const token = response.data.token
-            console.log('Login response', response.data);
             // alert('Login successful')
             setEmail('')
             setPassword('')
-            fetchUsers();
                 navigate('/MessagesList')
                 window.location.reload();
                 localStorage.setItem('token', token)
+                localStorage.setItem('user', JSON.stringify(response.data.user))
                                                             // am not passing the id separated from the token in the response
             
         } catch (error) {

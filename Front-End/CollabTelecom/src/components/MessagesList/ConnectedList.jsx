@@ -42,7 +42,6 @@ const names = [
             headers: { Authorization: `Bearer ${token}` }
         })
         .then((res) => {
-            console.log("axios is workinggg in messages list", res.data.freinds)
             setFreinds(res.data.freinds)  
         })
         .catch((error) => {

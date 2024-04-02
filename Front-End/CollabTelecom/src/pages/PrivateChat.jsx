@@ -1,7 +1,12 @@
+/* eslint-disable react/prop-types */
 import Header from "../components/PrivateChat/Header";
 import Message from "../components/PrivateChat/Message";
 import MessageInput from "../components/PrivateChat/MessageInput";
+import SocketContext from '../context/SocketContext';
+import { useContext,useEffect } from 'react';
 
+
+// Hardcoded data for demonstration purposes
 const person1 = "REGUIEG Zakaria";
 const person2 = "AMARI Lamis";
 
@@ -25,6 +30,12 @@ const messages = [
 ];
 
 const PrivateChat = () => {
+  const socket = useContext(SocketContext);
+  useEffect(() => {
+    socket.on('chat message', (msg) => {
+      console.log('Message from the socket :', msg);
+    });
+  }, [socket]);
   return (
     <div className="h-screen flex flex-col">
       <Header />

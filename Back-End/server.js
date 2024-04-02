@@ -53,14 +53,28 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
     mongoseConnect()
 
     const server = require('http').createServer(app);
-    const io = socketIO(server);
+    const io = require('socket.io')(server, {
+        cors: {
+          origin: "http://127.0.0.1:5173",
+          methods: ["GET", "POST"]
+        }
+      });
 
     io.on('connection', (socket) => {
-        console.log('User connected');
-        console.log('what is the socket',socket)
+        console.log('User connected with the socket server');
+        console.log('socket id:',socket.id);
+        console.log('socket token',socket.handshake.auth.token.substring(0,10));
+        console.log('socket userId:',socket.handshake.headers.userid);
         socket.on('disconnect', () => {
-            console.log('User disconnected');
+            console.log('User disconnected from the socket server');
+        
         });
+
+        socket.on('chat message', (msg) => {
+            console.log('Message:', msg);
+            socket.broadcast.emit('chat message', msg);
+        });
+
     });
 
     server.listen(8000,()=>{

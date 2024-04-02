@@ -64,7 +64,7 @@ const SignUp = () => {
     const handleSubmit = (event) => {
       event.preventDefault();
      if (validateForm()) {
-      console.log("the handle submit is working");
+    
       axios.post('http://localhost:8000/register', { email, username, password })
       .then(() => {
           alert('Registration Successful')

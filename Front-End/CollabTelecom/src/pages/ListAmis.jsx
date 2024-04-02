@@ -14,7 +14,7 @@ const ListAmis=() => {
       "http://localhost:8000/freindList"
       ,{headers: { Authorization: `Bearer ${token}` }})
      .then((response) => {
-        console.log(response.data.freinds);
+       
         setFriends(response.data.freinds);
          
     })

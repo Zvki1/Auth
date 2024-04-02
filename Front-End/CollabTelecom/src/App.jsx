@@ -1,13 +1,11 @@
 import {Routes, Route, Navigate,} from 'react-router-dom'
-// import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import './App.css'
 import SignUp from './pages/SignUp'
-
 import Login from './pages/Login'
 import Splash from './pages/Splash'
 import MessagesList from './pages/MessagesList'
-
-
 import NotFound from './pages/NotFound'
 import PrivateChat from './pages/PrivateChat'
 import GeneralChat from './pages/GeneralChat'
@@ -16,13 +14,40 @@ import Profile from './pages/Profile'
 import AddFreind from './pages/AddFreind'
 import ListAmis from './pages/ListAmis'
 
+import io from 'socket.io-client';
+import SocketContext from './context/SocketContext'
 
 function App() {
-
   const isUserSignedIn = !!localStorage.getItem('token')
-// dont forgetr to remove the token from local storage when the user logs out
+  const [socket, setSocket] = useState(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (isUserSignedIn) {
+      const socket = io('http://localhost:8000',
+      {
+        auth: {
+          token: localStorage.getItem('token')
+      },
+      extraHeaders: {
+        'userId':user.id
+      }
+      });
+      setSocket(socket);
+      socket.on('connect', () => {
+      console.log('Connected to  the socket server from the app');
+      // console.log('userId:',localStorage.getItem('user'));
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from the socket  server');
+    });
+    }
+    
+  } , [isUserSignedIn]);
+
   return (
-    <>
+    
+      <SocketContext.Provider value={socket}>
     <Routes>
       {/* Route pour la page d'accueil accessible à tous */}
       <Route path="/" element={<Splash />} />
@@ -31,10 +56,12 @@ function App() {
       {isUserSignedIn ? (
         <>
           <Route path="/GeneralChat" element={<GeneralChat />} />
-          <Route path="/MessagesList" element={<MessagesList />} />
+
+          <Route path="/MessagesList" element={<MessagesList socket={socket} />} />
+          <Route path="/PrivateChat/:user" element={<PrivateChat socket={socket}  />} />
+
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/PrivateChat/:user" element={<PrivateChat />} />
           <Route path='/AddFreind' element={<AddFreind/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/ListAmis" element={<ListAmis/>} />
@@ -51,7 +78,8 @@ function App() {
         </>
       )}
     </Routes>
-  </>
+      </SocketContext.Provider>
+  
   )
 }
 

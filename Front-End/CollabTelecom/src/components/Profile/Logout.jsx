@@ -1,11 +1,17 @@
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import SocketContext from "../../context/SocketContext"
 /* eslint-disable react/prop-types */
 
 const Logout = ({ icon, text }) => {
+
+  const socket = useContext(SocketContext);
+
     const navigate = useNavigate();
     const handleSignOut = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        socket.disconnect();
         console.log("sign out");
         navigate('/login');
         }

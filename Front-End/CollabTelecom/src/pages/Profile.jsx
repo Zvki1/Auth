@@ -19,7 +19,7 @@ const Profile = () => {
             }
         })
         .then((res) => {
-            console.log("axios is workinggg in profile page",res.data.user)
+           
           
               setUserInfo(res.data.user)
         })
