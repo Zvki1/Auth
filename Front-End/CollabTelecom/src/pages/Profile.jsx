@@ -68,7 +68,7 @@ const Profile = () => {
             <ProfileInfo
               icon={<SlidersHorizontal color="#0B4C8C" size={32} />}
               text="Paramètres"
-              linkTo="../ListAmis"
+              linkTo=""
             />
           </div>
             <div className="w-full">
