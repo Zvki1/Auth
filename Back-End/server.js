@@ -46,10 +46,6 @@ app.use('/freindList',freindListRoutes)
 app.use('/PrivateChat',privateChatRoutes)
 
 
-
-
-
-
 //connect to mongodb
 const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
     async function mongoseConnect(){
@@ -71,10 +67,18 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
       });
 
     io.on('connection', (socket) => {
+        // set the user online 
+        User.updateOne({_id:socket.handshake.headers.userid},{isOnline:true})
+        .then(() => {
+            console.log('User is online');
+        })
+        .catch((error) => {
+            console.log('Error:',error);
+        })
         console.log('User connected with the socket server');
-        console.log('socket id:',socket.id);
-        console.log('socket token',socket.handshake.auth.token.substring(0,10));
-        console.log('socket userId:',socket.handshake.headers.userid);
+        // console.log('socket id:',socket.id);
+        // console.log('socket token',socket.handshake.auth.token.substring(0,10));
+        // console.log('socket userId:',socket.handshake.headers.userid);
         // creatin a room for the user
         socket.join(socket.handshake.headers.userid);
         // console.log('my rooms',socket.rooms);

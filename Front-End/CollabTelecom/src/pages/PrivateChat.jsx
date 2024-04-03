@@ -33,6 +33,7 @@ const messagesList = [
 const PrivateChat = () => {
   const messagesEndRef = useRef(null);
   const  [username, setUsername] = useState('')
+  const [isOnline, setisOnline] = useState(false)
   const [receiverId, setreceiverId] = useState('')
   const [messages, setMessages] = useState([]);
   const socket = useContext(SocketContext);
@@ -64,9 +65,9 @@ const PrivateChat = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
     .then((response) => {
-
+     
       setUsername(response.data.freindInfos.username)
-      
+      setisOnline(response.data.freindInfos.isOnline)
       setMessages(response.data.messages)
     })
     .catch((error) => {
@@ -79,13 +80,13 @@ const PrivateChat = () => {
   return (
     <div className="h-screen flex flex-col">
       
-      <Header username={username} />
+      <Header username={username} isOnline={isOnline} />
       <div className=" overflow-y-auto h-full pb-20">
       {messages.map((element, index) => (
         <Message
           key={index}
           sender={element.sender.username || element.sender}
-          time="time"
+          time={element.timestamp}
           content={element.content}
         />
       ))}

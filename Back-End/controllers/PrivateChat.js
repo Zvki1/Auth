@@ -11,7 +11,7 @@ const freindInfos = async (req,res)=>{
         const userId=decoded.userId
        
         // getiing the frnd infos
-        const freindInfos = await User.findById(freindId).select('username _id email');
+        const freindInfos = await User.findById(freindId).select('username _id email isOnline');
         // getting the msg 
         const messages = await Message.find({
             $or: [
