@@ -19,5 +19,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User' 
     }],
+    isOnline: {
+        type: Boolean,
+        default: false
+    },
+    
 });
 module.exports = mongoose.model('User', userSchema);

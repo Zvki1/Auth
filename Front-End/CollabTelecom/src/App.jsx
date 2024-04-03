@@ -63,7 +63,8 @@ function App() {
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path='/AddFreind' element={<AddFreind/>} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Navigate to="/MessagesList" />} />
+          <Route path="/signup" element={<Navigate to="/MessagesList" />} />
           <Route path="/ListAmis" element={<ListAmis/>} />
           {/* Route NotFound pour les routes non définies */}
           <Route path="*" element={<NotFound/>} />

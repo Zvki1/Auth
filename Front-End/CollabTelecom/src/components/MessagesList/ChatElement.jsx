@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "react-string-avatar";
+
 // eslint-disable-next-line react/prop-types
-const ChatElement = ({sender,time,content}) => {
+const ChatElement = ({sender,time,content,freindId}) => {
   const truncatedContent = content.length >25 ? `${content.slice(0,25)}...` : content;
+  const [id, setId] = useState('')
+  useEffect(() => {
+   const idofuser =JSON.parse(localStorage.getItem('user')).id
+    setId(idofuser)
+  }, [])
   return (
-    <Link to="/PrivateChat/zaki" className="flex flex-row gap-4">
+    <Link to={`/PrivateChat/${freindId}`} className="flex flex-row gap-4">
       <div className="flex flex-row gap-4 max-h-14 w-full">
         {/* icon div */}
         <div className="relative inline min-w-14">

@@ -4,6 +4,7 @@ import Avatar from "react-string-avatar";
 import {Phone,MessageCircle ,Trash} from "lucide-react";
 import axios from "axios";
 import { useState ,useEffect } from "react";
+import { Link } from "react-router-dom";
 const ListAmis=() => {
     const [friendList, setFriends] = useState([]);
   
@@ -49,7 +50,14 @@ const ListAmis=() => {
                     </div> 
                     </div>
             
-                    <div className="flex items-center gap-3 justify-center"> <Phone color="#0B4C8C"/><MessageCircle color="#0B4C8C"/><Trash color="#D30000"/></div>
+                    <div className="flex items-center gap-3 justify-center">
+                      <Link to={`/PrivateChat/${freinds._id}`}>
+                       <Phone color="#0B4C8C"/>
+                       </Link>
+                        <Link to={`/PrivateChat/${freinds._id}`}>
+                       <MessageCircle color="#0B4C8C"/>
+                        </Link>
+                       <Trash color="#D30000"/></div>
                  
 
         </div>

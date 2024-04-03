@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
 import Header from "../components/PrivateChat/Header";
 import Message from "../components/PrivateChat/Message";
 import MessageInput from "../components/PrivateChat/MessageInput";
 import SocketContext from '../context/SocketContext';
-import { useContext,useEffect } from 'react';
+import { useContext,useEffect,useState,useRef} from 'react';
 
 
 // Hardcoded data for demonstration purposes
@@ -11,7 +12,7 @@ const person1 = "REGUIEG Zakaria";
 const person2 = "AMARI Lamis";
 
 // Array to store messages
-const messages = [
+const messagesList = [
   { sender: person1, time: "9:00 am", content: "Salut Lamis, comment ça va ?" },
   { sender: person2, time: "9:05 am", content: "Bonjour Zakaria, ça va bien, merci ! Et toi ?" },
   { sender: person1, time: "9:07 am", content: "Ça va bien aussi. As-tu eu le temps de regarder la nouvelle série sur Netflix ?" },
@@ -30,27 +31,71 @@ const messages = [
 ];
 
 const PrivateChat = () => {
+  const messagesEndRef = useRef(null);
+  const  [username, setUsername] = useState('')
+  const [isOnline, setisOnline] = useState(false)
+  const [receiverId, setreceiverId] = useState('')
+  const [messages, setMessages] = useState([]);
   const socket = useContext(SocketContext);
+  //  handle the message from the socket
   useEffect(() => {
-    socket.on('chat message', (msg) => {
-      console.log('Message from the socket :', msg);
+   
+    socket.on('chat message',(content,receiverId) => {
+      console.log('Message from the socket :', content);
+      console.log('and this is my id:',receiverId);
+      if (username) {
+        const newMessage = {
+          content: content,
+          sender: username,
+          timestamp: new Date().toISOString() // Ajouter l'heure d'envoi du message
+        };
+        console.log(newMessage);
+        setMessages(prevMessages => [...prevMessages, newMessage]);
+      }
     });
-  }, [socket]);
+  }, [socket,username]);
+
+  // fetching id from the url
+  useEffect(() => {
+   const id=window.location.pathname.split('/')[2] 
+   setreceiverId(id)
+    axios
+    .get(`http://localhost:8000/PrivateChat?freindId=${id}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then((response) => {
+     
+      setUsername(response.data.freindInfos.username)
+      setisOnline(response.data.freindInfos.isOnline)
+      setMessages(response.data.messages)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [])
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
   return (
     <div className="h-screen flex flex-col">
-      <Header />
+      
+      <Header username={username} isOnline={isOnline} />
       <div className=" overflow-y-auto h-full pb-20">
       {messages.map((element, index) => (
         <Message
           key={index}
-          sender={element.sender}
-          time={element.time}
+          sender={element.sender.username || element.sender}
+          time={element.timestamp}
           content={element.content}
         />
       ))}
+       <div ref={messagesEndRef} >
+
+       </div>
       
       </div>
-      <MessageInput />
+      <MessageInput receiverId={receiverId} setMessages={setMessages} />
     </div>
   );
 };

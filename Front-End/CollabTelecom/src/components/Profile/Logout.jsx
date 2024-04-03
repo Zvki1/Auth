@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import SocketContext from "../../context/SocketContext"
+import axios from "axios";
 /* eslint-disable react/prop-types */
 
 const Logout = ({ icon, text }) => {
@@ -9,11 +10,26 @@ const Logout = ({ icon, text }) => {
 
     const navigate = useNavigate();
     const handleSignOut = () => {
+
+        const token=localStorage.getItem('token');
+        axios.patch('http://localhost:8000/profile/disconnect',null,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((res) => {
+            console.log('User is disconnected',res.data);
+        })
+        .catch((error) => {
+            console.error('Error disconnecting user:', error);
+        });
+
+
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         socket.disconnect();
         console.log("sign out");
-        navigate('/login');
+        navigate('/');
         }
         
   return (

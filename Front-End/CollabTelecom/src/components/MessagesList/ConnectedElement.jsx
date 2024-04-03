@@ -2,9 +2,9 @@
 import { Link } from "react-router-dom";
 import Avatar from "react-string-avatar";
 
-const ConnectedElement = ({name}) => {
+const ConnectedElement = ({name,freindId}) => {
   return (
-    <Link to="/PrivateChat/zaki" className=" min-w-14">
+    <Link to={`/PrivateChat/${freindId}`} className=" min-w-14">
       <div className="relative ">
       
         <Avatar

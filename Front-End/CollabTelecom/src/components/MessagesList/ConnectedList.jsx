@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import ConnectedElement from "./ConnectedElement"
 import { useState,useEffect } from "react"
@@ -31,27 +32,8 @@ const names = [
 ]
 
  
- const ConnectedList = () => {
-  const [freinds,setFreinds] = useState([false])
-  const fetchFreinds = async () => {
-   
-        // Envoyer une requête GET vers l'endpoint /profile pour récupérer le profil de l'utilisateur
-        const token = localStorage.getItem('token');
-         axios
-         .get('http://localhost:8000/messages', {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        .then((res) => {
-            setFreinds(res.data.freinds)  
-        })
-        .catch((error) => {
-            console.error('Error fetching user profile:', error);
-        });
-
-};
-useEffect(() => {
-  fetchFreinds();
-}, []); 
+ const ConnectedList = ({freinds}) => {
+ 
 
    return (
     <div className="w-full px-5 pt-5 pb-3 flex flex-row items-center gap-3 overflow-x-auto">
@@ -60,7 +42,7 @@ useEffect(() => {
       {freinds.length > 0 
       && freinds[0] &&
       freinds.map((freind,index) => (
-          <ConnectedElement key={index} name={freind.username} />
+          <ConnectedElement key={index} name={freind.username} freindId={freind._id} />
         ))
         }
       
