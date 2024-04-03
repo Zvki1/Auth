@@ -46,6 +46,10 @@ app.use('/freindList',freindListRoutes)
 app.use('/PrivateChat',privateChatRoutes)
 
 
+
+
+
+
 //connect to mongodb
 const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
     async function mongoseConnect(){

@@ -3,16 +3,25 @@ import { SendHorizontal } from 'lucide-react';
 import { useState,useContext } from 'react';
 import SocketContext from '../../context/SocketContext';
 
-const MessageInput = ({receiverId}) => {
+const MessageInput = ({receiverId,setMessages}) => {
   const socket = useContext(SocketContext);
   const [message, setMessage] = useState('');
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (e) => {
+    e.preventDefault()
     if (!message.trim()) return; 
+
+    const username = JSON.parse(localStorage.getItem('user')).username;
+    console.log("user from message input",username);
     console.log('Message from the input not from the socket :', message);
     console.log('receiverId:',receiverId);
     socket.emit( 'chat message', message,receiverId)
-
+    const newMessage = {
+      content: message,
+      sender: username,
+      timestamp: new Date().toISOString() // Ajouter l'heure d'envoi du message
+    };
+    setMessages(prevMessages => [...prevMessages, newMessage]);
     setMessage(''); // Effacer le champ de saisie après l'envoi du message
   };
   return (
@@ -29,7 +38,7 @@ const MessageInput = ({receiverId}) => {
         </div>
     </div>
     {/* send buton */}
-    <button onClick={(event)=>{event.preventDefault();handleSendMessage()}} className=' bg-blue-700 p-3 rounded-full  '>
+    <button onClick={(event)=>{handleSendMessage(event)}} className=' bg-blue-700 p-3 rounded-full  '>
     <SendHorizontal color='white' />
     </button>
 </form>
