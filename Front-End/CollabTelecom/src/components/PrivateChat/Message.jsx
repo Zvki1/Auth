@@ -3,10 +3,14 @@
 import Avatar from "react-string-avatar";
 const Message = ({sender,time,content}) => {
   // extrecting hours and mins from the time
+  // the hour is adder by 1 to match the time zone
     const dateString = time;
     const hours = dateString.substring(11, 13);
+    const hourInt = parseInt(hours);
+    const incrementedHour = hourInt + 1;
+    const formattedHour = incrementedHour.toString();
     const minutes = dateString.substring(14, 16);
-    const formattedTime = hours + ':' + minutes;
+    const formattedTime = formattedHour + ':' + minutes;
 
   return (
     <div className="flex flex-row px-4 py-2 gap-2 items-start">
@@ -26,6 +30,7 @@ const Message = ({sender,time,content}) => {
             </p>
           </div>
     </div>
+   
   )
 }
 

@@ -24,7 +24,7 @@ const ChatList = ({freinds}) => {
       {freinds && freinds.length > 0 ? (
          <div className="flex-grow space-y-4 overflow-y-auto w-full  h-screen">
          {freinds.map((message, index) => (
-           <ChatElement key={index} sender={message.username} time="time" content="message" freindId={message._id} />
+           <ChatElement key={index} sender={message.username} isOnline={message.isOnline} time="time" content="message" freindId={message._id} />
          ))}
    </div>
       ) : (

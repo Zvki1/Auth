@@ -18,8 +18,8 @@ const freindInfos = async (req,res)=>{
                 { sender: userId, recipient: freindId },
                 { sender: freindId, recipient: userId }
             ]
-        }).populate('sender','username').sort({ timestamp: 1 }).limit(50);
-
+        }).populate('sender','username').sort({ timestamp: -1 }).limit(50);
+        messages.reverse();
         // sending the msgsand freindinfos
         res.json({freindInfos,messages});
     } catch (err){

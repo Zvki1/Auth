@@ -21,6 +21,7 @@ const MessagesList = () => {
           localStorage.setItem('user', JSON.stringify(res.data.user));
           
         }
+        
         setFreinds(res.data.freinds) 
         
         })

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Avatar from "react-string-avatar";
 
 // eslint-disable-next-line react/prop-types
-const ChatElement = ({sender,time,content,freindId}) => {
+const ChatElement = ({sender,time,content,freindId,isOnline}) => {
   const truncatedContent = content.length >25 ? `${content.slice(0,25)}...` : content;
   const [id, setId] = useState('')
   useEffect(() => {
@@ -23,7 +23,7 @@ const ChatElement = ({sender,time,content,freindId}) => {
             width={54}
             cornerRadius={5}
           />
-          <span className="absolute bottom-0 left-11 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+          {isOnline && <span className="absolute bottom-0 left-11 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>}
         </div>
         {/* second div */}
         <div className="flex flex-row justify-between  w-full ">

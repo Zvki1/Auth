@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
 import Header from "../components/PrivateChat/Header";
+import HeaderSkeleton from '../components/PrivateChat/HeaderSkeleton'
 import Message from "../components/PrivateChat/Message";
+import MessageSkeleton from "../components/PrivateChat/MessageSkeleton";
 import MessageInput from "../components/PrivateChat/MessageInput";
+import Loader from "../components/Loader";
 import SocketContext from '../context/SocketContext';
 import { useContext,useEffect,useState,useRef} from 'react';
 
@@ -33,9 +36,9 @@ const messagesList = [
 const PrivateChat = () => {
   const messagesEndRef = useRef(null);
   const  [username, setUsername] = useState('')
+  const [messages, setMessages] = useState([]);
   const [isOnline, setisOnline] = useState(false)
   const [receiverId, setreceiverId] = useState('')
-  const [messages, setMessages] = useState([]);
   const socket = useContext(SocketContext);
   //  handle the message from the socket
   useEffect(() => {
@@ -75,13 +78,20 @@ const PrivateChat = () => {
     })
   }, [])
   useEffect(() => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
   }, [messages]);
   return (
     <div className="h-screen flex flex-col">
-      
-      <Header username={username} isOnline={isOnline} />
+      {username ? <Header username={username} isOnline={isOnline} /> : <HeaderSkeleton />}
       <div className=" overflow-y-auto h-full pb-20">
+        {messages.length === 0 && 
+        <div>
+        {[...Array(50)].map((_, index) => (
+          <MessageSkeleton key={index} />
+        ))}
+      </div>
+        
+        }
       {messages.map((element, index) => (
         <Message
           key={index}
@@ -90,8 +100,8 @@ const PrivateChat = () => {
           content={element.content}
         />
       ))}
+      {/* empty div used for the scroll */}
        <div ref={messagesEndRef} >
-
        </div>
       
       </div>

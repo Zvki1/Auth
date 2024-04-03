@@ -12,7 +12,8 @@ const getFreindsList = async (req,res)=>{
         const freindsInfo = user.freinds.map(freind => ({
             _id: freind._id,
             email: freind.email,
-            username: freind.username
+            username: freind.username,
+            isOnline: freind.isOnline,
         }));
         res.json({freinds: freindsInfo,user: {username: user.username,id: user._id}});
     }catch(err){

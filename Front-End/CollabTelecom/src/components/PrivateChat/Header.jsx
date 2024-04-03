@@ -29,6 +29,7 @@ const Header = ({username,isOnline}) => {
       <EllipsisVertical color="#1D1C1DB2" />
       </div>
     </header>
+
   );
 };
 

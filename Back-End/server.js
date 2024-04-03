@@ -61,8 +61,7 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
     const server = require('http').createServer(app);
     const io = require('socket.io')(server, {
         cors: {
-          origin: "http://127.0.0.1:5173",
-          methods: ["GET", "POST"]
+          origin: "http://127.0.0.1:5173"
         }
       });
 
@@ -81,7 +80,9 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
         // console.log('socket userId:',socket.handshake.headers.userid);
         // creatin a room for the user
         socket.join(socket.handshake.headers.userid);
-        // console.log('my rooms',socket.rooms);
+        // joing the global room
+        socket.join('IT Group');
+        console.log('my rooms',socket.rooms);
         socket.on('disconnect', () => {
             console.log('User disconnected from the socket server');
         });
@@ -104,6 +105,11 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
             }
             io.to(receiverId).emit('chat message', msg,receiverId);
             // socket.broadcast.emit('chat message', msg,receiverId);
+        });
+        // for the global chat
+        socket.on('IT Group', (msg) => {
+            console.log('Message:', msg);
+            socket.broadcast.emit('IT Group', msg);
         });
 
     });
