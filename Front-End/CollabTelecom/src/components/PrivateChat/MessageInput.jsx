@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import { SendHorizontal } from 'lucide-react';
 import { useState,useContext } from 'react';
 import SocketContext from '../../context/SocketContext';
 
-const MessageInput = () => {
+const MessageInput = ({receiverId}) => {
   const socket = useContext(SocketContext);
   const [message, setMessage] = useState('');
 
   const handleSendMessage = () => {
     if (!message.trim()) return; 
     console.log('Message from the input not from the socket :', message);
-    socket.emit( 'chat message', message)
+    console.log('receiverId:',receiverId);
+    socket.emit( 'chat message', message,receiverId)
 
     setMessage(''); // Effacer le champ de saisie après l'envoi du message
   };

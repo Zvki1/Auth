@@ -32,20 +32,23 @@ const messages = [
 
 const PrivateChat = () => {
   const  [username, setUsername] = useState('')
-
+  const [receiverId, setreceiverId] = useState('')
   const socket = useContext(SocketContext);
   //  handle the message from the socket
   useEffect(() => {
-    socket.on('chat message', (msg) => {
+   
+    socket.on('chat message',(msg,receiverId) => {
       console.log('Message from the socket :', msg);
+      console.log('and this is my id:',receiverId);
     });
   }, [socket]);
 
   // fetching id from the url
   useEffect(() => {
-    const freindId = window.location.pathname.split('/')[2]
+   const id=window.location.pathname.split('/')[2] 
+   setreceiverId(id)
     axios
-    .get(`http://localhost:8000/PrivateChat?freindId=${freindId}`,
+    .get(`http://localhost:8000/PrivateChat?freindId=${id}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
@@ -55,7 +58,7 @@ const PrivateChat = () => {
     .catch((error) => {
       console.log(error)
     })
-  }),[]
+  }, [])
   return (
     <div className="h-screen flex flex-col">
       <Header username={username} />
@@ -70,7 +73,7 @@ const PrivateChat = () => {
       ))}
       
       </div>
-      <MessageInput />
+      <MessageInput receiverId={receiverId} />
     </div>
   );
 };
