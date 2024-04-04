@@ -75,6 +75,10 @@ const PrivateChat = () => {
     })
     .catch((error) => {
       console.log(error)
+      if (error.response.status === 401 || error.response.status === 403) {
+        localStorage.removeItem('token')
+        window.location.replace('/login')
+      }
     })
   }, [])
   useEffect(() => {

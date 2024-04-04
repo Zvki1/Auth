@@ -27,6 +27,11 @@ const MessagesList = () => {
         })
         .catch((error) => {
             console.error('Error fetching user profile:', error);
+            if (error.response.status === 403) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.reload();
+            }
         });
   }
   , [])

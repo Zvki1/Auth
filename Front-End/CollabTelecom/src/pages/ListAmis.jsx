@@ -21,6 +21,10 @@ const ListAmis=() => {
     })
     .catch((err) => {
       console.log("Error",err);
+      if(err.response.status===403){
+        localStorage.removeItem('token');
+        window.location.reload();
+      }
       
     });
   }

@@ -29,7 +29,7 @@ const Logout = ({ icon, text }) => {
         localStorage.removeItem('user');
         socket.disconnect();
         console.log("sign out");
-        navigate('/');
+        navigate('/login');
         }
         
   return (

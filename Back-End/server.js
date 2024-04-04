@@ -12,6 +12,8 @@ const messagesRoutes = require('./routes/Messages');
 const addFreindRoutes = require('./routes/addFreind');
 const freindListRoutes = require('./routes/freindList');
 const privateChatRoutes = require('./routes/PrivateChat');
+// midleware
+const verifyToken = require('./middleware/verifyToken');
 // IMPORTING THE USER MODEL
 const User = require('./models/userSchema');
 const Message = require('./models/messageSchema');
@@ -32,18 +34,18 @@ app.use('/register',registerRoutes)
 app.use('/login',loginRoutes)
 
 // get profile infos 
-app.use('/profile',profileRoutes)
+app.use('/profile',verifyToken,profileRoutes)
 // messages list
-app.use('/messages',messagesRoutes)
+app.use('/messages',verifyToken,messagesRoutes)
 
 // search for users to add
-app.use('/addFreind',addFreindRoutes)
+app.use('/addFreind',verifyToken,addFreindRoutes)
 
 // freind list 
-app.use('/freindList',freindListRoutes)
+app.use('/freindList',verifyToken,freindListRoutes)
 
 //  private chat
-app.use('/PrivateChat',privateChatRoutes)
+app.use('/PrivateChat',verifyToken,privateChatRoutes)
 
 
 //connect to mongodb
