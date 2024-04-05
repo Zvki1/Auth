@@ -5,19 +5,16 @@ const GeneralInput = () => {
   const socket = useContext(SocketContext)
   const [groups, setgroups] = useState([])
   useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem('groups')));
     JSON.parse(localStorage.getItem('groups')).map((group) => {
       setgroups((prev) => [...prev, group.name]);
     });
   },[])
-  socket.on('generalChat', (msg) => {
-    console.log('Message from the socket', msg)
-  }); 
+
   const submitMessage = (e) => {
     if(document.getElementById('default-search').value)
      e.preventDefault();
-  
-    socket.emit('generalChat',document.getElementById('default-search').value,groups);
+    
+    socket.emit('generalChat',document.getElementById('default-search').value,groups,JSON.parse(localStorage.getItem('user')).username);
     console.log('Message sent :',document.getElementById('default-search').value);
     document.getElementById('default-search').value = '';
    

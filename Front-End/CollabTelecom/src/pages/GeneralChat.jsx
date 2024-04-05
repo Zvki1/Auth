@@ -2,9 +2,10 @@ import Navbar from "../components/Navbar"
 import GeneralHeader from "../components/GeneralChat/GeneralHeader"
 import GeneralInput from "../components/GeneralChat/GeneralInput"
 import Message from "../components/PrivateChat/Message";
-
+import SocketContext from '../context/SocketContext';
+import { useContext, useEffect } from "react";
 const GeneralChat = () => {
-
+  const socket = useContext(SocketContext)
 // Définition des personnes
 const person1 = "محمد أحمد";
 const person2 = "فاطمة علي";
@@ -31,6 +32,13 @@ const messages = [
   { sender: person5, time: "10:10 am", content: "حسناً، إلى اللقاء في الاجتماع!" }
 ];
 
+useEffect(() => {
+  socket.on('generalChat', (message,sender) => {
+    console.log('Message received :'+ message + ' from :'+ sender);
+  
+  });
+}
+, [socket]);
   return (
   
     <div className="h-screen flex flex-col">

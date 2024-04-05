@@ -150,12 +150,23 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
             io.to(receiverId).emit('stop typing')
         });
         // for the global chat
-        socket.on('generalChat', (msg,groups) => {
+        socket.on('generalChat', async (msg,groups,sender) => {
             console.log('Message:', msg);
             console.log('Groups:', groups);
-            groups.forEach((group) => {
-                io.to(group).emit('generalChat', msg);
-            });
+            
+            const newMessage = new Message ({
+                content: msg,
+                sender: socket.handshake.headers.userid,
+                timestamp:new Date()
+            })
+                const savedMessage=await newMessage.save();
+                const group=groups[0];
+                // saving the message
+                const groupMessage = await Group.findOne({name:group});
+                 groupMessage.messages.push(savedMessage._id);
+                io.to(group).emit('generalChat', msg,sender);
+            
+            
         });
 
     });
