@@ -1,4 +1,5 @@
 const User = require('../models/userSchema');
+const Group = require('../models/groupSchema');
 const jwt = require('jsonwebtoken');
 
 const getFreindsList = async (req,res)=>{
@@ -15,9 +16,10 @@ const getFreindsList = async (req,res)=>{
             username: freind.username,
             isOnline: freind.isOnline,
         }));
-        res.json({freinds: freindsInfo,user: {username: user.username,id: user._id}});
+        const grouplist=await Group.find({ members: user._id },'name')
+        res.json({freinds: freindsInfo,user: {username: user.username,id: user._id},groups:grouplist});
     }catch(err){
-        res.status(500).send({err:'Server error'});
+        res.status(500).send({err:'Server test error'});
     }
 }
 

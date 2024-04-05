@@ -19,7 +19,9 @@ const MessagesList = () => {
         .then((res) => {
         if (!localStorage.getItem('user')) {
           localStorage.setItem('user', JSON.stringify(res.data.user));
-          
+        }
+        if(!localStorage.getItem('groups')){
+          localStorage.setItem('groups',JSON.stringify(res.data.groups));
         }
         
         setFreinds(res.data.freinds) 

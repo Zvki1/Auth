@@ -1,18 +1,26 @@
 import { SendHorizontal } from 'lucide-react';
 import SocketContext from '../../context/SocketContext';
-import { useContext} from 'react';
+import { useContext,useEffect,useState} from 'react';
 const GeneralInput = () => {
   const socket = useContext(SocketContext)
-  socket.on('IT Group', (msg) => {
+  const [groups, setgroups] = useState([])
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem('groups')));
+    JSON.parse(localStorage.getItem('groups')).map((group) => {
+      setgroups((prev) => [...prev, group.name]);
+    });
+  },[])
+  socket.on('generalChat', (msg) => {
     console.log('Message from the socket', msg)
   }); 
   const submitMessage = (e) => {
-    if(document.getElementById('default-search').value){
+    if(document.getElementById('default-search').value)
      e.preventDefault();
-    socket.emit('IT Group',document.getElementById('default-search').value);
+  
+    socket.emit('generalChat',document.getElementById('default-search').value,groups);
     console.log('Message sent :',document.getElementById('default-search').value);
     document.getElementById('default-search').value = '';
-   }
+   
   }
   return (
    
