@@ -92,14 +92,6 @@ const PrivateChat = () => {
        <div ref={messagesEndRef} >
       {isTyping && 
       <div className="animate-typing text-gray-500 pl-4 py-1 text-lg font-medium animate-pulse text-start">Typing...</div>
-      // <div className="flex flex-row items-center  pl-4 py-3">
-      //   <h2 className=" text-2xl text-Inter font-normal ">typing</h2>
-      //    <div className="flex items-center justify-center gap-2 ">
-      //       <div className="size-3 rounded-full animate-pulse bg-blue-600"></div>
-      //       <div className="size-3 rounded-full animate-pulse bg-blue-600"></div>
-      //       <div className="size-3 rounded-full animate-pulse bg-blue-600"></div>
-      //   </div>
-      // </div>
       }
        </div>
       

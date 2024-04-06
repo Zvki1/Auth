@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
     
     // Vérifier si le token est présent
-    if (!token) {
+    if (!token) { 
         return res.status(401).json({ error: 'Token not provided' });
     }
 

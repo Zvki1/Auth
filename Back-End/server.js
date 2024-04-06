@@ -12,6 +12,7 @@ const messagesRoutes = require('./routes/Messages');
 const addFreindRoutes = require('./routes/addFreind');
 const freindListRoutes = require('./routes/freindList');
 const privateChatRoutes = require('./routes/PrivateChat');
+const generalChatRoutes = require('./routes/generalChat');
 // midleware
 const verifyToken = require('./middleware/verifyToken');
 // IMPORTING THE USER MODEL
@@ -49,6 +50,8 @@ app.use('/freindList',verifyToken,freindListRoutes)
 //  private chat
 app.use('/PrivateChat',verifyToken,privateChatRoutes)
 
+// General Chat
+app.use('/GeneralChat',generalChatRoutes)
 // app.post('/createGroup',async (req,res) => {
 //     try {
 //         const existingGroup = await Group.findOne({name:req.body.name  });
@@ -152,19 +155,26 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
         // for the global chat
         socket.on('generalChat', async (msg,groups,sender) => {
             console.log('Message:', msg);
-            console.log('Groups:', groups);
-            
-            const newMessage = new Message ({
-                content: msg,
-                sender: socket.handshake.headers.userid,
-                timestamp:new Date()
-            })
-                const savedMessage=await newMessage.save();
-                const group=groups[0];
+            console.log('Groups:', groups[0]);
+            try {
+                const group = await Group.findOne({name:groups[0]})
+                if (!group) {
+                    throw new Error('Group not found');
+                }
                 // saving the message
-                const groupMessage = await Group.findOne({name:group});
-                 groupMessage.messages.push(savedMessage._id);
-                io.to(group).emit('generalChat', msg,sender);
+                const newMessage = {
+                    content: msg,
+                    sender: socket.handshake.headers.userid,
+                    timestamp:new Date()
+                }
+                group.messages.push(newMessage);
+                await group.save();
+                io.to(groups[0]).emit('generalChat', msg, sender);
+            } catch (error) {
+                console.log('Error:', error);
+            }
+
+           
             
             
         });
