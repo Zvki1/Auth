@@ -1,4 +1,6 @@
+const privateGroupSchema = require("../models/privateGroupSchema");
 const User = require("../models/userSchema");
+
 const jwt = require("jsonwebtoken");
 
 const searchUser = async (req, res) => {
@@ -46,7 +48,13 @@ const addUser = async (req, res) => {
       const operation2=   await User.findByIdAndUpdate(userId, { $addToSet: { freinds: mainUserId } });
       console.log('operation1:',operation1);
       console.log('operation2:',operation2);
-      res.json({ message: "Friend added successfully", operation1, operation2});
+      const newGroup = new privateGroupSchema({
+         members: [mainUserId, userId],
+         messages: []
+      });
+      const creatingGroup= await newGroup.save();
+      console.log('creatingGroup:',creatingGroup);
+      res.json({ message: "Friend added successfully,and private group created", newGroup });
 
    } catch (error) {
       console.error("Error adding friend:", error);
