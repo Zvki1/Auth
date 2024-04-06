@@ -11,10 +11,10 @@ const MessageInput = ({receiverId,setMessages,setisTyping}) => {
     setMessage(e.target.value);
     if(e.target.value){
       socket.emit('typing',receiverId)
-      console.log('typing');
+      // console.log('typing');
     }else{
       socket.emit('stop typing',receiverId)
-      console.log('stop typing');
+      // console.log('stop typing');
     }
   };
   const handleSendMessage = (e) => {

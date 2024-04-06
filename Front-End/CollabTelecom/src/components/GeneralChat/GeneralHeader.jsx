@@ -6,10 +6,10 @@ import { ChevronLeft,Phone,Video,EllipsisVertical    } from "lucide-react";
 import Avatar from "react-string-avatar";
 import GroupLogo from "../../assets/Logo_group_chat.svg";
 const GeneralHeader = ({nameOfGroup,Picture}) => {
-  useEffect(() => {
-    console.log('nameOfGroup:',nameOfGroup);
-    console.log('Picture:',Picture);
-  }, [Picture,nameOfGroup])
+  // useEffect(() => {
+  //   console.log('nameOfGroup:',nameOfGroup);
+  //   console.log('Picture:',Picture);
+  // }, [Picture,nameOfGroup])
   return (
     <header className="py-4 px-5 flex justify-between items-center border-b-2">
       <div className="flex flex-row items-center gap-2">

@@ -172,11 +172,15 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
                 io.to(groups[0]).emit('generalChat', msg, sender);
             } catch (error) {
                 console.log('Error:', error);
-            }
-
-           
-            
-            
+            } 
+        });
+        // handle general typing
+        socket.on('generalTyping', (groupName,typer) => {
+            socket.broadcast.to(groupName).emit('generalTyping',typer);
+        });
+        // handle stop general typing
+        socket.on('stop generalTyping', (groupName,typer) => {
+            socket.broadcast.to(groupName).emit('stop generalTyping',typer);
         });
 
     });

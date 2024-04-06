@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar"
 import GeneralHeader from "../components/GeneralChat/GeneralHeader"
 import GeneralInput from "../components/GeneralChat/GeneralInput"
 import Message from "../components/PrivateChat/Message";
+import TypingMessage from "../components/PrivateChat/TypingMessage";
 import SocketContext from '../context/SocketContext';
 import { useContext, useEffect ,useState,useRef} from "react";
 import axios from "axios";
@@ -10,12 +11,14 @@ const GeneralChat = () => {
   const [messages, setmessages] = useState([])
   const [nameOfGroup, setnameOfGroup] = useState('')
   const [Picture, setPicture] = useState('')
+  const [isTyping, setisTyping] = useState(false)
+  const [typer, settyper] = useState('')
   const socket = useContext(SocketContext)
 
 
 useEffect(() => {
   socket.on('generalChat', (message,sender) => {
-    console.log('Message received :'+ message + ' from :'+ sender);
+    // console.log('Message received :'+ message + ' from :'+ sender);
     const newMessage = {
       content: message,
       sender: sender,
@@ -23,6 +26,16 @@ useEffect(() => {
     };
     setmessages(prevMessages => [...prevMessages, newMessage]);
 
+  });
+  socket.on('generalTyping',(typer) => {
+    console.log('typer:',typer);
+    settyper(typer)
+    setisTyping(true)
+  });
+  socket.on('stop generalTyping',(typer) => {
+    console.log('typer:',typer);
+    settyper('')
+    setisTyping(false)
   });
 }
 , [socket]);
@@ -37,7 +50,7 @@ useEffect(() => {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
   })
   .then((response) => {
-    console.log(response.data.group.picture);
+    // console.log(response.data.group.picture);
     setPicture(response.data.group.picture)
     setnameOfGroup(response.data.group.name)
     setmessages(response.data.group.messages)
@@ -70,9 +83,10 @@ useEffect(() => {
       ))}
       
         <div ref={messagesEndRef} >
-      {/* {isTyping && 
-      <div className="animate-typing text-gray-500 pl-4 py-1 text-lg font-medium animate-pulse text-start">Typing...</div>
-      } */}
+      {isTyping && 
+      <TypingMessage typer={typer} />
+      // <div className="animate-typing text-gray-500 pl-4 py-1 text-lg font-medium animate-pulse text-start">Typing...</div>
+      }
        </div>
       
       </div>
