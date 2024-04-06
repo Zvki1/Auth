@@ -42,7 +42,7 @@ const names = [
       {freinds.length > 0 
       && freinds[0] &&
       freinds.map((freind,index) => (
-          <ConnectedElement key={index} name={freind.username.split(' ')[0]} freindId={freind._id} isOnline={freind.isOnline} />
+          <ConnectedElement key={index} name={freind.username} freindId={freind._id} isOnline={freind.isOnline} />
         ))
         }
       
