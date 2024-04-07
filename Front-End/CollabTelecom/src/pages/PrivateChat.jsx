@@ -45,6 +45,7 @@ const PrivateChat = () => {
   // fetching id from the url
   useEffect(() => {
    const id=window.location.pathname.split('/')[2] 
+   console.log(id);
    setreceiverId(id)
     axios
     .get(`http://localhost:8000/PrivateChat?freindId=${id}`,

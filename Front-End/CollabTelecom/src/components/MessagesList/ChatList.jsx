@@ -18,14 +18,19 @@ const lastMessages = [
   { sender: "Nadia Soussi", time: "10:05 am", content: "Looking forward to it!" },
   { sender: "Ali Cherif", time: "10:10 am", content: "Me too!" }
 ];
-const ChatList = ({freinds}) => {
+const ChatList = ({freinds,privateGroups}) => {
   return (
     <div className="px-5 pt-5  flex flex-col w-screen h-screen">
-      {freinds && freinds.length > 0 ? (
+      {console.log("the received groups in chatlist",privateGroups)}
+      {console.log("message",privateGroups[0].messages[0].timestamp)}
+      
+      {privateGroups && privateGroups.length > 0 ? (
+
          <div className="flex-grow space-y-4 overflow-y-auto w-full  h-screen">
-         {freinds.map((message, index) => (
-           <ChatElement key={index} sender={message.username} isOnline={message.isOnline} time="time" content="message" freindId={message._id} />
-         ))}
+         {privateGroups.map((message, index) => (
+           <ChatElement key={index} sender={message.members[0].username} isOnline={message.members[0].isOnline} time={message.messages[0].timestamp} content={message.messages[0].content} freindId={message.members[0]._id} />
+           
+       ))}
    </div>
       ) : (
         <div className=" h-screen flex flex-col gap-3  items-center">
