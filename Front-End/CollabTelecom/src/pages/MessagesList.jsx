@@ -34,6 +34,7 @@ const MessagesList = () => {
         // console.log("id",privateGroups.members[0]._id);
         // console.log("time",privateGroups.messages[0].timestamp);
         // console.log("isOnline",privateGroups.members[0].isOnline);
+        console.log("les groups from messages list ",res.data.privateGroups);
         setPrivateGroups(res.data.privateGroups)
         })
         .catch((error) => {

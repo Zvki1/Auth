@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { useEffect } from "react";
 import ChatElement from "./ChatElement"
+
 const lastMessages = [
   { sender: "Youssef Ben", time: "9:00 am", content: "Hey, how's it going?" },
   { sender: "Sofia ElKhattabi", time: "9:05 am", content: "Hi Youssef! I'm doing well, thanks. How about you?" },
@@ -19,13 +21,22 @@ const lastMessages = [
   { sender: "Ali Cherif", time: "10:10 am", content: "Me too!" }
 ];
 const ChatList = ({freinds,privateGroups}) => {
+  // useEffect(() => {
+  //   console.log("private groups in chatlist",privateGroups)    
+  //   privateGroups.sort((a, b) => {
+  //     const lastMessageA = a.messages[a.messages.length - 1];
+  //     const lastMessageB = b.messages[b.messages.length - 1];
+  //     return new Date(lastMessageB.timestamp) - new Date(lastMessageA.timestamp);
+  //   });
+  // }, [privateGroups])
+  
   return (
     <div className="px-5 pt-5  flex flex-col w-screen h-screen">
-      {console.log("the received groups in chatlist",privateGroups)}
-      {console.log("message",privateGroups[0].messages[0].timestamp)}
+      {/* {console.log("the received groups in chatlist",privateGroups)}
+      {console.log("message",privateGroups[0].messages[0].timestamp)} */}
       
       {privateGroups && privateGroups.length > 0 ? (
-
+        
          <div className="flex-grow space-y-4 overflow-y-auto w-full  h-screen">
          {privateGroups.map((message, index) => (
            <ChatElement key={index} sender={message.members[0].username} isOnline={message.members[0].isOnline} time={message.messages[0].timestamp} content={message.messages[0].content} freindId={message.members[0]._id} />

@@ -32,6 +32,7 @@ const getFreindsList = async (req,res)=>{
                 .lean();
             return privateGroup;
         });
+       
         
         // Attendre que toutes les requêtes soient terminées
         const privateGroups = await Promise.all(privateGroupsPromises);
@@ -73,11 +74,12 @@ const getFreindsList = async (req,res)=>{
 // ]).exec();
 
         
-        // console.log(privateGroups);
+        console.log(privateGroups);
         res.json({freinds: freindsInfo,user: {username: user.username,id: user._id},publicGroups:grouplist,privateGroups: privateGroups});
         // res.json({privateGroups: privateGroups});
     }catch(err){
         res.status(500).send({err:'Server test error'});
+        console.log(err);
     }
 }
 
