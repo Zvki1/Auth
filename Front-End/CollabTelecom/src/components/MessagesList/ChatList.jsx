@@ -31,6 +31,7 @@ const ChatList = ({freinds,privateGroups,setPrivateGroups}) => {
            time={message.messages[0].timestamp} 
            content={message.messages[0].content} 
            freindId={message.members[0]._id} 
+           realSender={message.messages[0].sender}
            />
            
        ))}
