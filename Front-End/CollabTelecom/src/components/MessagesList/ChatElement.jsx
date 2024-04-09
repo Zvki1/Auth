@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState,useEffect } from "react";
@@ -21,15 +22,10 @@ const ChatElement = ({sender,time,content,freindId,isOnline,realSender}) => {
    const idofuser =JSON.parse(localStorage.getItem('user')).id
     setId(idofuser)
     const username = JSON.parse(localStorage.getItem('user')).username
-    console.log("realSender",realSender);
-    console.log("idofuser",idofuser);
     if (realSender === idofuser) {
-      console.log("the same user");
-      console.log("is same before",isSame);
       setisSame(true)
-      console.log("is same after",isSame);
     }
-  }, [setisSame])
+  }, [])
   return (
     <Link to={`/PrivateChat/${freindId}`} className="flex flex-row gap-4">
       <div className="flex flex-row gap-4 max-h-14 w-full">
