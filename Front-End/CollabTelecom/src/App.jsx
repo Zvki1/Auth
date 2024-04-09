@@ -57,8 +57,8 @@ function App() {
         <>
           <Route path="/GeneralChat" element={<GeneralChat />} />
 
-          <Route path="/MessagesList" element={<MessagesList socket={socket} />} />
-          <Route path="/PrivateChat/:user" element={<PrivateChat socket={socket}  />} />
+          <Route path="/MessagesList" element={<MessagesList  />} />
+          <Route path="/PrivateChat/:user" element={<PrivateChat   />} />
 
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />

@@ -32,7 +32,6 @@ const getFreindsList = async (req,res)=>{
                 .lean();
             return privateGroup;
         });
-       
         
         // Attendre que toutes les requêtes soient terminées
         const privateGroups = await Promise.all(privateGroupsPromises);

@@ -57,7 +57,7 @@ const MessagesList = () => {
         <ConnectedList freinds={freinds} />
         {privateGroups && privateGroups.length > 0 ? 
         (
-          <ChatList freinds={freinds} privateGroups={privateGroups}/>
+          <ChatList freinds={freinds} privateGroups={privateGroups} setPrivateGroups={setPrivateGroups}/>
         ) : (
           <div className=" h-screen flex flex-col gap-3  items-center">
           <div role="status">
