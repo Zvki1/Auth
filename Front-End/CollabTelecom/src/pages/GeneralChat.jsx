@@ -17,6 +17,7 @@ const GeneralChat = () => {
 
 
 useEffect(() => {
+  if(socket){
   socket.on('generalChat', (message,sender) => {
     // console.log('Message received :'+ message + ' from :'+ sender);
     const newMessage = {
@@ -37,6 +38,7 @@ useEffect(() => {
     settyper('')
     setisTyping(false)
   });
+}
 }
 , [socket]);
 

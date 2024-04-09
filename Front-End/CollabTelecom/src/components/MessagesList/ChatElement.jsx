@@ -6,11 +6,21 @@ import Avatar from "react-string-avatar";
 
 // eslint-disable-next-line react/prop-types
 const ChatElement = ({sender,time,content,freindId,isOnline}) => {
+  const dateString = time;
+  const hours = dateString.substring(11, 13);
+  const hourInt = parseInt(hours);
+  const incrementedHour = hourInt + 1;
+  const formattedHour = incrementedHour.toString();
+  const minutes = dateString.substring(14, 16);
+  const formattedTime = formattedHour + ':' + minutes;
+
   const truncatedContent = content.length >25 ? `${content.slice(0,25)}...` : content;
   const [id, setId] = useState('')
   useEffect(() => {
    const idofuser =JSON.parse(localStorage.getItem('user')).id
     setId(idofuser)
+    const username = JSON.parse(localStorage.getItem('user')).username
+    
   }, [])
   return (
     <Link to={`/PrivateChat/${freindId}`} className="flex flex-row gap-4">
@@ -34,7 +44,7 @@ const ChatElement = ({sender,time,content,freindId,isOnline}) => {
             </h3>
             <p className="text-base text-elipsis ">{truncatedContent}</p>
           </div>
-          <p>{time}</p>
+          <p>{formattedTime}</p>
         </div>
       </div>
     </Link>

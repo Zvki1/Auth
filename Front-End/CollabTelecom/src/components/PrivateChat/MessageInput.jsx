@@ -9,7 +9,7 @@ const MessageInput = ({receiverId,setMessages,setisTyping}) => {
 
   const handleChange = (e) => {
     setMessage(e.target.value);
-    if(e.target.value){
+    if(e.target.value.trim()){
       socket.emit('typing',receiverId)
       // console.log('typing');
     }else{

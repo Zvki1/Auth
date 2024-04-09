@@ -20,7 +20,7 @@ const PrivateChat = () => {
   const socket = useContext(SocketContext);
   //  handle the message from the socket
   useEffect(() => {
-   
+   if(socket){
     socket.on('chat message',(content,receiverId) => {
       console.log('Message from the socket :', content);
       console.log('and this is my id:',receiverId);
@@ -40,11 +40,13 @@ const PrivateChat = () => {
     socket.on('stop typing',() => {
       setisTyping(false)
     });
+  }
   }, [socket,username]);
 
   // fetching id from the url
   useEffect(() => {
    const id=window.location.pathname.split('/')[2] 
+   console.log(id);
    setreceiverId(id)
     axios
     .get(`http://localhost:8000/PrivateChat?freindId=${id}`,
@@ -55,7 +57,8 @@ const PrivateChat = () => {
      
       setUsername(response.data.freindInfos.username)
       setisOnline(response.data.freindInfos.isOnline)
-      setMessages(response.data.messages)
+      // console.log('Messages:',response.data.privateGroup.messages);
+      setMessages(response.data.privateGroup.messages)
     })
     .catch((error) => {
       console.log(error)

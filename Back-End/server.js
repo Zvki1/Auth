@@ -20,7 +20,7 @@ const User = require('./models/userSchema');
 const Message = require('./models/messageSchema');
 const Group = require('./models/groupSchema')
 const Departement = require('./models/departementSchema')
-
+const PrivateGroup = require('./models/privateGroupSchema')
 
 // express connection
 const app = express();
@@ -135,8 +135,20 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
                     timestamp:new Date()
                 })
                 await newMessage.save();
+                // for the backup
                 console.log('Message enregistré dans la base de données:', newMessage);
-
+                // SEARCH FOR THE PRIVATE GROUP
+                
+                const privateGroup = await PrivateGroup.findOne({
+                    members: { $all: [socket.handshake.headers.userid, receiverId] }
+                }).populate('members', 'username');
+            //    saving the message in the private group
+                if (!privateGroup) {
+                    throw new Error('Private group not found');
+                }else{
+                    privateGroup.messages.push(newMessage);
+                    await privateGroup.save();
+                }
             } catch (error) {
                 console.error('Erreur lors de l\'enregistrement du message:', error);
             }
