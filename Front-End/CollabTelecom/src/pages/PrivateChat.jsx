@@ -20,7 +20,7 @@ const PrivateChat = () => {
   const socket = useContext(SocketContext);
   //  handle the message from the socket
   useEffect(() => {
-   
+   if(socket){
     socket.on('chat message',(content,receiverId) => {
       console.log('Message from the socket :', content);
       console.log('and this is my id:',receiverId);
@@ -40,6 +40,7 @@ const PrivateChat = () => {
     socket.on('stop typing',() => {
       setisTyping(false)
     });
+  }
   }, [socket,username]);
 
   // fetching id from the url
@@ -56,7 +57,7 @@ const PrivateChat = () => {
      
       setUsername(response.data.freindInfos.username)
       setisOnline(response.data.freindInfos.isOnline)
-      console.log('Messages:',response.data.privateGroup.messages);
+      // console.log('Messages:',response.data.privateGroup.messages);
       setMessages(response.data.privateGroup.messages)
     })
     .catch((error) => {

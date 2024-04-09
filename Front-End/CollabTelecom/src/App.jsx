@@ -18,11 +18,12 @@ import io from 'socket.io-client';
 import SocketContext from './context/SocketContext'
 
 function App() {
-  const isUserSignedIn = !!localStorage.getItem('token')
+  // const isUserSignedIn = !!localStorage.getItem('token')
+  const [isUserSignedIn, setIsUserSignedIn] = useState(!!localStorage.getItem('token'))
   const [socket, setSocket] = useState(null);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
     if (isUserSignedIn) {
+      const user = JSON.parse(localStorage.getItem('user'));
       const socket = io('http://localhost:8000',
       {
         auth: {
@@ -43,7 +44,7 @@ function App() {
     });
     }
     
-  } , [isUserSignedIn]);
+  } ,[]);
 
   return (
     

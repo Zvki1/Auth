@@ -19,6 +19,8 @@ const ChatElement = ({sender,time,content,freindId,isOnline}) => {
   useEffect(() => {
    const idofuser =JSON.parse(localStorage.getItem('user')).id
     setId(idofuser)
+    const username = JSON.parse(localStorage.getItem('user')).username
+    
   }, [])
   return (
     <Link to={`/PrivateChat/${freindId}`} className="flex flex-row gap-4">
