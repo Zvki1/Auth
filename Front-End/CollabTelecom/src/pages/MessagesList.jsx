@@ -50,7 +50,7 @@ const MessagesList = () => {
 
   return (
     <div className="flex flex-col h-screen">
-    <div className="flex-grow overflow-y-hidden">
+    <div className="flex-grow ">
       <div className="pt-4">
         <Heading />
         <SearchChat />
