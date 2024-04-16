@@ -37,7 +37,7 @@ const ChatElement = ({sender,time,content,freindId,isOnline,realSender}) => {
             width={54}
             cornerRadius={5}
           />
-          {isOnline && <span className="absolute bottom-0 left-11 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>}
+          {isOnline && <span className="absolute bottom-0 left-11 transform translate-y-1/4 size-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>}
         </div>
         {/* second div */}
         <div className="flex flex-row justify-between  w-full ">
