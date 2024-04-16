@@ -153,6 +153,7 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
                 console.error('Erreur lors de l\'enregistrement du message:', error);
             }
             io.to(receiverId).emit('chat message', msg,receiverId);
+            
           
             // socket.broadcast.emit('chat message', msg,receiverId);
         });

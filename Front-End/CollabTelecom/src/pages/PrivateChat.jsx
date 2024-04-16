@@ -72,9 +72,9 @@ const PrivateChat = () => {
     messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
   }, [messages,isTyping]);
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen  flex flex-col">
       {username ? <Header username={username} isOnline={isOnline} /> : <HeaderSkeleton />}
-      <div className=" overflow-y-auto h-full pb-20">
+      <div className=" overflow-y-auto w-full h-full pb-20">
         {messages.length === 0 && 
         <div>
         {[...Array(50)].map((_, index) => (
@@ -84,7 +84,7 @@ const PrivateChat = () => {
         
         }
       {messages.map((element, index) => (
-        <Message
+        <Message className="w-full"
           key={index}
           sender={element.sender.username || element.sender}
           time={element.timestamp}

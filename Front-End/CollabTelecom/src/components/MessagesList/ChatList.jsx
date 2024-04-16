@@ -16,13 +16,13 @@ const ChatList = ({freinds,privateGroups,setPrivateGroups}) => {
   }, [])
   
   return (
-    <div className="px-5 pt-5  flex flex-col w-screen h-screen">
+    <div className="px-5 pt-5  flex flex-col w-screen overflow-y-scroll h-full ">
       {/* {console.log("the received groups in chatlist",privateGroups)}
       {console.log("message",privateGroups[0].messages[0].timestamp)} */}
       
       {privateGroups && privateGroups.length > 0 ? (
         
-         <div className="flex-grow space-y-4 overflow-y-auto w-full  h-screen">
+         <div className="flex-grow space-y-4 overflow-y-scroll w-full  h-full">
          {privateGroups.map((message, index) => (
            <ChatElement 
            key={index} 
@@ -31,6 +31,7 @@ const ChatList = ({freinds,privateGroups,setPrivateGroups}) => {
            time={message.messages[0].timestamp} 
            content={message.messages[0].content} 
            freindId={message.members[0]._id} 
+           realSender={message.messages[0].sender}
            />
            
        ))}

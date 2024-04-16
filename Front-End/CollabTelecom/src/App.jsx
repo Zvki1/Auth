@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {Routes, Route, Navigate,} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
