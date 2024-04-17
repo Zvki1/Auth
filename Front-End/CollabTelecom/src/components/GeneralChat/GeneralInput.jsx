@@ -1,34 +1,35 @@
+/* eslint-disable react/prop-types */
 import { SendHorizontal } from 'lucide-react';
 import SocketContext from '../../context/SocketContext';
 import { useContext,useEffect,useState} from 'react';
-const GeneralInput = () => {
+const GeneralInput = ({nameOfGroup}) => {
   const socket = useContext(SocketContext)
   const [groups, setgroups] = useState([])
 
   const handleChange = (e) => {
     // setMessage(e.target.value);
-    const groupName=JSON.parse(localStorage.getItem('groups'))[0].name
     const typer=JSON.parse(localStorage.getItem('user')).username
     if(e.target.value.trim()){
-      socket.emit('generalTyping',groupName,typer)
+      socket.emit('generalTyping',nameOfGroup,typer)
       // console.log('typing');
     }else{
-      socket.emit('stop generalTyping',groupName,typer)
+      socket.emit('stop generalTyping',nameOfGroup,typer)
       // console.log('stop typing');
     }
   };
 
   useEffect(() => {
-    JSON.parse(localStorage.getItem('groups')).map((group) => {
-      setgroups((prev) => [...prev, group.name]);
-    });
-  },[])
+    // JSON.parse(localStorage.getItem('groups')).map((group) => {
+    //   setgroups((prev) => [...prev, group.name]);
+    // });
+    console.log("nameOfGroup:",nameOfGroup);
+  },[nameOfGroup])
 
   const submitMessage = (e) => {
     if(document.getElementById('default-search').value)
      e.preventDefault();
     
-    socket.emit('generalChat',document.getElementById('default-search').value,groups,JSON.parse(localStorage.getItem('user')).username);
+    socket.emit('generalChat',document.getElementById('default-search').value,nameOfGroup,JSON.parse(localStorage.getItem('user')).username);
     // console.log('Message sent :',document.getElementById('default-search').value);
     document.getElementById('default-search').value = '';
    

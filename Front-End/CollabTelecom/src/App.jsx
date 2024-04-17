@@ -14,6 +14,7 @@ import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
 import AddFreind from './pages/AddFreind'
 import ListAmis from './pages/ListAmis'
+import PublicGroupsList from './pages/PublicGroupsList'
 
 import io from 'socket.io-client';
 import SocketContext from './context/SocketContext'
@@ -57,11 +58,10 @@ function App() {
       {/* Routes protégées accessibles uniquement aux utilisateurs connectés */}
       {isUserSignedIn ? (
         <>
+          <Route path="/publicGroupsList" element={<PublicGroupsList />} />
           <Route path="/GeneralChat" element={<GeneralChat />} />
-
           <Route path="/MessagesList" element={<MessagesList  />} />
           <Route path="/PrivateChat/:user" element={<PrivateChat   />} />
-
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path='/AddFreind' element={<AddFreind/>} />

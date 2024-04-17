@@ -6,6 +6,7 @@ import TypingMessage from "../components/PrivateChat/TypingMessage";
 import SocketContext from '../context/SocketContext';
 import { useContext, useEffect ,useState,useRef} from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 const GeneralChat = () => {
   const messagesEndRef = useRef(null);
   const [messages, setmessages] = useState([])
@@ -44,15 +45,17 @@ useEffect(() => {
 
 
 useEffect(() => {
-  const groupName=JSON.parse(localStorage.getItem('groups'))[0].name
- 
+  // const groupName=JSON.parse(localStorage.getItem('groups'))[0].name
+  const searchParams = new URLSearchParams(window.location.search);
+  const groupNameParam = searchParams.get('groupName');
+  
   axios
-  .get(`http://localhost:8000/GeneralChat?groupName=${groupName}`,
+  .get(`http://localhost:8000/GeneralChat?groupName=${groupNameParam}`,
   {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
   })
   .then((response) => {
-    // console.log(response.data.group.picture);
+    
     setPicture(response.data.group.picture)
     setnameOfGroup(response.data.group.name)
     setmessages(response.data.group.messages)
@@ -92,7 +95,7 @@ useEffect(() => {
        </div>
       
       </div>
-      <GeneralInput />
+      <GeneralInput nameOfGroup={nameOfGroup}/>
        <Navbar />
     </div>
   )
