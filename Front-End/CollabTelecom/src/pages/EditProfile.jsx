@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/EditProfile/Header"
 import Avatar from 'react-string-avatar';
+import axios from "axios";
 
 
 
@@ -31,6 +32,18 @@ const EditProfile =()=>{
       e.preventDefault();
       try {
         console.log("Data for update : ");
+        const token = localStorage.getItem("token");
+        const user = {
+          username: username,
+          email: email,
+          password: password
+        };
+        const response = await axios.patch("http://localhost:8000/profile/update", user, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(response.data);
         // const response = await axios.put(`https://yourendpoint/${user.id}`, user);
       } catch (error) {
         console.log(error);
