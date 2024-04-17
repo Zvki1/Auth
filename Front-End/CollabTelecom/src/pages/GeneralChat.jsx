@@ -4,8 +4,11 @@ import GeneralInput from "../components/GeneralChat/GeneralInput"
 import Message from "../components/PrivateChat/Message";
 import TypingMessage from "../components/PrivateChat/TypingMessage";
 import SocketContext from '../context/SocketContext';
+import HeaderSkeleton from '../components/PrivateChat/HeaderSkeleton'
+import MessageSkeleton from "../components/PrivateChat/MessageSkeleton";
 import { useContext, useEffect ,useState,useRef} from "react";
 import axios from "axios";
+
 const GeneralChat = () => {
   const messagesEndRef = useRef(null);
   const [messages, setmessages] = useState([])
@@ -34,7 +37,7 @@ useEffect(() => {
     setisTyping(true)
   });
   socket.on('stop generalTyping',(typer) => {
-    console.log('typer:',typer);
+    console.log('stop typer:',typer);
     settyper('')
     setisTyping(false)
   });
@@ -44,15 +47,17 @@ useEffect(() => {
 
 
 useEffect(() => {
-  const groupName=JSON.parse(localStorage.getItem('groups'))[0].name
- 
+  // const groupName=JSON.parse(localStorage.getItem('groups'))[0].name
+  const searchParams = new URLSearchParams(window.location.search);
+  const groupNameParam = searchParams.get('groupName');
+  
   axios
-  .get(`http://localhost:8000/GeneralChat?groupName=${groupName}`,
+  .get(`http://localhost:8000/GeneralChat?groupName=${groupNameParam}`,
   {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
   })
   .then((response) => {
-    // console.log(response.data.group.picture);
+    
     setPicture(response.data.group.picture)
     setnameOfGroup(response.data.group.name)
     setmessages(response.data.group.messages)
@@ -68,13 +73,24 @@ useEffect(() => {
 , []);
 useEffect(() => {
   messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
-}, [messages]);
+}, [messages,isTyping]);
   return (
   
     <div className="h-screen flex flex-col">
-
+      {nameOfGroup ? 
       <GeneralHeader nameOfGroup={nameOfGroup} Picture={Picture}/>
+      :
+      <HeaderSkeleton />}
+
       <div className=" overflow-y-auto h-full pb-36 ">
+      {messages.length === 0 && 
+        <div>
+        {[...Array(50)].map((_, index) => (
+          <MessageSkeleton key={index} />
+        ))}
+      </div>
+        
+        }
       {messages.map((element, index) => (
         <Message
           key={index}
@@ -87,12 +103,10 @@ useEffect(() => {
         <div ref={messagesEndRef} >
       {isTyping && 
       <TypingMessage typer={typer} />
-      // <div className="animate-typing text-gray-500 pl-4 py-1 text-lg font-medium animate-pulse text-start">Typing...</div>
       }
        </div>
-      
       </div>
-      <GeneralInput />
+      <GeneralInput nameOfGroup={nameOfGroup}/>
        <Navbar />
     </div>
   )

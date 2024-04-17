@@ -22,9 +22,10 @@ const MessagesList = () => {
         if (!localStorage.getItem('user')) {
           localStorage.setItem('user', JSON.stringify(res.data.user));
         }
-        if(!localStorage.getItem('groups')){
-          localStorage.setItem('groups',JSON.stringify(res.data.publicGroups));
-        }
+        // if(!localStorage.getItem('groups')){
+        //   localStorage.setItem('groups',JSON.stringify(res.data.publicGroups));
+        // }  
+        //i need to  cancel it and ghadi njibha f request wa7adha n3ytlha fl page tee public groups
         
         setFreinds(res.data.freinds) 
         
