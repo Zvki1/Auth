@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import { SquarePen, SlidersHorizontal, DoorOpen, User } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import ProfileInfo from "../components/Profile/ProfileInfo";
 import UserInfo from "../components/Profile/UserInfo";
 import Logout from "../components/Profile/Logout";
@@ -45,9 +45,9 @@ const Profile = () => {
       (
         <div className="bg-gray-100 h-screen flex flex-col items-center overflow-hidden ">
         <div className=" w-full h-176 bg-blue-800  pr-[18px] pt-[21px] pb-[114px] flex justify-end items-center">
-        <button className="bg-white rounded-3xl p-2.5 flex justify-center items-center">
+        <Link to="/EditProfile" className="bg-white rounded-3xl p-2.5 flex justify-center items-center" >
           <SquarePen color="#0B4C8C" />
-        </button>
+        </Link>
       </div>
 
   
@@ -76,7 +76,7 @@ const Profile = () => {
               icon={<DoorOpen color="#D30000" size={32} />}
               text="Se déconnecter"
                />
-               </div>
+           </div>
          
             
           
