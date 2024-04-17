@@ -13,9 +13,10 @@ const GeneralHeader = ({nameOfGroup,Picture}) => {
   return (
     <header className="py-4 px-5 flex justify-between items-center border-b-2">
       <div className="flex flex-row items-center gap-2">
-        
+      <Link to="/publicGroupsList">
+          <ChevronLeft />
+        </Link>
         <img src={ GroupLogo|| Picture } alt="logo of group" />
-        
         <p className="font-lato text-[#2B363B] text-xl font-bold">{nameOfGroup}</p>
       </div>
 

@@ -18,8 +18,21 @@ const getFreindsList = async (req,res)=>{
             isOnline: freind.isOnline,
         }));
         
-        const grouplist=await Group.find({ members: user._id },'name')
-
+        const grouplist = await Group.aggregate([
+            { $match: { members: user._id } },
+            { $unwind: { path: '$messages', preserveNullAndEmptyArrays: true } },
+            { $sort: { 'messages.timestamp': -1 } },
+            { 
+                $group: { 
+                    _id: '$_id', 
+                    name: { $first: '$name' }, 
+                    picture: { $first: '$picture' }, 
+                    latestMessage: { $first: '$messages' } 
+                } 
+            }
+        ]);
+        
+        
 
         const privateGroupsPromises = freindsInfo.map(async (friendInfo) => {
             const privateGroup = await PrivateGroup.findOne({ members: { $all: [user._id, friendInfo._id] }})

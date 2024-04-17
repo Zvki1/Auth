@@ -8,7 +8,7 @@ const Navbar = () => {
   const NavElements = [
     {
       title: "Home",
-      href: "/GeneralChat",
+      href: "/publicGroupsList",
       icon: Home,
     },
     {
