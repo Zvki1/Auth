@@ -4,6 +4,8 @@ import GeneralInput from "../components/GeneralChat/GeneralInput"
 import Message from "../components/PrivateChat/Message";
 import TypingMessage from "../components/PrivateChat/TypingMessage";
 import SocketContext from '../context/SocketContext';
+import HeaderSkeleton from '../components/PrivateChat/HeaderSkeleton'
+import MessageSkeleton from "../components/PrivateChat/MessageSkeleton";
 import { useContext, useEffect ,useState,useRef} from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -75,9 +77,20 @@ useEffect(() => {
   return (
   
     <div className="h-screen flex flex-col">
-
+      {nameOfGroup ? 
       <GeneralHeader nameOfGroup={nameOfGroup} Picture={Picture}/>
+      :
+      <HeaderSkeleton />}
+
       <div className=" overflow-y-auto h-full pb-36 ">
+      {messages.length === 0 && 
+        <div>
+        {[...Array(50)].map((_, index) => (
+          <MessageSkeleton key={index} />
+        ))}
+      </div>
+        
+        }
       {messages.map((element, index) => (
         <Message
           key={index}
@@ -93,7 +106,6 @@ useEffect(() => {
       // <div className="animate-typing text-gray-500 pl-4 py-1 text-lg font-medium animate-pulse text-start">Typing...</div>
       }
        </div>
-      
       </div>
       <GeneralInput nameOfGroup={nameOfGroup}/>
        <Navbar />
