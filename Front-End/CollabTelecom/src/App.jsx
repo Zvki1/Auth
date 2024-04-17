@@ -14,7 +14,7 @@ import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
 import AddFreind from './pages/AddFreind'
 import ListAmis from './pages/ListAmis'
-import EditProfile from './pages/EditProfile'
+
 
 import io from 'socket.io-client';
 import SocketContext from './context/SocketContext'
@@ -69,7 +69,7 @@ function App() {
           <Route path="/login" element={<Navigate to="/MessagesList" />} />
           <Route path="/signup" element={<Navigate to="/MessagesList" />} />
           <Route path="/ListAmis" element={<ListAmis/>} />
-          <Route path="/EditProfile" element={<EditProfile/>} />
+          
           {/* Route NotFound pour les routes non définies */}
           <Route path="*" element={<NotFound/>} />
         </>
