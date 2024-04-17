@@ -8,9 +8,11 @@ const ChatList = ({freinds,privateGroups,setPrivateGroups}) => {
   const [render, setrender] = useState(false)
   useEffect(() => {
     privateGroups.sort((a, b) => {
+     if(a.messages.length != 0){
       const lastMessageA = a.messages[a.messages.length - 1];
       const lastMessageB = b.messages[b.messages.length - 1];
       return new Date(lastMessageB.timestamp) - new Date(lastMessageA.timestamp);
+     }
     });
     setrender(true)
   }, [])
@@ -28,10 +30,10 @@ const ChatList = ({freinds,privateGroups,setPrivateGroups}) => {
            key={index} 
            sender={message.members[0].username} 
            isOnline={message.members[0].isOnline} 
-           time={message.messages[0].timestamp} 
-           content={message.messages[0].content} 
+           time={message?.messages[0]?.timestamp || " "} 
+           content={message?.messages[0]?.content || " "} 
            freindId={message.members[0]._id} 
-           realSender={message.messages[0].sender}
+           realSender={message?.messages[0]?.sender || "sender"}
            />
            
        ))}

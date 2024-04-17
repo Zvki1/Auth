@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Avatar from "react-string-avatar";
 
 // eslint-disable-next-line react/prop-types
-const ChatElement = ({sender,time,content,freindId,isOnline,realSender}) => {
+const ChatElement = ({sender,time="time",content,freindId,isOnline,realSender}) => {
   const dateString = time;
   const hours = dateString.substring(11, 13);
   const hourInt = parseInt(hours);
