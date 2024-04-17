@@ -8,7 +8,7 @@ import HeaderSkeleton from '../components/PrivateChat/HeaderSkeleton'
 import MessageSkeleton from "../components/PrivateChat/MessageSkeleton";
 import { useContext, useEffect ,useState,useRef} from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+
 const GeneralChat = () => {
   const messagesEndRef = useRef(null);
   const [messages, setmessages] = useState([])
@@ -37,7 +37,7 @@ useEffect(() => {
     setisTyping(true)
   });
   socket.on('stop generalTyping',(typer) => {
-    console.log('typer:',typer);
+    console.log('stop typer:',typer);
     settyper('')
     setisTyping(false)
   });
@@ -73,7 +73,7 @@ useEffect(() => {
 , []);
 useEffect(() => {
   messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
-}, [messages]);
+}, [messages,isTyping]);
   return (
   
     <div className="h-screen flex flex-col">
@@ -103,7 +103,6 @@ useEffect(() => {
         <div ref={messagesEndRef} >
       {isTyping && 
       <TypingMessage typer={typer} />
-      // <div className="animate-typing text-gray-500 pl-4 py-1 text-lg font-medium animate-pulse text-start">Typing...</div>
       }
        </div>
       </div>
