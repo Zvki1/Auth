@@ -58,6 +58,7 @@ function App() {
 
       {/* Routes protégées accessibles uniquement aux utilisateurs connectés */}
       {isUserSignedIn ? (
+        
         <>
           <Route path="/publicGroupsList" element={<PublicGroupsList />} />
           <Route path="/GeneralChat" element={<GeneralChat />} />
