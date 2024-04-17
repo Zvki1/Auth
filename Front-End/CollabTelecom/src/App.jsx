@@ -15,7 +15,7 @@ import Profile from './pages/Profile'
 import AddFreind from './pages/AddFreind'
 import ListAmis from './pages/ListAmis'
 import PublicGroupsList from './pages/PublicGroupsList'
-
+import EditProfile from './pages/EditProfile'
 
 import io from 'socket.io-client';
 import SocketContext from './context/SocketContext'
@@ -60,6 +60,7 @@ function App() {
       {isUserSignedIn ? (
         
         <>
+          <Route path="/EditProfile" element={<EditProfile />} />
           <Route path="/publicGroupsList" element={<PublicGroupsList />} />
           <Route path="/GeneralChat" element={<GeneralChat />} />
           <Route path="/MessagesList" element={<MessagesList  />} />
