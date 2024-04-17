@@ -44,6 +44,10 @@ const EditProfile =()=>{
           }
         });
         console.log(response.data);
+        if (response.data.message) {
+          alert(response.data.message);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+        }
         // const response = await axios.put(`https://yourendpoint/${user.id}`, user);
       } catch (error) {
         console.log(error);

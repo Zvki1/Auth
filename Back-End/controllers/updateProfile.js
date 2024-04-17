@@ -7,7 +7,7 @@ const updateProfile = async (req,res)=>{
     const decoded = jwt.verify(token,'Zvki1');
     try{
         const hashedPassword = await bcrypt.hash(password,10);
-        const user = await User.findById(decoded.userId);
+        const user = await User.findById(decoded.userId).select('email id username');
         if(username && username !== user.username){
             const existingUsername = await User.findOne({username})
             if(existingUsername){
