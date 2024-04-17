@@ -12,10 +12,15 @@ const messagesRoutes = require('./routes/Messages');
 const addFreindRoutes = require('./routes/addFreind');
 const freindListRoutes = require('./routes/freindList');
 const privateChatRoutes = require('./routes/PrivateChat');
+const generalChatRoutes = require('./routes/generalChat');
+// midleware
+const verifyToken = require('./middleware/verifyToken');
 // IMPORTING THE USER MODEL
 const User = require('./models/userSchema');
 const Message = require('./models/messageSchema');
-
+const Group = require('./models/groupSchema')
+const Departement = require('./models/departementSchema')
+const PrivateGroup = require('./models/privateGroupSchema')
 
 // express connection
 const app = express();
@@ -32,19 +37,37 @@ app.use('/register',registerRoutes)
 app.use('/login',loginRoutes)
 
 // get profile infos 
-app.use('/profile',profileRoutes)
+app.use('/profile',verifyToken,profileRoutes)
 // messages list
-app.use('/messages',messagesRoutes)
+app.use('/messages',verifyToken,messagesRoutes)
 
 // search for users to add
-app.use('/addFreind',addFreindRoutes)
+app.use('/addFreind',verifyToken,addFreindRoutes)
 
 // freind list 
-app.use('/freindList',freindListRoutes)
+app.use('/freindList',verifyToken,freindListRoutes)
 
 //  private chat
-app.use('/PrivateChat',privateChatRoutes)
+app.use('/PrivateChat',verifyToken,privateChatRoutes)
 
+// General Chat
+app.use('/GeneralChat',generalChatRoutes)
+// app.post('/createGroup',async (req,res) => {
+//     try {
+//         const existingGroup = await Group.findOne({name:req.body.name  });
+//         if (existingGroup) {
+//             return res.status(400).json({ error: 'Group with this name already exists' });
+//         }
+//         const newGroup = new Group({
+//             name: req.body.name,
+//             members: req.body.members
+//         })
+//         await newGroup.save();
+//         res.status(200).json(newGroup);
+//     } catch (error) {
+//         res.status(500).json(error);
+//     }
+// })
 
 //connect to mongodb
 const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
@@ -78,10 +101,24 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
         // console.log('socket id:',socket.id);
         // console.log('socket token',socket.handshake.auth.token.substring(0,10));
         // console.log('socket userId:',socket.handshake.headers.userid);
+        
         // creatin a room for the user
         socket.join(socket.handshake.headers.userid);
         // joing the global room
-        socket.join('IT Group');
+        const userId = socket.handshake.headers.userid;
+        // search for the groups that the user is a member of
+     
+        Group.find({ members: userId })
+            .then((groups) => {
+                
+                groups.forEach((group) => {
+                    socket.join(group.name);
+                });
+            })
+            .catch((error) => {
+                console.log('Error:', error);
+            });
+    
         console.log('my rooms',socket.rooms);
         socket.on('disconnect', () => {
             console.log('User disconnected from the socket server');
@@ -98,18 +135,65 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
                     timestamp:new Date()
                 })
                 await newMessage.save();
+                // for the backup
                 console.log('Message enregistré dans la base de données:', newMessage);
-
+                // SEARCH FOR THE PRIVATE GROUP
+                
+                const privateGroup = await PrivateGroup.findOne({
+                    members: { $all: [socket.handshake.headers.userid, receiverId] }
+                }).populate('members', 'username');
+            //    saving the message in the private group
+                if (!privateGroup) {
+                    throw new Error('Private group not found');
+                }else{
+                    privateGroup.messages.push(newMessage);
+                    await privateGroup.save();
+                }
             } catch (error) {
                 console.error('Erreur lors de l\'enregistrement du message:', error);
             }
             io.to(receiverId).emit('chat message', msg,receiverId);
+            
+          
             // socket.broadcast.emit('chat message', msg,receiverId);
         });
+        // handle typing
+        socket.on('typing', (receiverId) => {
+            io.to(receiverId).emit('typing')
+        });
+        // handle stop typing
+        socket.on('stop typing', (receiverId) => {
+            io.to(receiverId).emit('stop typing')
+        });
         // for the global chat
-        socket.on('IT Group', (msg) => {
+        socket.on('generalChat', async (msg,groups,sender) => {
             console.log('Message:', msg);
-            socket.broadcast.emit('IT Group', msg);
+            console.log('Groups:', groups[0]);
+            try {
+                const group = await Group.findOne({name:groups[0]})
+                if (!group) {
+                    throw new Error('Group not found');
+                }
+                // saving the message
+                const newMessage = {
+                    content: msg,
+                    sender: socket.handshake.headers.userid,
+                    timestamp:new Date()
+                }
+                group.messages.push(newMessage);
+                await group.save();
+                io.to(groups[0]).emit('generalChat', msg, sender);
+            } catch (error) {
+                console.log('Error:', error);
+            } 
+        });
+        // handle general typing
+        socket.on('generalTyping', (groupName,typer) => {
+            socket.broadcast.to(groupName).emit('generalTyping',typer);
+        });
+        // handle stop general typing
+        socket.on('stop generalTyping', (groupName,typer) => {
+            socket.broadcast.to(groupName).emit('stop generalTyping',typer);
         });
 
     });

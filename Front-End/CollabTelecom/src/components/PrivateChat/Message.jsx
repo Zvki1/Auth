@@ -13,14 +13,14 @@ const Message = ({sender,time,content}) => {
     const formattedTime = formattedHour + ':' + minutes;
 
   return (
-    <div className="flex flex-row px-4 py-2 gap-2 items-start">
+    <div className="flex flex-row px-4 py-2 gap-2 items-start w-full">
         <Avatar 
             string={sender}
             autoColor={true}
             width={46}
             cornerRadius={5}
           />
-          <div className="flex flex-col">
+          <div className="flex flex-col overflow-x-clip">
             <div className="flex flex-row items-center gap-5">
                 <p className="font-lato text-[#2B363B] text-lg font-bold">{sender}</p>
                 <p className="text-[#616061] font-lato font-[400] text-sm">{formattedTime}</p>

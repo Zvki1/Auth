@@ -27,6 +27,10 @@ const AddFreind = () => {
                         console.log('Ami ajouté avec succès:', response.data.message);
                 } catch (error) {
                     console.error('Error adding friend:', error);
+                    if (error.response.status === 403) {
+                        localStorage.removeItem('token');
+                        window.location.reload();
+                    }
                 }finally {
                     setIsAdding(false);
                 }

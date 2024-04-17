@@ -25,11 +25,10 @@ const Logout = ({ icon, text }) => {
         });
 
 
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.clear();
         socket.disconnect();
         console.log("sign out");
-        navigate('/');
+        navigate('/login');
         }
         
   return (

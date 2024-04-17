@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {Routes, Route, Navigate,} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
@@ -19,11 +20,12 @@ import io from 'socket.io-client';
 import SocketContext from './context/SocketContext'
 
 function App() {
-  const isUserSignedIn = !!localStorage.getItem('token')
+  // const isUserSignedIn = !!localStorage.getItem('token')
+  const [isUserSignedIn, setIsUserSignedIn] = useState(!!localStorage.getItem('token'))
   const [socket, setSocket] = useState(null);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
     if (isUserSignedIn) {
+      const user = JSON.parse(localStorage.getItem('user'));
       const socket = io('http://localhost:8000',
       {
         auth: {
@@ -44,7 +46,7 @@ function App() {
     });
     }
     
-  } , [isUserSignedIn]);
+  } ,[]);
 
   return (
     
@@ -58,8 +60,8 @@ function App() {
         <>
           <Route path="/GeneralChat" element={<GeneralChat />} />
 
-          <Route path="/MessagesList" element={<MessagesList socket={socket} />} />
-          <Route path="/PrivateChat/:user" element={<PrivateChat socket={socket}  />} />
+          <Route path="/MessagesList" element={<MessagesList  />} />
+          <Route path="/PrivateChat/:user" element={<PrivateChat   />} />
 
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />

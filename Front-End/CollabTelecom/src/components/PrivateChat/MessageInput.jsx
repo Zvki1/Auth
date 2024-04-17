@@ -3,12 +3,23 @@ import { SendHorizontal } from 'lucide-react';
 import { useState,useContext } from 'react';
 import SocketContext from '../../context/SocketContext';
 
-const MessageInput = ({receiverId,setMessages}) => {
+const MessageInput = ({receiverId,setMessages,setisTyping}) => {
   const socket = useContext(SocketContext);
   const [message, setMessage] = useState('');
 
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+    if(e.target.value.trim()){
+      socket.emit('typing',receiverId)
+      // console.log('typing');
+    }else{
+      socket.emit('stop typing',receiverId)
+      // console.log('stop typing');
+    }
+  };
   const handleSendMessage = (e) => {
     e.preventDefault()
+    setisTyping(false) 
     if (!message.trim()) return; 
 
     const username = JSON.parse(localStorage.getItem('user')).username;
@@ -30,7 +41,7 @@ const MessageInput = ({receiverId,setMessages}) => {
    {/* message input */}
     <div className="relative w-4/5">
         <input
-        value={message}  onChange={(e) => setMessage(e.target.value)} type="text" id="default-search" className="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Send your message" required />
+        value={message}  onChange={(e) => handleChange(e)} type="text" id="default-search" className="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Send your message" required />
         {/* we will hide it temprarly  */}
         <div className=" absolute end-2.5 bottom-2.5 hidden  ">\
         <input type="file" />
