@@ -1,6 +1,43 @@
+import { useState } from "react";
 import Header from "../components/EditProfile/Header"
 import Avatar from 'react-string-avatar';
+
+
+
+
 const EditProfile =()=>{
+    const[username,setUsername]=useState('');
+    const[email,setEmail]=useState('');
+    const[password,setPassword]=useState('');
+
+    const handleChangeUsername =(e)=>{
+      const value = e.target.value;
+      setUsername(value); 
+      console.log(value);
+    }
+
+    const handleChangeemail =(e)=>{
+      const value = e.target.value;
+      setEmail(value); 
+      console.log(value);
+    }
+
+    const handlePassword =(e)=>{
+      const value = e.target.value;
+      setPassword(value); 
+      console.log(value);
+    }
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        console.log("Data for update : ");
+        // const response = await axios.put(`https://yourendpoint/${user.id}`, user);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    
     return(
         <>
         <div className="w-full bg-gray-100 h-screen flex flex-col items-center space-y-6">
@@ -14,28 +51,29 @@ const EditProfile =()=>{
         </button>
             {/*form*/}
         <div className="w-full px-4">
-        <form className=" flex flex-col gap-6 ">
-        {/* email */}
+        <form className=" flex flex-col gap-6" onSubmit={handleSubmit}>
+        {/* username */}
         {/*errors.email && <p className="text-red-500 pt-1 -mb-[17px]">{errors.email}</p>*/}
         
           <input
             type="text"
-            id="email-address-icon"
+            id=""
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl font-medium rounded-lg  block w-full ps-4 p-4     "
-            placeholder="Email"
-            value="Username"
-            
+            placeholder="Username"
+            value={username}
+            onChange={handleChangeUsername}
           />
         
-        {/* username */}
+        {/* email */}
         {/*errors.username && <p className="text-red-500 pt-1 -mb-[17px]">{errors.username}</p>*/}
         <div className="relative">
           <input
             type="text"
-            id="email-address-icon"
+            id=""
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl font-medium rounded-lg  block w-full ps-4 p-4     "
-            placeholder="password"
-            value="Password"
+            placeholder="email"
+            value={email}
+            onChange={handleChangeemail}
             
           />
         </div>
@@ -44,10 +82,11 @@ const EditProfile =()=>{
         <div className="relative">
           <input
             type="text"
-            id="email-address-icon"
+            id=""
             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl font-medium rounded-lg  block w-full ps-4 p-4     "
             placeholder="Password"
-            value="Confirm Password"
+            value={password}
+            onChange={handlePassword}
          
           />
         </div>
