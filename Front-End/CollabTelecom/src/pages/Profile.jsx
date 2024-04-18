@@ -50,7 +50,7 @@ const Profile = () => {
       (
         <div className="bg-gray-100 h-screen flex flex-col items-center overflow-hidden ">
         <div className=" w-full h-176 bg-blue-800  pr-[18px] pt-[21px] pb-[114px] flex justify-end items-center">
-        <Link to="/EditProfile" className="bg-white rounded-3xl p-2.5 flex justify-center items-center" >
+        <Link to={`/EditProfile?name=${userInfo?.username}`} className="bg-white rounded-3xl p-2.5 flex justify-center items-center" >
           <SquarePen color="#0B4C8C" />
         </Link>
       </div>

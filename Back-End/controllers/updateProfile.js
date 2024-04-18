@@ -11,11 +11,11 @@ const updateProfile = async (req,res)=>{
         if(username && username !== user.username){
             const existingUsername = await User.findOne({username})
             if(existingUsername){
-                return res.status(400).json({message:'Username already exists'});
+                return res.status(400).json({message:'Ce nom d\'utilisateur est déjà pris'});
             }
             user.username = username;
         }else if(username === user.username){
-            return res.status(400).json({message:'Username already USED by you'});
+            return res.status(400).json({message:'vous avez entré le même nom d\'utilisateur'});
         }
         if(password){
             user.password = hashedPassword;

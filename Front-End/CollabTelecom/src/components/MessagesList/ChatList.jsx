@@ -7,6 +7,7 @@ import ChatElement from "./ChatElement"
 const ChatList = ({freinds,privateGroups,setPrivateGroups}) => {
   const [render, setrender] = useState(false)
   useEffect(() => {
+    // fiha probleme when there is no message between freinds
     privateGroups.sort((a, b) => {
      if(a.messages.length != 0){
       const lastMessageA = a.messages[a.messages.length - 1];
