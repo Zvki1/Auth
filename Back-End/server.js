@@ -14,6 +14,7 @@ const freindListRoutes = require('./routes/freindList');
 const privateChatRoutes = require('./routes/PrivateChat');
 const generalChatRoutes = require('./routes/generalChat');
 const publicGroupsRoutes = require('./routes/publicGroups');
+const publicGroupRoutes = require('./routes/publicGroupRoutes');
 // midleware
 const verifyToken = require('./middleware/verifyToken');
 // IMPORTING THE USER MODEL
@@ -55,26 +56,23 @@ app.use('/PrivateChat',verifyToken,privateChatRoutes)
 // General Chat
 app.use('/GeneralChat',generalChatRoutes)
 
-// public group list
+// public groups list
 app.use('/publicGroups',verifyToken,publicGroupsRoutes)
 
+// public group
+app.use('/publicGroup',verifyToken,publicGroupRoutes)
 
-// app.post('/createGroup',async (req,res) => {
-//     try {
-//         const existingGroup = await Group.findOne({name:req.body.name  });
-//         if (existingGroup) {
-//             return res.status(400).json({ error: 'Group with this name already exists' });
-//         }
-//         const newGroup = new Group({
-//             name: req.body.name,
-//             members: req.body.members
-//         })
-//         await newGroup.save();
-//         res.status(200).json(newGroup);
-//     } catch (error) {
-//         res.status(500).json(error);
-//     }
-// })
+
+
+// get users by search term
+app.get('/searchUsers',verifyToken,async (req,res) => {
+    try {
+        const users = await User.find({username:{$regex:req.query.searchTerm,$options:'i'}}).select('username email _id isOnline ')
+        res.json({users})
+    } catch (error) {
+        console.log('Error:',error)
+    }
+})
 
 //connect to mongodb
 const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"

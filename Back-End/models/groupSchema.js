@@ -11,7 +11,8 @@ const groupSchema = new Schema({
     name: { type: String, required: true ,unique:true},
     picture: { type: String, default: '../../Front-End/CollabTelecom/src/assets/Logo_group_chat.svg' },
     members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    messages: [messageSchema]
+    messages: [messageSchema],
+    admins: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     });
 
 module.exports = mongoose.model('Group', groupSchema);
