@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
-import { UserRound,SquarePen,Settings , LogOut  } from 'lucide-react';
+import { UserRound,SquarePen,Settings , Trash2   } from 'lucide-react';
 import ConfirmDelete from "./ConfirmDelete";
 import { useState } from "react";
 
-const Actionscontainer = ({groupName}) => {
+const Actionscontainer = ({groupName,isAdmin}) => {
   const [showModal, setShowModal] = useState(false)
   const handleClick = () => {
     setShowModal(true)
@@ -39,12 +39,12 @@ const Actionscontainer = ({groupName}) => {
           </Link> 
 
          
-           <button className=" w-full bg-[#F8F8F8] rounded-lg pl-[14px] py-[10px]  space-x-2   inline-flex items-center font-Inter font-[400]" onClick={handleClick}>
+           {isAdmin && <button className=" w-full bg-[#F8F8F8] rounded-lg pl-[14px] py-[10px]  space-x-2   inline-flex items-center font-Inter font-[400]" onClick={handleClick}>
           
-                <LogOut size={32} color="red" />
+                <Trash2  size={32} color="red" />
           
            <span className=" font-inter font-[500] text-[23px]">Suprimer le groupe</span>
-            </button> 
+            </button> }
          
         {showModal && <ConfirmDelete setShowModal={setShowModal}/>}
      

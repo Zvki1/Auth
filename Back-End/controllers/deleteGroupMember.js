@@ -20,6 +20,10 @@ const deleteGroupMember = async (req, res) => {
         if (!group.admins.includes(user._id)) {
             return res.status(400).json({ error: "You are not an admin of this group" });
         }
+        // check if the member to  delete is the admin 
+        if (group.admins.includes(memberId)) {
+            return res.status(400).json({ error: "You can't delete an admin" });
+        }
         const deletion = await Group.updateOne({ name: groupName }, { $pull: { members: memberId } });
 
         return res.status(200).json({ message: "Member deleted successfully", deletion });

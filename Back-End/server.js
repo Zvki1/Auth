@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const socketIO = require('socket.io');
 
 // importing routes
@@ -66,8 +67,24 @@ app.use('/publicGroup',verifyToken,publicGroupRoutes)
 
 // get users by search term
 app.get('/searchUsers',verifyToken,async (req,res) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'Zvki1');
     try {
-        const users = await User.find({username:{$regex:req.query.searchTerm,$options:'i'}}).select('username email _id isOnline ')
+        console.log('user id ',decoded.userId);
+        const users = await User.find(
+            { $and: [
+                { 
+                    username: { 
+                        $regex: req.query.searchTerm, 
+                        $options: 'i' 
+                    } 
+                },
+                {
+                    _id: { $ne: decoded.userId } 
+                }
+            ]}
+        )
+        .select('username email _id isOnline ')
         res.json({users})
     } catch (error) {
         console.log('Error:',error)

@@ -8,6 +8,7 @@ const GroupMembersList = () => {
 
   const [groupMembers, setGroupMembers] = useState([]);
   const [groupName, setGroupName] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const groupNameParam = searchParams.get("groupName");
@@ -17,8 +18,12 @@ const GroupMembersList = () => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => {
-        console.log(response.data.group.members);
+        console.log(response.data.group);
         setGroupMembers(response.data.group.members);
+        const userId = JSON.parse(localStorage.getItem("user")).id;
+        if (response.data.group.admins.includes(userId)) {
+          setIsAdmin(true);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -28,7 +33,7 @@ const GroupMembersList = () => {
     <div>
       <Header />
       <SearchMember />
-      <MembersList groupMembers={groupMembers} groupName={groupName}/>
+      <MembersList groupMembers={groupMembers} groupName={groupName} isAdmin={isAdmin}/>
     </div>
   );
 };

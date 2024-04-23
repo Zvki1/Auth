@@ -18,7 +18,7 @@ const NewGroup = () => {
  
   // use effect tee search contacts 
   useEffect(() => {
-    if(searchTerm) {
+   
       axios.get(  `http://localhost:8000/searchUsers?searchTerm=${searchTerm}`,{
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -31,7 +31,7 @@ const NewGroup = () => {
       .catch((error) => {
         console.error('Error searching for friends:', error);
       });
-    }
+    
   
   }, [searchTerm]);
   useEffect(()=>{

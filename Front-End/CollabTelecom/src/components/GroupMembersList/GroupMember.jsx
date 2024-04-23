@@ -4,10 +4,15 @@ import {Phone,MessageCircle ,Trash} from "lucide-react";
 import axios from "axios";
 // import { useState ,useEffect } from "react";
 import { Link } from "react-router-dom";
+import DeleteMemberError from "./DeleteMemberError";
+import { useState } from "react";
 
-const GroupMember = ({member,groupName}) => {
+
+const GroupMember = ({member,groupName,isAdmin}) => {
+    const [showModal, setShowModal] = useState(false)
     const handleDelete = () => {
         console.log('delete member:',member);
+       
         axios.patch(`http://localhost:8000/publicGroup/groupMembers`,{
             groupName:groupName,
             memberId:member._id
@@ -20,7 +25,11 @@ const GroupMember = ({member,groupName}) => {
             window.location.reload();
         })
         .catch((error) => {
-            console.log(error);
+            if(error.response.data.error === "You can't delete an admin"){
+                console.log(error.response.data.error);
+                setShowModal(true)
+            }
+            // alert(error.response.data.error);
         });
     }
   return (
@@ -46,11 +55,13 @@ const GroupMember = ({member,groupName}) => {
                         <Link to={`/PrivateChat/${member._id}`}>
                        <MessageCircle color="#0B4C8C"/>
                         </Link>
-                       <button onClick={handleDelete}>
+                        
+                       {isAdmin && <button onClick={handleDelete}>
                         <Trash color="#D30000"/>
                        </button>
+                       }
                        </div>
-                 
+                 {showModal && <DeleteMemberError setShowModal={setShowModal} />}
 
         </div>
   )
