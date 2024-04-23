@@ -16,9 +16,9 @@ const Heading = () => {
             </Link>
             }
 
-            <Link to="/groupInfos">
+            {/* <Link to="/groupInfos">
             <EllipsisVertical  size={30} />
-            </Link>
+            </Link> */}
         </div>
     </div>
   )

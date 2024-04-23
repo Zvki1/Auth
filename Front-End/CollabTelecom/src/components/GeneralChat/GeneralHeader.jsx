@@ -21,9 +21,12 @@ const GeneralHeader = ({nameOfGroup,Picture}) => {
       </div>
 
       <div className="flex items-center gap-3 justify-center">
-      <Phone color="#1D1C1DB2" />
-      <Video  color="#1D1C1DB2"/>
-      <EllipsisVertical color="#1D1C1DB2" />
+      <Phone  />
+      <Video  />
+    
+      <Link to={`/groupInfos?groupName=${nameOfGroup}`}>  
+            <EllipsisVertical  size={26} />
+            </Link>
       </div>
     </header>
   )
