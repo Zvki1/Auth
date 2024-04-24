@@ -1,11 +1,9 @@
 import { useState } from "react";
 
 
-const SearchMember = () => {
-    const [searchFriend, setSearchFriend] = useState("");
+const SearchMember = ({searchFriend,setSearchFriend}) => {
     const handleChange = (e) => {
         setSearchFriend(e.target.value);
-        console.log(searchFriend);
     }
   return (
     <form className="w-full px-5 ">   

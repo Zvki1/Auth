@@ -7,7 +7,7 @@ import { useState ,useEffect } from "react";
 import { Link } from "react-router-dom";
 const ListAmis=() => {
     const [friendList, setFriends] = useState([]);
-  
+    const [searchGroup, setSearchGroup] = useState("");
   
   const getFriends=() => {
     const token=localStorage.getItem('token');
@@ -32,13 +32,16 @@ const ListAmis=() => {
   useEffect(() => {
     getFriends();
 }, []);
+const filteredFreinds = friendList.filter((group) => {
+  return group.username.toLowerCase().includes(searchGroup.toLowerCase());
+});
   
     return (
         <div className="h-screen flex flex-col items-center " >
          <Header/>
-         <SearchChat/> 
+         <SearchChat searchGroup={searchGroup} setSearchGroup={setSearchGroup}/> 
          <div  className="py-3 flex flex-col w-full gap-3 items-center  flex-grow overflow-y-auto ">
- {friendList.map((freinds, index) =>(
+ {filteredFreinds.map((freinds, index) =>(
          <div className=" px-5 flex flex-row justify-between w-full items-center" key={index}>
         
                     <div className="flex flex-row items-center gap-3">

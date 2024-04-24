@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import ChatElement from "./ChatElement";
 
-const ChatList = ({ freinds, privateGroups, setPrivateGroups }) => {
+const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
   const [render, setrender] = useState(false);
   useEffect(() => {
     // fiha probleme when there is no message between freinds
@@ -19,6 +19,9 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups }) => {
     });
     setrender(true);
   }, []);
+  const filteredPrivateGroups = privateGroups.filter((group) => {
+    return group.members[0].username.toLowerCase().includes(searchGroup.toLowerCase());
+  });
 
   return (
     <div className="px-5 pt-5  flex flex-col w-screen overflow-y-scroll h-full ">
@@ -27,7 +30,7 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups }) => {
 
       {privateGroups && privateGroups.length > 0 ? (
         <div className="flex-grow space-y-4 overflow-y-scroll w-full  h-full">
-          {privateGroups.map((message, index) => (
+          {filteredPrivateGroups.map((message, index) => (
             <ChatElement
               key={index}
               sender={message.members[0].username}

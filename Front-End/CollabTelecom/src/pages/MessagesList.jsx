@@ -9,7 +9,8 @@ import axios from "axios";
 const MessagesList = () => {
   const [freinds, setFreinds] = useState([]);
   const [privateGroups, setPrivateGroups] = useState([]);
-
+  const [searchGroup, setSearchGroup] = useState("");
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -26,14 +27,6 @@ const MessagesList = () => {
         //i need to  cancel it and ghadi njibha f request wa7adha n3ytlha fl page tee public groups
 
         setFreinds(res.data.freinds);
-
-        // console.log("private groups",res.data.privateGroups[0]);
-        // console.log("content",privateGroups.messages[0].content);
-        // console.log("sender",privateGroups.members[0].username);
-        // console.log("id",privateGroups.members[0]._id);
-        // console.log("time",privateGroups.messages[0].timestamp);
-        // console.log("isOnline",privateGroups.members[0].isOnline);
-        // console.log("les groups from messages list ",res.data.privateGroups);
         setPrivateGroups(res.data.privateGroups);
       })
       .catch((error) => {
@@ -45,16 +38,16 @@ const MessagesList = () => {
         }
       });
   }, []);
-
   return (
     <div className="flex flex-col h-screen">
       <div className="flex-grow ">
         <div className="pt-4">
           <Heading />
-          <SearchChat />
+          <SearchChat searchGroup={searchGroup} setSearchGroup={setSearchGroup} />
           <ConnectedList freinds={freinds} />
           {privateGroups && privateGroups.length > 0 ? (
             <ChatList
+            searchGroup={searchGroup}
               freinds={freinds}
               privateGroups={privateGroups}
               setPrivateGroups={setPrivateGroups}

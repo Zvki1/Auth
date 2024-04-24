@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import GroupElement from "./GroupElement"
 import axios from "axios"
 
-const GroupList = () => {
+const GroupList = ({searchGroup}) => {
     const [groups, setgroups] = useState([])
     useEffect(() => {
       
@@ -24,11 +24,13 @@ const GroupList = () => {
         
      
     }, [])
-
+    const filteredGroups = groups.filter(group =>
+        group.name.toLowerCase().includes(searchGroup.toLowerCase())
+    );
   return (
     <div className="px-5 pt-5  flex flex-col w-screen   ">
         <div className="flex-grow space-y-4    w-full  ">
-            {groups.map((group, index) => (
+            {filteredGroups.map((group, index) => (
             <GroupElement key={index} name={group.name} content={group?.latestMessage?.content || "message"} time={group?.latestMessage?.timestamp || "time"} />
         ))}
         </div>

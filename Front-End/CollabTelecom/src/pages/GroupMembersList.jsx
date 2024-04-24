@@ -5,7 +5,7 @@ import SearchMember from "../components/GroupMembersList/SearchMember";
 import axios from "axios";
 
 const GroupMembersList = () => {
-
+  const [searchFriend, setSearchFriend] = useState("");
   const [groupMembers, setGroupMembers] = useState([]);
   const [groupName, setGroupName] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
@@ -32,8 +32,8 @@ const GroupMembersList = () => {
   return (
     <div>
       <Header />
-      <SearchMember />
-      <MembersList groupMembers={groupMembers} groupName={groupName} isAdmin={isAdmin}/>
+      <SearchMember searchFriend={searchFriend} setSearchFriend={setSearchFriend}/>
+      <MembersList groupMembers={groupMembers} groupName={groupName} isAdmin={isAdmin} searchFriend={searchFriend}/>
     </div>
   );
 };
