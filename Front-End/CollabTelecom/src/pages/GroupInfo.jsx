@@ -31,7 +31,7 @@ const GroupInfo = () => {
   }, [])
   return (
     <div className="h-screen flex flex-col items-center">
-        <BluePart groupName={groupName} />
+        <BluePart groupName={groupName} isAdmin={isAdmin} />
         <GrayPart  groupName={groupName} isAdmin={isAdmin} />
     </div>
   )

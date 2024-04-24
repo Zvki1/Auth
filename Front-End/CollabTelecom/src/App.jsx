@@ -22,6 +22,7 @@ import SocketContext from './context/SocketContext'
 import NewGroup from './pages/NewGroup'
 import GroupInfo from './pages/GroupInfo'
 import GroupMembersList from './pages/GroupMembersList'
+import EditGroupe from './pages/EditGroup'
 
 function App() {
   // const isUserSignedIn = !!localStorage.getItem('token')
@@ -77,6 +78,7 @@ function App() {
           <Route path='/newGroup' element={<NewGroup/>} />
           <Route path='/groupInfos'element={<GroupInfo/>} />
           <Route path='/groupMembersList' element={<GroupMembersList/>} />
+          <Route path='/EditGroup' element={<EditGroupe/>} />
           {/* Route NotFound pour les routes non définies */}
           <Route path="*" element={<NotFound/>} />
         </>
