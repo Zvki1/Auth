@@ -18,7 +18,7 @@ const Navbar = () => {
     },
     {
       title: "Notifications",
-      href: "/Notifications",
+      href: "/Notifications/Alertes",
       icon: Bell,
     },
     {
@@ -29,7 +29,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="w-full bg-[#EDF2F7]  absolute bottom-0 flex items-center justify-around  ">
+    <div className="w-full bg-[#EDF2F7]  absolute bottom-0 flex  items-center justify-around  ">
       {NavElements.map((element) => (
         <NavLink
           key={element.title}

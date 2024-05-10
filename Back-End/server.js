@@ -24,7 +24,7 @@ const Message = require('./models/messageSchema');
 const Group = require('./models/groupSchema')
 const Departement = require('./models/departementSchema')
 const PrivateGroup = require('./models/privateGroupSchema');
-const publicGroups = require('./controllers/getPublicGroups');
+const Employe =require("./models/employeSchema")
 
 // express connection
 const app = express();

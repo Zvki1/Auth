@@ -10,7 +10,7 @@ import MessagesList from './pages/MessagesList'
 import NotFound from './pages/NotFound'
 import PrivateChat from './pages/PrivateChat'
 import GeneralChat from './pages/GeneralChat'
-import Notifications from './pages/Notifications'
+import Notifications from './pages/Notfications'
 import Profile from './pages/Profile'
 import AddFreind from './pages/AddFreind'
 import ListAmis from './pages/ListAmis'
@@ -23,6 +23,9 @@ import NewGroup from './pages/NewGroup'
 import GroupInfo from './pages/GroupInfo'
 import GroupMembersList from './pages/GroupMembersList'
 import EditGroupe from './pages/EditGroup'
+import Alertes from './pages/Alertes'
+import Appels from './pages/Appels'
+import Others from './pages/Others'
 
 function App() {
   // const isUserSignedIn = !!localStorage.getItem('token')
@@ -69,6 +72,7 @@ function App() {
           <Route path="/GeneralChat" element={<GeneralChat />} />
           <Route path="/MessagesList" element={<MessagesList  />} />
           <Route path="/PrivateChat/:user" element={<PrivateChat   />} />
+          {/* this notificaiton is not used  */}
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path='/AddFreind' element={<AddFreind/>} />
@@ -79,6 +83,9 @@ function App() {
           <Route path='/groupInfos'element={<GroupInfo/>} />
           <Route path='/groupMembersList' element={<GroupMembersList/>} />
           <Route path='/EditGroup' element={<EditGroupe/>} />
+          <Route path='Notifications/Alertes' element={<Alertes/>} />
+          <Route path='Notifications/Appels' element={<Appels/>} />
+          <Route path='/Notifications/Others' element={<Others/>} />
           {/* Route NotFound pour les routes non définies */}
           <Route path="*" element={<NotFound/>} />
         </>

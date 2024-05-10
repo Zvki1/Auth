@@ -10,6 +10,7 @@ const registerUser = async (req,res)=>{
         if (existingUser) {
             return res.status(400).json({ error: 'Email already in use' });
         }
+        
         const hashedPassword = await bcrypt.hash(password,10);
         const user = new User({
             email,
