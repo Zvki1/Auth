@@ -19,6 +19,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User' 
     }],
+    tickets: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Ticket'
+    }],
     isOnline: {
         type: Boolean,
         default: false

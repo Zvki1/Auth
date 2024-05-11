@@ -16,6 +16,7 @@ const privateChatRoutes = require('./routes/PrivateChat');
 const generalChatRoutes = require('./routes/generalChat');
 const publicGroupsRoutes = require('./routes/publicGroups');
 const publicGroupRoutes = require('./routes/publicGroupRoutes');
+const alertesRoutes = require('./routes/alertes');
 // midleware
 const verifyToken = require('./middleware/verifyToken');
 // IMPORTING THE USER MODEL
@@ -63,7 +64,8 @@ app.use('/publicGroups',verifyToken,publicGroupsRoutes)
 // public group
 app.use('/publicGroup',verifyToken,publicGroupRoutes)
 
-
+// alertes
+app.use('/alertes',verifyToken,alertesRoutes)
 
 // get users by search term
 app.get('/searchUsers',verifyToken,async (req,res) => {
