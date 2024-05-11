@@ -29,7 +29,7 @@ import Others from './pages/Others'
 
 function App() {
   // const isUserSignedIn = !!localStorage.getItem('token')
-  const [isUserSignedIn, setIsUserSignedIn] = useState(!!localStorage.getItem('token'))
+  const [isUserSignedIn] = useState(!!localStorage.getItem('token'))
   const [socket, setSocket] = useState(null);
   useEffect(() => {
     if (isUserSignedIn) {

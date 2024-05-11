@@ -1,4 +1,5 @@
-import Alert from "../components/Alertes/Alert"
+
+import AlertsContainer from "../components/Alertes/AlertsContainer"
 import Navbar from "../components/Navbar"
 import Header from "../components/Notifications.jsx/Header"
 import Switcher from "../components/Notifications.jsx/Switcher"
@@ -8,7 +9,7 @@ const Alertes = () => {
     <div>
         <Header/>
         <Switcher/>
-        <Alert/>
+        <AlertsContainer/>
         <Navbar/>
     </div>
   )

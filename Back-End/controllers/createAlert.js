@@ -1,7 +1,7 @@
  const Alert = require("../models/alerteSchema");
 
 const createAlert = async (req, res) => {
-    const { type, importance, description, localisation, managerResponsable } = req.body;
+    const { type, importance, description, localisation, managerResponsable,titre } = req.body;
     const alert = new Alert({
         type,
         importance,
@@ -9,6 +9,7 @@ const createAlert = async (req, res) => {
         date: new Date(),
         localisation,
         managerResponsable,
+        titre
     });
     try {
         await alert.save();
