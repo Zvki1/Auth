@@ -8,7 +8,8 @@ const ContactElement = ({name,email,isOnline,id,setmembersToAdd,membersToAdd}) =
 
   useEffect(() => {
     setIsCheckedState(membersToAdd.some((member) => member.id === id));
-  }, [membersToAdd]);
+  }, [membersToAdd,id]);
+    // i added the id whitout testin tsma blk dir problem need to check next time
   const handleCheckboxChange = () => {
     setIsCheckedState((prev)=> !prev);
     if (!isCheckedState) {

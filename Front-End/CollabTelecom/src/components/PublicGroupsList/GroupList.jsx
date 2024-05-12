@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import GroupElement from "./GroupElement"
 import axios from "axios"

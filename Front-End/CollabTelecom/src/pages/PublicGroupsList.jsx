@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar"
 import Heading from "../components/PublicGroupsList/Heading"
 import SearchChat from "../components/MessagesList/SearchChat"
 import GroupList from "../components/PublicGroupsList/GroupList"
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 
 const PublicGroupsList = () => {
   const [searchGroup, setSearchGroup] = useState('');
