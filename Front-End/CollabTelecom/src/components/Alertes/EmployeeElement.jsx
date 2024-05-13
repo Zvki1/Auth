@@ -1,24 +1,28 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Avatar from "react-string-avatar";
 const EmployeeElement = (
     {name,email,setEmployelist,employelist,id}
 ) => {
     const [isCheckedState, setIsCheckedState] = useState(employelist.some((member) => member.id === id));
     const handleCheckboxChange = () => {
-        setIsCheckedState((prev)=> !prev);
+        // setIsCheckedState((prev)=> !prev);
         if (!isCheckedState) {
             setEmployelist([...employelist, { id, name }]);
         } else {
             setEmployelist(employelist.filter((member) => member.id !== id));
         }
-        // if(isChecked){
-        //   setmembersToAdd([...membersToAdd,{id,name}]);
+        // if(!isCheckedState){
+        //   setEmployelist([...employelist,{id,name}]);
         // }else{
-        //   setmembersToAdd(membersToAdd.filter((memberId) => memberId !== id));
+        //   setEmployelist(employelist.filter((memberId) => memberId !== id));
         // }
         
       };
+      useEffect(() => {
+        setIsCheckedState(employelist.some((member) => member.id === id));
+        console.log("employelist");
+      }, [employelist,id]);
   return (
     <div className="w-full flex items-center justify-between ">
     <div className="flex items-center gap-3">

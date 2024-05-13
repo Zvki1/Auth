@@ -2,7 +2,7 @@
 
 
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import EmployeeElement from "./EmployeeElement";
 
@@ -29,7 +29,9 @@ const SearchEmployee = ({setEmployelist,employelist,employeName,setEmployeName})
     console.log(value);
     handleSearch(value);
 };
-
+useEffect(() => {
+    handleSearch("");
+}, []);
   return (
       
 <div className="w-full ">   

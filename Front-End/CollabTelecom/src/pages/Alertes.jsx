@@ -5,7 +5,7 @@ import Header from "../components/Notifications.jsx/Header";
 import Switcher from "../components/Notifications.jsx/Switcher";
 
 const Alertes = () => {
-  const [showPopUp, setshowPopUp] = useState(false);
+  const [showPopUp, setshowPopUp] = useState(null);
   return (
     <div>
       <Header />
