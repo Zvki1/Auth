@@ -1,11 +1,10 @@
-import Navbar from "../components/Navbar";
-import Header from "../components/Alertes/Header";
-import Switcher from "../components/Alertes/Switcher";
 import { useEffect, useState } from "react";
 import { fetchProfile } from "../../api/profile";
-
-const Others = () => {
-  const [role, setRole] = useState([]);
+import Header from "../components/Alertes/Header";
+import Switcher from "../components/Alertes/Switcher";
+import Navbar from "../components/Navbar";
+const Tickets = () => {
+    const [role, setRole] = useState([]);
     useEffect(() => {
       fetchProfile()
         .then((res) => {
@@ -17,11 +16,11 @@ const Others = () => {
     }, []);
   return (
     <div>
-      <Header />
-      <Switcher role={role} />
-      <Navbar />
+        <Header/>
+        <Switcher role={role}/>
+        <Navbar/>
     </div>
-  );
-};
+  )
+}
 
-export default Others;
+export default Tickets

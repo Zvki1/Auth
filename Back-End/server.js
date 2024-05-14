@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const socketIO = require('socket.io');
-
+// i want to encrypt the messages before saving them in the database , and decrypting them while fetching
 // importing routes
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
@@ -27,6 +27,7 @@ const Group = require('./models/groupSchema')
 const Departement = require('./models/departementSchema')
 const PrivateGroup = require('./models/privateGroupSchema');
 const Employe =require("./models/employeSchema")
+const Ticket =require("./models/ticketShema")
 
 // express connection
 const app = express();
@@ -95,21 +96,20 @@ app.get('/searchUsers',verifyToken,async (req,res) => {
     }
 })
 
-//  i want to add a new attribute of role to the user schema , and set by defeaut the "employe" role 
-//   app.get('/addRole',async (req,res) => {
-//         try {
-//             const users = await User.find();
-//             users.forEach(async (user) => {
-//                 user.role = ['employe'];
-//                 await user.save();
-//             });
-//             res.json({message:'Role added successfully'})
-//         } catch (error) {
-//             console.log('Error:',error);
-//         }
-//     }
-// )
-
+// update the owner field of the tickets
+app.get('/updateTickets',async (req,res) => {
+    try {
+        const tickets = await Ticket.find()
+        tickets.forEach(async (ticket) => {
+            ticket.owner = "65e8350f2f37eafb4f30ace6"
+            await ticket.save()
+        }
+        )
+        res.json({message:'tickets updated'})
+    } catch (error) {
+        console.log('Error:',error)
+    }
+})
 //connect to mongodb
 const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"
     async function mongoseConnect(){

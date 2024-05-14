@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema({
+    owner: { type: Schema.Types.ObjectId, ref: 'Employe' },
     title: { type: String, required: true },
     description: { type: String, required: true },
     importance:{type: String,enum:["faible","moyen","haut"]},

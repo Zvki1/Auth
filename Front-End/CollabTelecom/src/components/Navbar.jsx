@@ -18,7 +18,7 @@ const Navbar = () => {
     },
     {
       title: "Notifications",
-      href: "/Notifications/Alertes",
+      href: "/Notifications/Others",
       icon: Bell,
     },
     {

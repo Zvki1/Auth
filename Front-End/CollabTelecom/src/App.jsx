@@ -24,8 +24,9 @@ import GroupInfo from './pages/GroupInfo'
 import GroupMembersList from './pages/GroupMembersList'
 import EditGroupe from './pages/EditGroup'
 import Alertes from './pages/Alertes'
-import Appels from './pages/Appels'
+// import Appels from './pages/Appels'
 import Others from './pages/Others'
+import Tickets from './pages/Tickets'
 
 function App() {
   // const isUserSignedIn = !!localStorage.getItem('token')
@@ -84,7 +85,7 @@ function App() {
           <Route path='/groupMembersList' element={<GroupMembersList/>} />
           <Route path='/EditGroup' element={<EditGroupe/>} />
           <Route path='Notifications/Alertes' element={<Alertes/>} />
-          <Route path='Notifications/Appels' element={<Appels/>} />
+          <Route path='Notifications/Tickets' element={<Tickets/>} />
           <Route path='/Notifications/Others' element={<Others/>} />
           {/* Route NotFound pour les routes non définies */}
           <Route path="*" element={<NotFound/>} />

@@ -1,32 +1,29 @@
 import { useEffect, useState } from "react";
 import AlertsContainer from "../components/Alertes/AlertsContainer";
 import Navbar from "../components/Navbar";
-import Header from "../components/Notifications.jsx/Header";
-import Switcher from "../components/Notifications.jsx/Switcher";
+import Header from "../components/Alertes/Header";
+import Switcher from "../components/Alertes/Switcher";
 import axios from "axios";
+import { fetchProfile } from "../../api/profile";
 
 const Alertes = () => {
   const [showPopUp, setshowPopUp] = useState(null);
   const [role, setRole] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/profile",
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-    ).then((res) => {
-      setRole(res.data.user.role);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    axios
+     fetchProfile()
+      .then((res) => {
+        setRole(res.data.user.role);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return (
     <div>
       <Header />
-      {role.includes("manager") ? <Switcher /> : null}
-     
+      <Switcher role={role}/>
+
       <AlertsContainer setshowPopUp={setshowPopUp} showPopUp={showPopUp} />
 
       <Navbar />

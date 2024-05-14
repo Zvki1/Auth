@@ -49,6 +49,7 @@ const Alert = ({alert,setshowPopUp,showPopUp}) => {
         {showPopUp===alert._id &&  
         <AssignContainer setshowPopUp={setshowPopUp} alert={alert}/>}
     </div>
+    
   )
 }
 

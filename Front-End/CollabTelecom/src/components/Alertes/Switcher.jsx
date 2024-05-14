@@ -1,19 +1,20 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 
 NavLink;
-const Switcher = () => {
+const Switcher = ({ role }) => {
   const switchElements = [
-    {
-      title: "Alertes",
-      href: "/Notifications/Alertes",
-    },
-    {
-      title: "Appels",
-      href: "/Notifications/Appels",
-    },
     {
       title: "Others",
       href: "/Notifications/Others",
+    },
+    {
+      title: "Tickets",
+      href: "/Notifications/Tickets",
+    },
+    {
+      title: role.includes("manager") ? "Alertes" : null,
+      href: role.includes("manager") ? "/Notifications/Alertes" : null,
     },
   ];
   return (
