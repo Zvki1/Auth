@@ -5,6 +5,7 @@ import { useEffect,useState } from 'react';
 import AssignContainer from './AssignContainer';
 
 const Alert = ({alert,setshowPopUp,showPopUp}) => {
+  
     const [formattedTime, setFormattedTime] = useState("");
     useEffect(() => {
     if(alert){
@@ -32,9 +33,17 @@ const Alert = ({alert,setshowPopUp,showPopUp}) => {
         </div>
         <div className="flex flex-col justify-around items-end gap-2  ">
             <p>{formattedTime || "date"}</p>
+            {alert?.isAssigned ?
+            <button>
+             <button type="button" className="text-[#112377] bg-gray-200  border-2 border-[#112377]  font-medium rounded-md text-sm px-5 py-2.5  "
+            disabled
+            >assigné</button>
+            </button>
+            :
             <button type="button" className="text-white bg-[#112377] hover:bg-blue-800  font-medium rounded-md text-sm px-5 py-2.5  "
             onClick={() => setshowPopUp(alert._id)}
-            >assigner</button>
+            >     assigner</button>}
+           
         </div>
 
         {showPopUp===alert._id &&  

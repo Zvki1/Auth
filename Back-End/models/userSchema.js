@@ -27,6 +27,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
+    role:{
+        type: Array,
+        default: ['employe']
+    }
     
 });
 module.exports = mongoose.model('User', userSchema);

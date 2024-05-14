@@ -13,3 +13,9 @@ const alerteSchema = new Schema({
 });
 
 module.exports = mongoose.model('Alerte', alerteSchema);
+
+
+// curl -X POST -H "Content-Type: application/json" -d @Example.json http://127.0.0.1:5000/alerts
+// curl http://127.0.0.1:5000/alerts
+// for runnig the db
+// python3 alert_Db_data.py

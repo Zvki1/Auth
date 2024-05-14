@@ -24,12 +24,12 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
   });
 
   return (
-    <div className="px-5 pt-5  flex flex-col w-screen overflow-y-scroll h-full ">
+    <div className="px-5 pt-5 flex flex-col w-screen overflow-y-auto" style={{ height: "calc(100% - 48px)" }}>
       {/* {console.log("the received groups in chatlist",privateGroups)}
       {console.log("message",privateGroups[0].messages[0].timestamp)} */}
 
       {privateGroups && privateGroups.length > 0 ? (
-        <div className="flex-grow space-y-4 overflow-y-scroll w-full  h-full">
+        <div className="flex-grow space-y-4 overflow-y-auto w-full h-full">
           {filteredPrivateGroups.map((message, index) => (
             <ChatElement
               key={index}
@@ -43,7 +43,7 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
           ))}
         </div>
       ) : (
-        <div className=" h-screen flex flex-col gap-3  items-center">
+        <div className="h-screen flex flex-col gap-3 items-center">
           <div role="status">
             <svg
               aria-hidden="true"
@@ -63,7 +63,7 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
             </svg>
             <span className="sr-only">Loading...</span>
           </div>
-          <h2 className=" text-blue-600 text-xl font-semibold">Loading...</h2>
+          <h2 className="text-blue-600 text-xl font-semibold">Loading...</h2>
         </div>
       )}
     </div>

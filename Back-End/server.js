@@ -17,6 +17,7 @@ const generalChatRoutes = require('./routes/generalChat');
 const publicGroupsRoutes = require('./routes/publicGroups');
 const publicGroupRoutes = require('./routes/publicGroupRoutes');
 const alertesRoutes = require('./routes/alertes');
+const ticketsRoutes = require('./routes/tickets')
 // midleware
 const verifyToken = require('./middleware/verifyToken');
 // IMPORTING THE USER MODEL
@@ -67,6 +68,7 @@ app.use('/publicGroup',verifyToken,publicGroupRoutes)
 // alertes
 app.use('/alertes',verifyToken,alertesRoutes)
 
+app.use('/tickets',verifyToken,ticketsRoutes)
 // get users by search term
 app.get('/searchUsers',verifyToken,async (req,res) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -92,6 +94,21 @@ app.get('/searchUsers',verifyToken,async (req,res) => {
         console.log('Error:',error)
     }
 })
+
+//  i want to add a new attribute of role to the user schema , and set by defeaut the "employe" role 
+//   app.get('/addRole',async (req,res) => {
+//         try {
+//             const users = await User.find();
+//             users.forEach(async (user) => {
+//                 user.role = ['employe'];
+//                 await user.save();
+//             });
+//             res.json({message:'Role added successfully'})
+//         } catch (error) {
+//             console.log('Error:',error);
+//         }
+//     }
+// )
 
 //connect to mongodb
 const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-01.zkwoogj.mongodb.net:27017,ac-b3mzl8n-shard-00-02.zkwoogj.mongodb.net:27017/?ssl=true&replicaSet=atlas-al2c0u-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0"

@@ -78,6 +78,7 @@ const SignUp = () => {
           setUsername("");
           setPassword("");
           navigate("/login");
+          // need to fix it  redirect to  messages page and  set the local storage
         })
         .catch((error) => {
           if (error.response && error.response.status === 400) {

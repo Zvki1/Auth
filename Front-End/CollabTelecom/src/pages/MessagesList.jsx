@@ -39,8 +39,8 @@ const MessagesList = () => {
       });
   }, []);
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex-grow ">
+    <div className="flex flex-col h-screen overflow-x-hidden pb-24">
+      <div className=" ">
         <div className="pt-4">
           <Heading />
           <SearchChat searchGroup={searchGroup} setSearchGroup={setSearchGroup} />
