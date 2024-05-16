@@ -9,18 +9,18 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
   useEffect(() => {
     // fiha probleme when there is no message between freinds
     privateGroups.sort((a, b) => {
-      if (a.messages.length != 0) {
-        const lastMessageA = a.messages[a.messages.length - 1];
-        const lastMessageB = b.messages[b.messages.length - 1];
+      if (a?.messages?.length != 0) {
+        const lastMessageA = a?.messages[a.messages.length - 1];
+        const lastMessageB = b?.messages[b.messages.length - 1];
         return (
-          new Date(lastMessageB.timestamp) - new Date(lastMessageA.timestamp)
+          new Date(lastMessageB?.timestamp) - new Date(lastMessageA?.timestamp)
         );
       }
     });
     setrender(true);
   }, []);
   const filteredPrivateGroups = privateGroups.filter((group) => {
-    return group.members[0].username.toLowerCase().includes(searchGroup.toLowerCase());
+    return group?.members[0]?.username.toLowerCase().includes(searchGroup.toLowerCase());
   });
 
   return (
@@ -33,8 +33,8 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
           {filteredPrivateGroups.map((message, index) => (
             <ChatElement
               key={index}
-              sender={message.members[0].username}
-              isOnline={message.members[0].isOnline}
+              sender={message?.members[0].username}
+              isOnline={message?.members[0].isOnline}
               time={message?.messages[0]?.timestamp || " "}
               content={message?.messages[0]?.content || " "}
               freindId={message.members[0]._id}

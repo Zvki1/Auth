@@ -57,7 +57,7 @@ const PrivateChat = () => {
      
       setUsername(response.data.freindInfos.username)
       setisOnline(response.data.freindInfos.isOnline)
-      // console.log('Messages:',response.data.privateGroup.messages);
+      console.log('Messages:',response.data.privateGroup.messages);
       setMessages(response.data.privateGroup.messages)
     })
     .catch((error) => {

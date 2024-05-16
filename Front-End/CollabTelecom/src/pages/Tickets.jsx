@@ -3,6 +3,7 @@ import { fetchProfile } from "../../api/profile";
 import Header from "../components/Alertes/Header";
 import Switcher from "../components/Alertes/Switcher";
 import Navbar from "../components/Navbar";
+import TicketsContainer from "../components/Tickets/TicketsContainer";
 const Tickets = () => {
     const [role, setRole] = useState([]);
     useEffect(() => {
@@ -18,6 +19,7 @@ const Tickets = () => {
     <div>
         <Header/>
         <Switcher role={role}/>
+        <TicketsContainer/>
         <Navbar/>
     </div>
   )

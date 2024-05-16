@@ -13,15 +13,30 @@ const createTicket = async (req, res) => {
   console.log("remarque", remarque);
   // filtring assgnedTo from the names
   const employelistIds = [];
-  employelist.map((employe) => employelistIds.push(employe.id));
+  try {
+    employelist.map((employe) => employelistIds.push(employe.id));
+  } catch (err) {
+    console.log("error from create ticket ", err, "-----------------\n");
+  }
   // set  the isAssigned to true
-  await Alert.updateOne({ _id: alert._id }, { isAssigned: true })
-    .then(() => {
-      console.log("alert is set to assigned");
-    })
-    .catch((error) => {
-      console.log("Error:", error);
+  try {
+    await Alert.updateOne({ _id: alert._id }, { isAssigned: true })
+      .then(() => {
+        console.log("alert is set to assigned");
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  } catch (err) {
+    console.log("error from create ticket while assigning the alert  ", err, "-----------------\n");
+  }
+    // create remarque
+    const newRemarque = new Remarque({
+      content: remarque,
+      date: new Date(),
+      sender: decoded.userId,
     });
+    const savedRemarque = await newRemarque.save();
   // create ticket
   const ticket = new Ticket({
     title: alert.titre,
@@ -31,17 +46,11 @@ const createTicket = async (req, res) => {
     localisation: alert.localisation,
     assignedTo: employelistIds,
     owner: decoded.userId,
+    remarques: [savedRemarque._id],
   });
   try {
     const savedTicket = await ticket.save();
-    // create remarque
-    const newRemarque = new Remarque({
-      content: remarque,
-      date: new Date(),
-      ticket: savedTicket._id,
-      sender: decoded.userId,
-    });
-    const savedRemarque = await newRemarque.save();
+    
     res.json({ message: "Ticket created successfully", savedTicket, savedRemarque });
   } catch (err) {
     res.json({ message: err });

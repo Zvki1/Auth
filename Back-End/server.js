@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const socketIO = require('socket.io');
-// i want to encrypt the messages before saving them in the database , and decrypting them while fetching
+const { encrypt, decrypt } = require('./cipher');
 // importing routes
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
@@ -166,7 +166,14 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
         });
 
         socket.on('chat message', async  (msg,receiverId) => {
-            console.log('Message:', msg);
+            // console.log('Message:', msg);
+            // try {
+            //     console.log("encrypted message",encrypt(msg));
+            //     const encryptedMessage = encrypt(msg);
+            //     console.log("decrypted message",decrypt(encryptedMessage),"\n\n");
+            // } catch (err) {
+            //     console.log("erro from encrypting in the socket server",err,"\n\n");
+            // }
             try {
                 // saving the message
                 const newMessage = new Message ({
@@ -177,7 +184,7 @@ const dbURI = "mongodb://Zvki1:Nadz3EMn57cESWQ4@ac-b3mzl8n-shard-00-00.zkwoogj.m
                 })
                 await newMessage.save();
                 // for the backup
-                console.log('Message enregistré dans la base de données:', newMessage);
+                // console.log('Message enregistré dans la base de données:', newMessage);
                 // SEARCH FOR THE PRIVATE GROUP
                 
                 const privateGroup = await PrivateGroup.findOne({

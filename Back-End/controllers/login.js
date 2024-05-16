@@ -14,7 +14,7 @@ const loginUser = async (req,res)=>{
         if(!isMatch){
             return res.status(401).send({error:'Invalid  password'});
         }
-        const token = jwt.sign({userId:user._id},'Zvki1',{expiresIn:'8h'});
+        const token = jwt.sign({userId:user._id,role:user.role},'Zvki1',{expiresIn:'100h'});
         console.log(jwt.verify(token,'Zvki1'),"token");
         res.json({message:'Login success',token,user:{username:user.username,email:user.email,id:user._id}});
     }catch (err){
