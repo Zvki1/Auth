@@ -49,8 +49,12 @@ const CpuAlert = ({ remarques }) => {
     return (
       <div className="flex justify-between items-center py-3 px-4 border-b border-[#112377]">
         <div className="flex items-center space-x-2">
+         { remarque?.path &&<button
+         onClick={() => window.open(`http://localhost:8000/files/${remarque.path}`)}
+         > 
           <File className="w-5 h-5" />
-          <span className="text-gray-700">{remarque?.title ||"remarque"}</span>
+          </button>}
+          <span className="text-gray-700">{remarque?.content ||"remarque"}</span>
           <span className="text-gray-500">{remarque?.sender?.username || "employe username"}</span>
         </div>
        
