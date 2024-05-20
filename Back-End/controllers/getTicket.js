@@ -15,8 +15,10 @@ const getTicket = async (req, res) => {
         path: "sender",
         select: "username  _id"
           }
-        });
-      res.status(200).json(ticket);
+        
+        })
+        const userRole= jwt.decode(req.headers.authorization.split(" ")[1]).role;
+      res.status(200).json({ticket, userRole});
     } catch (error) {
         res.status(400).json({ message: "error" });
     }

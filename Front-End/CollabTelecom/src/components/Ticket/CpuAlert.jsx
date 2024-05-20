@@ -44,8 +44,8 @@ const CpuAlert = ({ remarques }) => {
   );
 
   const RemarkItem = ({ remarque }) => {
-    console.log("remarque from remarkItem", remarque);
-    console.log("remarque",remarque.sender.username);
+   console.log("remarque from remarkItem", remarque); 
+    console.log("remarque",remarque.content);
     return (
       <div className="flex justify-between items-center py-3 px-4 border-b border-[#112377]">
         <div className="flex items-center space-x-2">
@@ -74,19 +74,20 @@ const CpuAlert = ({ remarques }) => {
     formData.append("ticketId", window.location.search.split("=")[1]);
     console.log("remarque", remarque);
     console.log("file", file);
-    axios
-      .post("http://localhost:8000/addRemarque", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if(remarque || file) {
+      axios.post("http://localhost:8000/addRemarque", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     setFile("");
     setRemarque("");
   };
