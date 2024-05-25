@@ -19,7 +19,7 @@ const TicketsContainer = () => {
         })
     }, [])
   return (
-    <div>
+    <div className='w-full '>
         {tickets.map((ticket) => (
             <Ticket
             ticket={ticket}

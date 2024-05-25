@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { SendHorizontal } from 'lucide-react';
 import SocketContext from '../../context/SocketContext';
-import { useContext,useEffect,useState} from 'react';
+import { useContext,useEffect} from 'react';
 const GeneralInput = ({nameOfGroup}) => {
   const socket = useContext(SocketContext)
-  const [groups, setgroups] = useState([])
+
 
   const handleChange = (e) => {
     // setMessage(e.target.value);
@@ -36,7 +36,7 @@ const GeneralInput = ({nameOfGroup}) => {
   }
   return (
    
-    <form className="w-full py-3  absolute bottom-[73px] inset-x-0 flex items-center justify-evenly bg-[#fff] ">   
+    <form className="w-full py-3  absolute bottom-0 inset-x-0 flex items-center justify-evenly bg-[#fff] ">   
    {/* message input */}
     <div className="relative w-4/5">
         <input onChange={(e)=>{handleChange(e)}}  type="text" id="default-search" className="block w-full p-4  text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Send your message" required />

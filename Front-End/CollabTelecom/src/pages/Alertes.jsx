@@ -5,10 +5,21 @@ import Header from "../components/Alertes/Header";
 import Switcher from "../components/Alertes/Switcher";
 import axios from "axios";
 import { fetchProfile } from "../../api/profile";
+import SideBar from "../components/SideBar";
 
 const Alertes = () => {
   const [showPopUp, setshowPopUp] = useState(null);
   const [role, setRole] = useState([]);
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   useEffect(() => {
     axios
      fetchProfile()
@@ -20,13 +31,13 @@ const Alertes = () => {
       });
   }, []);
   return (
-    <div>
-      <Header />
+    <div className={`flex w-screen h-screen   ${(width>768)?" flex-row-reverse justify-end":""}`}>
+      <div className={`${(width>768) && "w-11/12"}  flex-grow`}><Header />
       <Switcher role={role}/>
 
-      <AlertsContainer setshowPopUp={setshowPopUp} showPopUp={showPopUp} />
+      <AlertsContainer setshowPopUp={setshowPopUp} showPopUp={showPopUp} /></div>
 
-      <Navbar />
+      {width > 768 ? <SideBar /> : <Navbar />}
     </div>
   );
 };

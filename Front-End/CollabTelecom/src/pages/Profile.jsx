@@ -7,8 +7,19 @@ import Logout from "../components/Profile/Logout";
 
 import { useEffect,useState } from "react";
 import axios from "axios";
+import SideBar from "../components/SideBar";
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(null)
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   const fetchUserProfile = async () => {
     try {
         // Envoyer une requête GET vers l'endpoint /profile pour récupérer le profil de l'utilisateur
@@ -42,7 +53,8 @@ const Profile = () => {
 }, []); 
   return (
 
-    <div >
+    <div className={`flex w-screen h-screen  ${(width>768)?" flex-row-reverse justify-end":""}`} >
+      <div className={`${(width>768) && "w-11/12"}  flex-grow`} >
       {/* personal informations div */}
       
      {
@@ -99,7 +111,9 @@ const Profile = () => {
       )
      }
     {/* navbar component */}
-      <Navbar />
+    
+    </div>
+    {width > 768 ? <SideBar /> : <Navbar />}
     </div>
   );
 };

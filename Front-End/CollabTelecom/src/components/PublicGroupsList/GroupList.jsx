@@ -29,7 +29,7 @@ const GroupList = ({searchGroup}) => {
         group.name.toLowerCase().includes(searchGroup.toLowerCase())
     );
   return (
-    <div className="px-5 pt-5  flex flex-col w-screen   ">
+    <div className="px-5 pt-5  flex flex-col w-full   ">
         <div className="flex-grow space-y-4    w-full  ">
             {filteredGroups.map((group, index) => (
             <GroupElement key={index} name={group.name} content={group?.latestMessage?.content || "message"} time={group?.latestMessage?.timestamp || "time"} />

@@ -2,21 +2,32 @@ import Navbar from "../components/Navbar"
 import Heading from "../components/PublicGroupsList/Heading"
 import SearchChat from "../components/MessagesList/SearchChat"
 import GroupList from "../components/PublicGroupsList/GroupList"
-import {  useState } from "react"
+import {  useState,useEffect } from "react"
+import SideBar from "../components/SideBar"
 
 const PublicGroupsList = () => {
   const [searchGroup, setSearchGroup] = useState('');
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   return (
-    <div className="flex flex-col h-screen overflow-y-hidden">
-    <div className=" ">
-    <div className="pt-4">
+    <div className={`flex w-screen h-screen  ${(width>768)?" flex-row-reverse justify-end":""}`}>
+    <div className={`${(width>768) && "w-11/12"}  flex-grow`}>
+    <div className="pt-4 h-screen overflow-y-auto">
         <Heading/>
         <SearchChat  searchGroup={searchGroup} setSearchGroup={setSearchGroup}/>
         <GroupList searchGroup={searchGroup}/>
       </div>
     </div>
     {/* Navbar component is rendered here, outside the flex container */}
-    <Navbar/>
+    {width > 768 ? <SideBar /> : <Navbar />}
   </div>
   )
 }

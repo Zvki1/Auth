@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar"
+
 import GeneralHeader from "../components/GeneralChat/GeneralHeader"
 import GeneralInput from "../components/GeneralChat/GeneralInput"
 import Message from "../components/PrivateChat/Message";
@@ -82,7 +82,7 @@ useEffect(() => {
       :
       <HeaderSkeleton />}
 
-      <div className=" overflow-y-auto h-full pb-36 ">
+      <div className=" overflow-y-auto h-full  ">
       {messages.length === 0 && 
         <div>
         {[...Array(50)].map((_, index) => (
@@ -107,7 +107,7 @@ useEffect(() => {
        </div>
       </div>
       <GeneralInput nameOfGroup={nameOfGroup}/>
-       <Navbar />
+       
     </div>
   )
 }
