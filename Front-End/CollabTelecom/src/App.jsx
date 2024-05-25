@@ -28,6 +28,7 @@ import Alertes from './pages/Alertes'
 import Others from './pages/Others'
 import Tickets from './pages/Tickets'
 import Ticket from './pages/TicketPage'
+import MessagesListAndPrivateChat from './pages/MessagesListAndPrivateChat'
 // import Remarque from './pages/Remarque'
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
           <Route path="/GeneralChat" element={<GeneralChat />} />
           <Route path="/MessagesList" element={<MessagesList  />} />
           <Route path="/PrivateChat/:user" element={<PrivateChat   />} />
+          <Route path='/Chat' element={<MessagesListAndPrivateChat/>} />
           {/* this notificaiton is not used  */}
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Profile" element={<Profile />} />

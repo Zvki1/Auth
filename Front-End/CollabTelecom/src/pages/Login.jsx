@@ -48,6 +48,7 @@ function Login() {
                 window.location.reload();
                 localStorage.setItem('token', token)
                 localStorage.setItem('user', JSON.stringify(response.data.user))
+                localStorage.setItem('role', JSON.stringify(response.data.user.role))
                                                             // am not passing the id separated from the token in the response
             
         } catch (error) {

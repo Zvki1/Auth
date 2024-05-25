@@ -20,6 +20,8 @@ function encrypt(text) {
 }
 
 function decrypt(text) {
+  console.log("iv",text.iv,"\n");
+  console.log("encryptedData",text.encryptedData,"\n");
   const iv = Buffer.from(text.iv, 'hex');
   const encryptedText = Buffer.from(text.encryptedData, 'hex');
 
@@ -30,9 +32,9 @@ function decrypt(text) {
     return decrypted.toString();
   } catch (err) {
     console.error("Error from decrypting:", err);
-    console.error("Encrypted data:", text.encryptedData);
-    console.error("Key:", key);
-    console.error("IV:", iv);
+    // console.error("Encrypted data:", text.encryptedData);
+    // console.error("Key:", key);
+    // console.error("IV:", iv);
     return null; // Handle decryption error gracefully
   }
 }

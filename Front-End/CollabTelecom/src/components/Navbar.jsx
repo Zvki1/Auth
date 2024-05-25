@@ -18,7 +18,21 @@ const Navbar = () => {
     },
     {
       title: "Notifications",
-      href: "/Notifications/Others",
+      href: "/Notifications",
+      Children:[
+        {
+          title: "Others",
+          href: "/Others",
+        },
+        {
+          title: "Alertes",
+          href: "/Alertes",
+        },
+        {
+          title: "Tickets",
+          href: "/Tickets",
+        },
+      ],
       icon: Bell,
     },
     {
@@ -35,7 +49,7 @@ const Navbar = () => {
           key={element.title}
           to={element.href}
           className={({isActive}) =>
-            "pt-6 pb-[22px] border-b-4 px-4 " + (isActive ? " text-[#112377]  border-b-[#112377] " : "text-[#4A5568]")
+            "pt-6 pb-[22px] border-b-4 px-4 " + (isActive ? " text-[#112377]  border-b-[#112377] " : "text-[#4A5568]") 
           }
         >
           <element.icon />

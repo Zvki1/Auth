@@ -24,7 +24,7 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
   });
 
   return (
-    <div className="px-5 pt-5 flex flex-col w-screen overflow-y-auto" style={{ height: "calc(100% - 48px)" }}>
+    <div className="px-5 pt-5 flex flex-col w-full overflow-y-auto" style={{ height: "calc(100% - 48px)" }}>
       {/* {console.log("the received groups in chatlist",privateGroups)}
       {console.log("message",privateGroups[0].messages[0].timestamp)} */}
 

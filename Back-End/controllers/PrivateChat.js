@@ -28,24 +28,17 @@ const freindInfos = async (req,res)=>{
             members: { $all: [userId, freindInfos._id] }
         },'messages').populate('messages.sender','username');
         // console.log("privateGroup.messages",privateGroup.messages,"\n\n");
-        privateGroup.messages.forEach(msg => {
-            // console.log("msg.encryptedcontent:",msg.encryptedcontent,"\n -----------------------\n");
-    })
+    
         privateGroup.messages.forEach(msg => {
             // console.log("msg",msg,"\n\n");
             if ((msg.encryptedcontent.iv) && (msg.encryptedcontent.encryptedData)) {
-                // console.log("am undified");
-                // console.log("encrypted mesageform db",msg.encryptedcontent);
-                // console.log(msg.content,"msg.content");
-                // its genearting error argue
-                // console.log("encrypted mesageform db",msg.encryptedcontent);
                 try {
                     msg.content = decrypt(msg.encryptedcontent);
                 } catch (err) {
                     console.log("error from decrypting in the private chat",err);
                 }
             }else {
-                console.log("decrypted mesageform db of else",msg.content);
+                // console.log("decrypted mesageform db of else",msg.content);
             }
         });
         res.json({freindInfos,privateGroup});

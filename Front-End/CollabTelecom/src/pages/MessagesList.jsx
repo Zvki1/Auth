@@ -5,12 +5,22 @@ import Heading from "../components/MessagesList/Heading";
 import SearchChat from "../components/MessagesList/SearchChat";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import SideBar from "../components/SideBar";
 
 const MessagesList = () => {
   const [freinds, setFreinds] = useState([]);
   const [privateGroups, setPrivateGroups] = useState([]);
   const [searchGroup, setSearchGroup] = useState("");
-  
+  const [width, setWidth] = useState(window.innerWidth);
+useEffect(() => {
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+  window.addEventListener("resize", handleResize);
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  }
+}, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -39,15 +49,18 @@ const MessagesList = () => {
       });
   }, []);
   return (
-    <div className="flex flex-col h-screen overflow-x-hidden pb-24">
-      <div className=" ">
+    <div className={`flex  ${(width>768)?" flex-row-reverse h-screen justify-end":"flex-col pb-24"} h-screen overflow-y-auto w-screen  `}>
+      <div className={`${(width>768) && "w-11/12"}`}>
         <div className="pt-4">
           <Heading />
-          <SearchChat searchGroup={searchGroup} setSearchGroup={setSearchGroup} />
+          <SearchChat
+            searchGroup={searchGroup}
+            setSearchGroup={setSearchGroup}
+          />
           <ConnectedList freinds={freinds} />
           {privateGroups && privateGroups.length > 0 ? (
             <ChatList
-            searchGroup={searchGroup}
+              searchGroup={searchGroup}
               freinds={freinds}
               privateGroups={privateGroups}
               setPrivateGroups={setPrivateGroups}
@@ -82,7 +95,7 @@ const MessagesList = () => {
         </div>
       </div>
       {/* Navbar component is rendered here, outside the flex container */}
-      <Navbar />
+      {width > 768 ? <SideBar /> : <Navbar />}
     </div>
   );
 };

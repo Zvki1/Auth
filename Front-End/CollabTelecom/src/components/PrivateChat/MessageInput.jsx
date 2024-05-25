@@ -37,7 +37,7 @@ const MessageInput = ({receiverId,setMessages,setisTyping}) => {
   };
   return (
 //    pt-4 border-t border-gray-300 maybe i add it in the style of the form
-<form className="w-full py-3 bg-white  absolute bottom-0 inset-x-0 flex items-center justify-evenly  ">   
+<form className="w-full py-3 bg-white  relative bottom-0 inset-x-0 flex items-center justify-evenly  ">   
    {/* message input */}
     <div className="relative w-4/5">
         <input

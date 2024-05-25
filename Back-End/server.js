@@ -255,7 +255,7 @@ io.on("connection", (socket) => {
     //     console.log("erro from encrypting in the socket server",err,"\n\n");
     // }
     try {
-      // saving the message
+      // saving the message but am not retreinving the messaages from this document
       const newMessage = new Message({
         content: msg,
         sender: socket.handshake.headers.userid,
