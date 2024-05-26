@@ -74,7 +74,7 @@ const PrivateChat = () => {
   return (
     <div className="h-screen  flex flex-col">
       {username ? <Header username={username} isOnline={isOnline} /> : <HeaderSkeleton />}
-      <div className=" overflow-y-auto w-full h-full pb-20">
+      <div className=" overflow-y-auto w-full h-full ">
         {messages.length === 0 && 
         <div>
         {[...Array(50)].map((_, index) => (

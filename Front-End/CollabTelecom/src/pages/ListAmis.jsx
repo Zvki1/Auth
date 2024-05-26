@@ -10,18 +10,6 @@ import { Link } from "react-router-dom";
 const ListAmis = () => {
   const [friendList, setFriends] = useState([]);
   const [searchGroup, setSearchGroup] = useState("");
-  // toast.success("Ami Supprime avec succes", {
-  //   position: "top-right",
-  //   autoClose: 5000,
-  //   hideProgressBar: false,
-  //   closeOnClick: true,
-  //   pauseOnHover: true,
-  //   draggable: true,
-  //   progress: undefined,
-  //   theme: "light",
-  //   transition: Slide,
-  // });
-  // <ToastContainer/>
   const deleteFriend = (id) => {
     const token = localStorage.getItem("token");
     axios
