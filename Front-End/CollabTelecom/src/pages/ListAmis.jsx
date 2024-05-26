@@ -34,7 +34,9 @@ const ListAmis = () => {
         });
         // when the toast is done, we will reload the page to show the changes
         setTimeout(() => {
-          window.location.reload();
+         if (window.location.pathname === "/ListAmis") {
+            window.location.reload();
+          }
         }, 5000);
       })
       .catch((err) => {

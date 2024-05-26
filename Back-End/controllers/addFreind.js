@@ -40,6 +40,7 @@ const addUser = async (req, res) => {
       const token = req.headers.authorization.split(" ")[1];
       const mainUser = jwt.verify(token,'Zvki1');
       const mainUserId = mainUser.userId;
+      const user = await User.findById(mainUserId);
       const friend = await User.findById(userId);
       if (!friend) {
          return res.status(404).json({ error: "Freind not found" });
@@ -57,7 +58,7 @@ const addUser = async (req, res) => {
       // send notification to friend
       const notification = new Notification({
          titre: "Demande d'ami",
-         description: `${mainUser.username} vous a ajouté comme ami`,
+         description: `${user.username} vous a ajouté comme ami`,
          date: new Date(),
          receiver: userId
       });
