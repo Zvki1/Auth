@@ -5,7 +5,7 @@ NavLink;
 const Switcher = ({ role }) => {
   const switchElements = [
     {
-      title: "Others",
+      title: "Autres",
       href: "/Notifications/Others",
     },
     {

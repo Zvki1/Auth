@@ -4,10 +4,12 @@ import Switcher from "../components/Alertes/Switcher";
 import { useEffect, useState } from "react";
 import { fetchProfile } from "../../api/profile";
 import SideBar from "../components/SideBar";
+import NotificationsEmptyState from "../components/NotificationsEmptyState";
 
 const Others = () => {
   const [role, setRole] = useState([]);
   const [width, setWidth] = useState(window.innerWidth);
+  const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -31,7 +33,14 @@ const Others = () => {
     <div className={`${(width>768) && "w-11/12"}  flex-grow`}>
       <Header />
     <Switcher role={role}/>
-    </div>
+    {notifications.length === 0 ? (
+      <NotificationsEmptyState />
+    ) : (
+      <div>
+        notif
+    </div>)}
+    
+  </div>
     {width > 768 ? <SideBar /> : <Navbar />}
   </div>
   );

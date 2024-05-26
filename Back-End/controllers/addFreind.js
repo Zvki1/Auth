@@ -1,6 +1,6 @@
 const privateGroupSchema = require("../models/privateGroupSchema");
 const User = require("../models/userSchema");
-
+const Notification = require("../models/notificationSchema");
 const jwt = require("jsonwebtoken");
 
 const searchUser = async (req, res) => {
@@ -54,6 +54,14 @@ const addUser = async (req, res) => {
       });
       const creatingGroup= await newGroup.save();
       console.log('creatingGroup:',creatingGroup);
+      // send notification to friend
+      const notification = new Notification({
+         titre: "Demande d'ami",
+         description: `${mainUser.username} vous a ajouté comme ami`,
+         date: new Date(),
+         receiver: userId
+      });
+      await notification.save();
       res.json({ message: "Friend added successfully,and private group created", newGroup });
 
    } catch (error) {

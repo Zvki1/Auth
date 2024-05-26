@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const getFreindList = require('../controllers/freindList');
-
-router.route('/').get(getFreindList)
+const deletefreind = require('../controllers/deleteFreind');
+router.route('/').get(getFreindList).patch(deletefreind);
 
 
 module.exports = router;
