@@ -5,12 +5,11 @@ import Switcher from "../components/Alertes/Switcher";
 import SideBar from "../components/SideBar";
 import { useNavigate } from "react-router-dom";
 
-
 const Notifications = () => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    navigate('/Notifications/Others');
+    navigate("/Notifications/Others");
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
@@ -20,7 +19,6 @@ const Notifications = () => {
     };
   }, []);
   useEffect(() => {
-
     document.title = "Notifications";
   }, []);
   return (

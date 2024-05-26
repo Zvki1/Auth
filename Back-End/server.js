@@ -19,6 +19,7 @@ const publicGroupRoutes = require("./routes/publicGroupRoutes");
 const alertesRoutes = require("./routes/alertes");
 const ticketsRoutes = require("./routes/tickets");
 const ticketRoutes = require("./routes/ticket");
+const notificationsRoutes = require("./routes/notifications");
 // midleware
 const verifyToken = require("./middleware/verifyToken");
 // IMPORTING THE USER MODEL
@@ -74,6 +75,9 @@ app.use("/alertes", verifyToken, alertesRoutes);
 app.use("/tickets", verifyToken, ticketsRoutes);
 
 app.use("/ticket", verifyToken, ticketRoutes);
+
+// notifications
+app.use("/notifications", verifyToken,notificationsRoutes )
 // get users by search term
 app.get("/searchUsers", verifyToken, async (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
