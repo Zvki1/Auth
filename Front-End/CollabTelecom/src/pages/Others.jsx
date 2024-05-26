@@ -10,6 +10,7 @@ const Others = () => {
   const [role, setRole] = useState([]);
   const [width, setWidth] = useState(window.innerWidth);
   const [notifications, setNotifications] = useState([]);
+
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -17,32 +18,38 @@ const Others = () => {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
+    };
   }, []);
-    useEffect(() => {
-      fetchProfile()
-        .then((res) => {
-          setRole(res.data.user.role);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, []);
+  useEffect(() => {
+    fetchProfile()
+      .then((res) => {
+        setRole(res.data.user.role);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+ 
   return (
-    <div className={`flex w-screen h-screen   ${(width>768)?" flex-row-reverse justify-end":""}`}>
-    <div className={`${(width>768) && "w-11/12"}  flex-grow`}>
-      <Header />
-    <Switcher role={role}/>
-    {notifications.length === 0 ? (
-      <NotificationsEmptyState />
-    ) : (
-      <div>
-        notif
-    </div>)}
-    
-  </div>
-    {width > 768 ? <SideBar /> : <Navbar />}
-  </div>
+    <div
+      className={`flex w-screen h-screen   ${
+        width > 768 ? " flex-row-reverse justify-end" : ""
+      }`}
+    >
+      <div className={`${width > 768 && "w-11/12"}  flex-grow`}>
+        <Header />
+        <Switcher role={role} />
+        {notifications.length === 0 ? (
+          <>
+            <NotificationsEmptyState />
+            
+          </>
+        ) : (
+          <div>notif</div>
+        )}
+      </div>
+      {width > 768 ? <SideBar /> : <Navbar />}
+    </div>
   );
 };
 
