@@ -5,16 +5,25 @@ NavLink;
 const Switcher = ({ role }) => {
   const switchElements = [
     {
-      title: "Autres",
-      href: "/Notifications/Others",
+      title:
+        role?.includes("manager") ||
+        JSON.parse(localStorage.getItem("role")).includes("manager")
+          ? "Alertes"
+          : null,
+      href:
+        role?.includes("manager") ||
+        JSON.parse(localStorage.getItem("role")).includes("manager")
+          ? "/Notifications/Alertes"
+          : null,
     },
+
     {
       title: "Tickets",
       href: "/Notifications/Tickets",
     },
     {
-      title:(role?.includes("manager") || (JSON.parse(localStorage.getItem('role'))).includes("manager")) ? "Alertes" : null,
-      href: (role?.includes("manager")||(JSON.parse(localStorage.getItem('role'))).includes("manager")) ? "/Notifications/Alertes" : null,
+      title: "Autres",
+      href: "/Notifications/Others",
     },
   ];
   return (

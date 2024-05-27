@@ -33,11 +33,7 @@ const ListAmis = () => {
           transition: Slide,
         });
         // when the toast is done, we will reload the page to show the changes
-        setTimeout(() => {
-         if (window.location.pathname === "/ListAmis") {
-            window.location.reload();
-          }
-        }, 5000);
+        setFriends(friendList.filter((friend) => friend._id !== id));
       })
       .catch((err) => {
         console.log("Error", err);

@@ -35,11 +35,7 @@ const AddFreind = () => {
             transition: Slide,
           });
           // when the toast is done, we will reload the page to show the changes
-          setTimeout(() => {
-          if(window.location.pathname === "/AddFreind"){
-            window.location.reload();
-            }
-          }, 5000);
+         setSearchResults(searchResults.filter((user) => user._id !== userId));
         } catch (error) {
           console.error("Error adding friend:", error);
           if (error.response.status === 403) {

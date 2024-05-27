@@ -9,7 +9,7 @@ const Notifications = () => {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    navigate("/Notifications/Others");
+    navigate("/Notifications/alertes");
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
