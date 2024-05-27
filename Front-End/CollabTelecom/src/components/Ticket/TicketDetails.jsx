@@ -25,11 +25,15 @@ console.log(ticket);
         <div className="text-sm text-gray-500 mb-2">
          assigne a : {ticket?.assignedTo.map((user) => user.username).join(", ") || "assigned to"}
         </div>
-        <div className="flex items-center mb-2">
-          <span className="inline-block w-3 h-3 mr-2 bg-orange-500 rounded-full animate-spin"></span>
-          <span className="text-orange-600">En cours</span>
-        </div>
-        <div className="text-red-600 font-semibold">Remarque:</div>
+        {ticket?.status ==="open"?(
+        <span className="bg-orange-400 text-white text-xs font-medium px-2.5 py-0.5 rounded-full  ">
+        en cours
+      </span>
+       ):(
+        <span className="bg-[#209E34] text-white text-xs font-medium px-2.5 py-0.5 rounded-full  ">
+        finalise
+      </span>
+       )}
       </div>
       <p className="font-Lato font-[400] text-[#9E9E9E] text-xl">{ticket?.date.substring(11,16)}</p>
     </div>

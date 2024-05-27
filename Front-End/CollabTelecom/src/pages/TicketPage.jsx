@@ -24,7 +24,7 @@ const Ticket = () => {
   }, [])
   return (
     <div>
-      <TicketHeader userRole={userRole} />
+      <TicketHeader userRole={userRole} statut={ticket?.status} />
       <TicketDetails ticket={ticket}/>
       <CpuAlert remarques={remarques}/>
       
