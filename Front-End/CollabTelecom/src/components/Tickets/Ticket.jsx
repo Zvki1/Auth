@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Ticket = ({ ticket }) => {
-  console.log(ticket);
+  console.log(ticket,"from ticket");
   const [assignedToList, setAssignedToList] = useState([]);
   // make an array that contains the usernames of the assignedTo  and concatinate them 
   useEffect(() => {
@@ -43,6 +43,7 @@ const Ticket = ({ ticket }) => {
           to={`/Notifications/Tickets/ticket?id=${ticket._id}`}
           type="button"
           className="text-white bg-[#112377] hover:bg-blue-800  font-medium rounded-md text-sm px-3 py-2.5  "
+          state={{status:ticket.status}}
         >
           Consulter
         </Link>

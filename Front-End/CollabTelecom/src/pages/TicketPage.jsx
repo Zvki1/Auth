@@ -3,8 +3,11 @@ import axios from 'axios'
 import TicketHeader from "../components/Ticket/TicketHeader"
 import TicketDetails from "../components/Ticket/TicketDetails"
 import CpuAlert from "../components/Ticket/CpuAlert"
+import { useLocation } from "react-router-dom"
 
 const Ticket = () => {
+  let {state} =useLocation()
+  
   const [ticket, setTicket] = useState(null)
   const [remarques, setRemarques] = useState([])
   const [userRole, setUserRole] = useState(null)
@@ -26,7 +29,7 @@ const Ticket = () => {
     <div>
       <TicketHeader userRole={userRole} statut={ticket?.status} />
       <TicketDetails ticket={ticket}/>
-      <CpuAlert remarques={remarques}/>
+      <CpuAlert remarques={remarques} state={state}/>
       
 
     </div>
