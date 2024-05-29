@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 const EmployeeElement = (
     {name,email,setEmployelist,employelist,id}
 ) => {
@@ -28,10 +28,10 @@ const EmployeeElement = (
     <div className="flex items-center gap-3">
       <div className="relative ">
         <Avatar
-          string={name}
+          name={name}
           autoColor={true} 
-          width={54}
-          cornerRadius={5}
+          size={54}
+          round={5}
         />
      
       </div>

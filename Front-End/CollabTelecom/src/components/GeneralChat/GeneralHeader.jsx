@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft,Phone,Video,EllipsisVertical    } from "lucide-react";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 import GroupLogo from "../../assets/Logo_group_chat.svg";
 const GeneralHeader = ({nameOfGroup,Picture}) => {
   // useEffect(() => {

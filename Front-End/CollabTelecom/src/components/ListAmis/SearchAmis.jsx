@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Avatar from "react-avatar";
 const searchAmis = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -49,10 +50,10 @@ const searchAmis = () => {
                             <div key={user._id} className="flex flex-row justify-between w-full items-center">
                             <div className="flex flex-row items-center gap-3">
                             <Avatar
-                                string={user.username}
+                                name={user.username}
                                 autoColor={true}
-                                width={62}
-                                cornerRadius={5}
+                                size={62}
+                                round={5}
                             />
                             <div>
                                 <h3 className="text-[#2B363B] font-semibold text-xl font-Inter">{user.username}</h3>

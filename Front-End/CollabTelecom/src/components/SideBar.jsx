@@ -6,7 +6,7 @@ import axios from "axios";
 import { Home, MessageCircle, Bell, Settings, DoorOpen } from "lucide-react";
 import Logo from "../assets/sidebar-logo.svg";
 import { Link, NavLink } from "react-router-dom";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 const SideBar = () => {
     const navigate = useNavigate();
     const socket = useContext(SocketContext);
@@ -71,12 +71,12 @@ const SideBar = () => {
           <img src={Logo} alt="" />
           <Link to="/Profile">
             <Avatar
-              string={
+              name={
                 JSON.parse(localStorage.getItem("user")).username || "Profile"
               }
-              autoColor={true}
-              width={48}
-              cornerRadius={5}
+             
+              size={48}
+              round={5}
             />
           </Link>
         </div>

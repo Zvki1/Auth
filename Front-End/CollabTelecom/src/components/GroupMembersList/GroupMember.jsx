@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 import {Phone,MessageCircle ,Trash} from "lucide-react";
 import axios from "axios";
 // import { useState ,useEffect } from "react";
@@ -37,10 +37,10 @@ const GroupMember = ({member,groupName,isAdmin}) => {
         
                     <div className="flex flex-row items-center gap-3">
                     <Avatar
-                        string={member.username}
+                        name={member.username}
                         autoColor={true}
-                        width={62}
-                        cornerRadius={5}
+                        size={62}
+                        round={5}
                     />
                     <div>
                         <h3 className="text-[#2B363B] font-semibold text-xl font-Inter">{member.username}</h3>

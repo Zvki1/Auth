@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 const Message = ({sender,time,content}) => {
   // extrecting hours and mins from the time
   // the hour is adder by 1 to match the time zone
@@ -15,10 +15,10 @@ const Message = ({sender,time,content}) => {
   return (
     <div className="flex flex-row px-4 py-2 gap-2 items-start w-full">
         <Avatar 
-            string={sender}
+            name={sender}
             autoColor={true}
-            width={46}
-            cornerRadius={5}
+            size={46}
+            round={5}
           />
           <div className="flex flex-col overflow-x-clip">
             <div className="flex flex-row items-center gap-5">

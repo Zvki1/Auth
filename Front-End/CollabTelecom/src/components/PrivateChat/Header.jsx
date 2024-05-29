@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { ChevronLeft,Phone,Video,EllipsisVertical    } from "lucide-react";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 const Header = ({username,isOnline}) => {
   return (
     <header className="py-4 px-5 flex justify-between items-center border-b-2">
@@ -12,10 +12,10 @@ const Header = ({username,isOnline}) => {
 
         <div className="relative inline">
           <Avatar
-            string={username}
+            name={username}
             autoColor={true}
-            width={36}
-            cornerRadius={5}
+            size={36}
+            round={5}
           />
 
          {isOnline && <span className="absolute bottom-0 left-7 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>}

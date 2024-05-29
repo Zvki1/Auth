@@ -1,6 +1,6 @@
 import Header from "../components/ListAmis/Header";
 import SearchChat from "../components/MessagesList/SearchChat";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Phone, MessageCircle, Trash } from "lucide-react";
@@ -77,10 +77,10 @@ const ListAmis = () => {
           >
             <div className="flex flex-row items-center gap-3">
               <Avatar
-                string={freinds.username}
+                name={freinds.username}
                 autoColor={true}
-                width={62}
-                cornerRadius={5}
+                size={62}
+                round={5}
               />
               <div>
                 <h3 className="text-[#2B363B] font-semibold text-xl font-Inter">

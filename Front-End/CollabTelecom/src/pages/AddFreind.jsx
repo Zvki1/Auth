@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Header from "../components/AddFreind/Header";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const AddFreind = () => {
@@ -18,7 +18,7 @@ const AddFreind = () => {
         try {
           console.log("Adding friend:", userId);
           const token = localStorage.getItem("token");
-           await axios.patch(
+          await axios.patch(
             `http://localhost:8000/addFreind`,
             { userId },
             { headers: { Authorization: `Bearer ${token}` } }
@@ -35,7 +35,7 @@ const AddFreind = () => {
             transition: Slide,
           });
           // when the toast is done, we will reload the page to show the changes
-         setSearchResults(searchResults.filter((user) => user._id !== userId));
+          setSearchResults(searchResults.filter((user) => user._id !== userId));
         } catch (error) {
           console.error("Error adding friend:", error);
           if (error.response.status === 403) {
@@ -75,7 +75,7 @@ const AddFreind = () => {
 
   return (
     <div className=" px-5">
-        <ToastContainer />
+      <ToastContainer />
       <Header />
       <div>
         <h1 className="text-black font-Inter text-3xl text-center font-semibold">
@@ -132,10 +132,10 @@ const AddFreind = () => {
               >
                 <div className="flex flex-row items-center gap-3">
                   <Avatar
-                    string={user.username}
+                    name={user.username}
                     autoColor={true}
-                    width={62}
-                    cornerRadius={5}
+                    size={62}
+                    round={5}
                   />
                   <div>
                     <h3 className="text-[#2B363B] font-semibold text-xl font-Inter">

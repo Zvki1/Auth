@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import Avatar from "react-string-avatar";
+import Avatar from "react-avatar";
 
 const ContactElement = ({name,email,isOnline,id,setmembersToAdd,membersToAdd}) => {
   
@@ -29,10 +29,10 @@ const ContactElement = ({name,email,isOnline,id,setmembersToAdd,membersToAdd}) =
       <div className="flex items-center gap-3">
         <div className="relative ">
           <Avatar
-            string={name}
+            name={name}
             autoColor={true} 
-            width={54}
-            cornerRadius={5}
+            size={54}
+            round={5}
           />
           {isOnline && <span className="absolute bottom-0 left-11 transform translate-y-1/4 size-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>}
         </div>
