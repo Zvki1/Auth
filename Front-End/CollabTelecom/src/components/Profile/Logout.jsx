@@ -25,8 +25,9 @@ const Logout = ({ icon, text }) => {
 
     localStorage.clear();
     socket.disconnect();
-    console.log("sign out");
+
     navigate("/login");
+    window.location.reload();
   };
 
   return (

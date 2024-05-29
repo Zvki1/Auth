@@ -12,8 +12,7 @@ const SideBar = () => {
   const socket = useContext(SocketContext);
   const handleSignOut = () => {
     const token = localStorage.getItem("token");
-    axios
-      .patch("https://auth-ivbz.onrender.com/profile/disconnect", null, {
+    axios.patch("https://auth-ivbz.onrender.com/profile/disconnect", null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -27,7 +26,7 @@ const SideBar = () => {
 
     localStorage.clear();
     socket.disconnect();
-    console.log("sign out");
+   
     navigate("/login");
     window.location.reload();
   };
