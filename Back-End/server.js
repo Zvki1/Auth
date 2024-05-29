@@ -40,7 +40,9 @@ app.use(cors());
 app.use("/files", express.static("files"));
 
 //routes
-
+app.get("/", (req, res) => {
+  res.send("Welcome to Collab Telecom API");
+});
 // user registration
 app.use("/register", registerRoutes);
 // user login
