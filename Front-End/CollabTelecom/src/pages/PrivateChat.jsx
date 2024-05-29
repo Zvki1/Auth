@@ -68,7 +68,7 @@ const PrivateChat = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "auto" });
   }, [messages, isTyping]);
   return (
-    <div className="h-screen  flex flex-col">
+    <div className="h-[100dvh]  flex flex-col">
       {username ? (
         <Header username={username} isOnline={isOnline} />
       ) : (

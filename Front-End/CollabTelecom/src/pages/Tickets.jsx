@@ -28,11 +28,11 @@ const Tickets = () => {
   }, []);
   return (
     <div
-      className={`flex w-screen h-screen   ${
+      className={`flex w-screen h-[100dvh]   ${
         width > 768 ? " flex-row-reverse justify-end" : ""
       }`}
     >
-      <div className={`${(width>768) && "w-11/12"}  flex-grow`}>
+      <div className={`${width > 768 && "w-11/12"}  flex-grow`}>
         <Header />
         <Switcher role={role} />
         <TicketsContainer />

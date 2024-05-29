@@ -47,7 +47,7 @@ const EditGroupe = () => {
   };
 
   return (
-    <div className="h-screen w-screen ">
+    <div className="h-[100dvh] w-screen ">
       <Header title="Edit Group" />
 
       <div className="w-full flex gap-4 px-4 flex-col justify-center ">

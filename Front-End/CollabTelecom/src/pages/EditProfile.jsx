@@ -87,7 +87,7 @@ const EditProfile = () => {
 
   return (
     <>
-      <div className="w-full bg-gray-100 h-screen flex flex-col items-center space-y-6 ">
+      <div className="w-full bg-gray-100 h-[100dvh] flex flex-col items-center space-y-6 ">
         <Header />
         <div className=" bg-white p-2 rounded-3xl">
           <Avatar

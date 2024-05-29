@@ -66,7 +66,7 @@ const Others = () => {
 
   return (
     <div
-      className={`flex w-screen h-screen   ${
+      className={`flex w-screen h-[100dvh]   ${
         width > 768 ? " flex-row-reverse justify-end" : ""
       }`}
     >

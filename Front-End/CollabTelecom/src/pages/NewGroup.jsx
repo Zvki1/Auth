@@ -41,7 +41,7 @@ const NewGroup = () => {
     }
   }, [membersToAdd, nameOfGroup]);
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-[100dvh]">
       <Header
         isButtonDisabled={isButtonDisabled}
         nameOfGroup={nameOfGroup}

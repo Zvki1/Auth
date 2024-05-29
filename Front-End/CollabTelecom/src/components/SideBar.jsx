@@ -64,7 +64,7 @@ const SideBar = () => {
   ];
   console.log();
   return (
-    <div className="w-[100px] h-screen py-4 bg-[#F3F3F3] flex flex-col items-center justify-between">
+    <div className="w-[100px] h-[100dvh] py-4 bg-[#F3F3F3] flex flex-col items-center justify-between">
       <div>
         <div className="flex flex-col items-center gap-5">
           <img src={Logo} alt="" />

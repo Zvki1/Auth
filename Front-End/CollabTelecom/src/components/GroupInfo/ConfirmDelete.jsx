@@ -32,7 +32,7 @@ const ConfirmDelete = ({ setShowModal }) => {
   };
   return (
     <div>
-      <div className="absolute w-screen h-screen top-0 right-0 bg-black opacity-30"></div>
+      <div className="absolute w-screen h-[100dvh] top-0 right-0 bg-black opacity-30"></div>
 
       <div
         id="deleteModal"

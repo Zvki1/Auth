@@ -65,7 +65,7 @@ const ListAmis = () => {
   });
 
   return (
-    <div className="h-screen flex flex-col items-center ">
+    <div className="h-[100dvh] flex flex-col items-center ">
       <ToastContainer />
       <Header />
       <SearchChat searchGroup={searchGroup} setSearchGroup={setSearchGroup} />

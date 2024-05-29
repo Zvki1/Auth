@@ -18,11 +18,11 @@ const Alertes = () => {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
+    };
   }, []);
   useEffect(() => {
-    axios
-     fetchProfile()
+    axios;
+    fetchProfile()
       .then((res) => {
         setRole(res.data.user.role);
       })
@@ -31,11 +31,17 @@ const Alertes = () => {
       });
   }, []);
   return (
-    <div className={`flex w-screen h-screen   ${(width>768)?" flex-row-reverse justify-end":""}`}>
-      <div className={`${(width>768) && "w-11/12"}  flex-grow`}><Header />
-      <Switcher role={role}/>
+    <div
+      className={`flex w-screen h-[100dvh]   ${
+        width > 768 ? " flex-row-reverse justify-end" : ""
+      }`}
+    >
+      <div className={`${width > 768 && "w-11/12"}  flex-grow`}>
+        <Header />
+        <Switcher role={role} />
 
-      <AlertsContainer setshowPopUp={setshowPopUp} showPopUp={showPopUp} /></div>
+        <AlertsContainer setshowPopUp={setshowPopUp} showPopUp={showPopUp} />
+      </div>
 
       {width > 768 ? <SideBar /> : <Navbar />}
     </div>

@@ -4,7 +4,12 @@
 import { useEffect, useState } from "react";
 import ChatElement from "./ChatElement";
 
-const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
+const ChatList = ({
+  freinds,
+  privateGroups,
+  setPrivateGroups,
+  searchGroup,
+}) => {
   const [render, setrender] = useState(false);
   useEffect(() => {
     // fiha probleme when there is no message between freinds
@@ -20,11 +25,16 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
     setrender(true);
   }, []);
   const filteredPrivateGroups = privateGroups.filter((group) => {
-    return group?.members[0]?.username.toLowerCase().includes(searchGroup.toLowerCase());
+    return group?.members[0]?.username
+      .toLowerCase()
+      .includes(searchGroup.toLowerCase());
   });
 
   return (
-    <div className="px-5 pt-5 flex flex-col w-full overflow-y-auto" style={{ height: "calc(100% - 48px)" }}>
+    <div
+      className="px-5 pt-5 flex flex-col w-full overflow-y-auto"
+      style={{ height: "calc(100% - 48px)" }}
+    >
       {/* {console.log("the received groups in chatlist",privateGroups)}
       {console.log("message",privateGroups[0].messages[0].timestamp)} */}
 
@@ -43,7 +53,7 @@ const ChatList = ({ freinds, privateGroups, setPrivateGroups,searchGroup }) => {
           ))}
         </div>
       ) : (
-        <div className="h-screen flex flex-col gap-3 items-center">
+        <div className="h-[100dvh] flex flex-col gap-3 items-center">
           <div role="status">
             <svg
               aria-hidden="true"

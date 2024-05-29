@@ -52,7 +52,7 @@ const Profile = () => {
   }, []);
   return (
     <div
-      className={`flex w-screen h-screen  ${
+      className={`flex w-screen h-[100dvh]  ${
         width > 768 ? " flex-row-reverse justify-end" : ""
       }`}
     >
@@ -60,7 +60,7 @@ const Profile = () => {
         {/* personal informations div */}
 
         {userInfo ? (
-          <div className="bg-gray-100 h-screen flex flex-col items-center overflow-hidden ">
+          <div className="bg-gray-100 h-[100dvh] flex flex-col items-center overflow-hidden ">
             <div className=" w-full h-176 bg-blue-800  pr-[18px] pt-[21px] pb-[114px] flex justify-end items-center">
               <Link
                 to={`/EditProfile?name=${userInfo?.username}`}
@@ -100,7 +100,7 @@ const Profile = () => {
             </div>
           </div>
         ) : (
-          <div className="bg-gray-100 h-screen flex flex-col gap-3 justify-center items-center">
+          <div className="bg-gray-100 h-[100dvh] flex flex-col gap-3 justify-center items-center">
             <div role="status">
               <svg
                 aria-hidden="true"

@@ -52,9 +52,9 @@ const MessagesList = () => {
     <div
       className={`flex  ${
         width > 768
-          ? " flex-row-reverse h-screen justify-end"
+          ? " flex-row-reverse h-[100dvh] justify-end"
           : "flex-col pb-24"
-      } h-screen overflow-y-auto w-screen  `}
+      } h-[100dvh] overflow-y-auto w-screen  `}
     >
       <div className={`${width > 768 && "w-11/12"}`}>
         <div className="pt-4">
@@ -72,7 +72,7 @@ const MessagesList = () => {
               setPrivateGroups={setPrivateGroups}
             />
           ) : (
-            <div className=" h-screen flex flex-col gap-3  items-center">
+            <div className=" h-[100dvh] flex flex-col gap-3  items-center">
               <div role="status">
                 <svg
                   aria-hidden="true"
