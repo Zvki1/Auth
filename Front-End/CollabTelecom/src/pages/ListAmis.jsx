@@ -14,7 +14,7 @@ const ListAmis = () => {
     const token = localStorage.getItem("token");
     axios
       .patch(
-        "http://localhost:8000/freindList",
+        "https://auth-ivbz.onrender.com/freindList",
         { userId: id },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -42,7 +42,7 @@ const ListAmis = () => {
   const getFriends = () => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8000/freindList", {
+      .get("https://auth-ivbz.onrender.com/freindList", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

@@ -18,7 +18,7 @@ const Others = () => {
   useEffect(() => {
     setIsGetting(true);
     axios
-      .get("http://localhost:8000/notifications", {
+      .get("https://auth-ivbz.onrender.com/notifications", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
@@ -48,7 +48,7 @@ const Others = () => {
   const handleArchive = (id) => {
     axios
       .patch(
-        "http://localhost:8000/notifications",
+        "https://auth-ivbz.onrender.com/notifications",
         { notificationId: id },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

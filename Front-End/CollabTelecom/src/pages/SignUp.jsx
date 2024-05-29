@@ -57,7 +57,7 @@ const SignUp = () => {
   }, []);
 
   const fetchUsers = () => {
-    axios.get("http://localhost:8000/register").then((res) => {
+    axios.get("https://auth-ivbz.onrender.com/register").then((res) => {
       console.log(res.data);
     });
   };
@@ -66,7 +66,7 @@ const SignUp = () => {
     event.preventDefault();
     if (validateForm()) {
       axios
-        .post("http://localhost:8000/register", {
+        .post("https://auth-ivbz.onrender.com/register", {
           email,
           username,
           password,

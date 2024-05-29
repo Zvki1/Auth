@@ -12,19 +12,19 @@ const MessagesList = () => {
   const [privateGroups, setPrivateGroups] = useState([]);
   const [searchGroup, setSearchGroup] = useState("");
   const [width, setWidth] = useState(window.innerWidth);
-useEffect(() => {
-  const handleResize = () => {
-    setWidth(window.innerWidth);
-  };
-  window.addEventListener("resize", handleResize);
-  return () => {
-    window.removeEventListener("resize", handleResize);
-  }
-}, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8000/messages", {
+      .get("https://auth-ivbz.onrender.com/messages", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -49,8 +49,14 @@ useEffect(() => {
       });
   }, []);
   return (
-    <div className={`flex  ${(width>768)?" flex-row-reverse h-screen justify-end":"flex-col pb-24"} h-screen overflow-y-auto w-screen  `}>
-      <div className={`${(width>768) && "w-11/12"}`}>
+    <div
+      className={`flex  ${
+        width > 768
+          ? " flex-row-reverse h-screen justify-end"
+          : "flex-col pb-24"
+      } h-screen overflow-y-auto w-screen  `}
+    >
+      <div className={`${width > 768 && "w-11/12"}`}>
         <div className="pt-4">
           <Heading />
           <SearchChat

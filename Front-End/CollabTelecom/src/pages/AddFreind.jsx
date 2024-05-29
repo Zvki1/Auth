@@ -19,7 +19,7 @@ const AddFreind = () => {
           console.log("Adding friend:", userId);
           const token = localStorage.getItem("token");
           await axios.patch(
-            `http://localhost:8000/addFreind`,
+            `https://auth-ivbz.onrender.com/addFreind`,
             { userId },
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -59,7 +59,7 @@ const AddFreind = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:8000/addFreind?searchTerm=${term}`,
+        `https://auth-ivbz.onrender.com/addFreind?searchTerm=${term}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setSearchResults(response.data.users);

@@ -22,7 +22,7 @@ const AssignContainer = ({ setshowPopUp, alert }) => {
     // console.log("i will send this to the back", employelist,alert,remarque);
     axios
       .post(
-        "http://localhost:8000/tickets",
+        "https://auth-ivbz.onrender.com/tickets",
         {
           employelist,
           alert,

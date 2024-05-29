@@ -14,9 +14,12 @@ const GroupMembersList = () => {
     const groupNameParam = searchParams.get("groupName");
     setGroupName(groupNameParam);
     axios
-      .get(`http://localhost:8000/publicGroup?groupName=${groupNameParam}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
+      .get(
+        `https://auth-ivbz.onrender.com/publicGroup?groupName=${groupNameParam}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      )
       .then((response) => {
         console.log(response.data.group);
         setGroupMembers(response.data.group.members);
@@ -32,8 +35,16 @@ const GroupMembersList = () => {
   return (
     <div>
       <Header />
-      <SearchMember searchFriend={searchFriend} setSearchFriend={setSearchFriend}/>
-      <MembersList groupMembers={groupMembers} groupName={groupName} isAdmin={isAdmin} searchFriend={searchFriend}/>
+      <SearchMember
+        searchFriend={searchFriend}
+        setSearchFriend={setSearchFriend}
+      />
+      <MembersList
+        groupMembers={groupMembers}
+        groupName={groupName}
+        isAdmin={isAdmin}
+        searchFriend={searchFriend}
+      />
     </div>
   );
 };

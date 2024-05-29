@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import SocketContext from "../context/SocketContext"
+import SocketContext from "../context/SocketContext";
 import axios from "axios";
 
 import { Home, MessageCircle, Bell, Settings, DoorOpen } from "lucide-react";
@@ -8,30 +8,29 @@ import Logo from "../assets/sidebar-logo.svg";
 import { Link, NavLink } from "react-router-dom";
 import Avatar from "react-avatar";
 const SideBar = () => {
-    const navigate = useNavigate();
-    const socket = useContext(SocketContext);
-    const handleSignOut = () => {
+  const navigate = useNavigate();
+  const socket = useContext(SocketContext);
+  const handleSignOut = () => {
+    const token = localStorage.getItem("token");
+    axios
+      .patch("https://auth-ivbz.onrender.com/profile/disconnect", null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log("User is disconnected", res.data);
+      })
+      .catch((error) => {
+        console.error("Error disconnecting user:", error);
+      });
 
-        const token=localStorage.getItem('token');
-        axios.patch('http://localhost:8000/profile/disconnect',null,{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((res) => {
-            console.log('User is disconnected',res.data);
-        })
-        .catch((error) => {
-            console.error('Error disconnecting user:', error);
-        });
-
-
-        localStorage.clear();
-        socket.disconnect();
-        console.log("sign out");
-        navigate('/login');
-        window.location.reload();
-        }
+    localStorage.clear();
+    socket.disconnect();
+    console.log("sign out");
+    navigate("/login");
+    window.location.reload();
+  };
   const NavElements = [
     {
       title: "Home",
@@ -74,7 +73,6 @@ const SideBar = () => {
               name={
                 JSON.parse(localStorage.getItem("user")).username || "Profile"
               }
-             
               size={48}
               round={5}
             />
@@ -91,17 +89,17 @@ const SideBar = () => {
                 (isActive ? "  bg-white  " : " ")
               }
             >
-              <element.icon size={28}/>
+              <element.icon size={28} />
             </NavLink>
           ))}
         </div>
       </div>
       <div className="flex flex-col gap-6 pb-4">
         <button>
-            <Settings size={28} color="#112377"/>
+          <Settings size={28} color="#112377" />
         </button>
         <button onClick={handleSignOut}>
-            <DoorOpen size={28} color="#D30000"/>
+          <DoorOpen size={28} color="#D30000" />
         </button>
       </div>
     </div>

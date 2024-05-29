@@ -2,8 +2,7 @@
 import axios from "axios";
 import { History, File } from "lucide-react";
 import { useState } from "react";
-const CpuAlert = ({ remarques,state }) => {
-  
+const CpuAlert = ({ remarques, state }) => {
   const RemarkItem = ({ remarque }) => {
     console.log("remarque from remarkItem", remarque);
     // console.log("remarque", remarque.content);
@@ -13,7 +12,9 @@ const CpuAlert = ({ remarques,state }) => {
           {remarque?.path && (
             <button
               onClick={() =>
-                window.open(`http://localhost:8000/files/${remarque.path}`)
+                window.open(
+                  `https://auth-ivbz.onrender.com/files/${remarque.path}`
+                )
               }
             >
               <File className="w-5 h-5" />
@@ -47,7 +48,7 @@ const CpuAlert = ({ remarques,state }) => {
     console.log("file", file);
     if (remarque || file) {
       axios
-        .post("http://localhost:8000/addRemarque", formData, {
+        .post("https://auth-ivbz.onrender.com/addRemarque", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -77,7 +78,7 @@ const CpuAlert = ({ remarques,state }) => {
           <RemarkItem key={remarque._id} remarque={remarque} />
         ))}
       </div>
-      { (state?.status==="open" )&&
+      {state?.status === "open" && (
         <form
           onSubmit={handleSubmit}
           className="mt-4 text-center text-gray-300 cursor-pointer "
@@ -125,7 +126,7 @@ const CpuAlert = ({ remarques,state }) => {
             </button>
           </div>
         </form>
-      }
+      )}
     </div>
   );
 };

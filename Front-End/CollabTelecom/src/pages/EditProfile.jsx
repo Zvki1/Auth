@@ -63,7 +63,7 @@ const EditProfile = () => {
         password: password,
       };
       const response = await axios.patch(
-        "http://localhost:8000/profile/update",
+        "https://auth-ivbz.onrender.com/profile/update",
         user,
         {
           headers: {

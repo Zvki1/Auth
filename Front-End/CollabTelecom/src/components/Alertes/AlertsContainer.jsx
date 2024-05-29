@@ -9,7 +9,7 @@ const AlertsContainer = ({ setshowPopUp, showPopUp }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/alertes", {
+      .get("https://auth-ivbz.onrender.com/alertes", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
