@@ -208,7 +208,9 @@ mongoseConnect();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://127.0.0.1:5173",
+    origin: (origin, callback) => {
+      callback(null, true);
+    },
   },
 });
 
