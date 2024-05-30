@@ -1,6 +1,7 @@
 {
     "short_name": "CollabTelecom",
     "name": "CollabTelecom",
+    "description": "CollabTelecom is a platform for collaboration between algerien telecom employees",
     "icons": [
         {
             "src": "/logo192.png",
