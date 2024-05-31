@@ -51,18 +51,42 @@ function App() {
         console.log("Connected to  the socket server from the app");
         // console.log('userId:',localStorage.getItem('user'));
       });
-
+      socket.on("chat message", (content, receiverId,username) => {
+        checkPageStatus(content,username);
+      });
       socket.on("disconnect", () => {
         console.log("Disconnected from the socket  server");
       });
     }
-
-    if ("getInstalledRelatedApps" in window.navigator) {
-      console.log("am propmting");
-      
-    }
   }, []);
+  // hnaya rani zayed socket fl useEffect
+  const checkPageStatus = (message, username) => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support system notifications!");
+    } else if (Notification.permission === "granted") {
+      sendNotification(message, username);
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission((permission) => {
+        if (permission === "granted") {
+          sendNotification(message, username);
+        }
+      });
+    }
+  };
+  const sendNotification = (message, username) => {
+    console.log("send notification from app");
 
+    if (document.visibilityState === "hidden") {
+      const notification = new Notification("New message from Collabtelecom", {
+        icon: "Front-End\CollabTelecom\public\logo512.png",
+        body: `${username}: ${message}`,
+      });
+      notification.onclick = () =>
+        function () {
+          window.open("http://127.0.0.1:5173/MessagesList");
+        };
+    }
+  };
   return (
     <SocketContext.Provider value={socket}>
       <Routes>

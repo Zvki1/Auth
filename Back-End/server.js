@@ -253,7 +253,7 @@ io.on("connection", (socket) => {
     console.log("User disconnected from the socket server");
   });
 
-  socket.on("chat message", async (msg, receiverId) => {
+  socket.on("chat message", async (msg, receiverId,username) => {
     // console.log('Message:', msg);
     // try {
     //     console.log("encrypted message",encrypt(msg));
@@ -288,7 +288,7 @@ io.on("connection", (socket) => {
     } catch (error) {
       console.error("Erreur lors de l'enregistrement du message:", error);
     }
-    io.to(receiverId).emit("chat message", msg, receiverId);
+    io.to(receiverId).emit("chat message", msg, receiverId,username);
 
     // socket.broadcast.emit('chat message', msg,receiverId);
   });
