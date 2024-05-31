@@ -36,6 +36,7 @@ const CpuAlert = ({ remarques, state }) => {
   };
   // --------------------------------------
   // this is remarque li ttb3et frequest
+  console.log(state, "from cpu alert");
   const [remarque, setRemarque] = useState("");
   const [file, setFile] = useState("");
   const handleSubmit = (e) => {
