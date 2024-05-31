@@ -1,41 +1,54 @@
 {
-    "short_name": "CollabTelecom",
-    "name": "CollabTelecom",
-    "description": "CollabTelecom is a platform for collaboration between algerien telecom employees",
-    "icons": [
+  "short_name": "CollabTelecom",
+  "name": "CollabTelecom",
+  "description": "CollabTelecom is a platform for collaboration between algerien telecom employees",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screen-wide.png",
+      "sizes": "1917x843",
+      "type": "image/png",
+      "form-factor": "wide"
+    },
+    {
+      "src": "/screen-mobile.png",
+      "sizes": "403x714",
+      "type": "image/png",
+      "form-factor": "mobile"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#FFFFFF",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "shortcuts": [
+    {
+      "name": "CollabTelecom",
+      "url": "/",
+      "icons": [
         {
-            "src": "/logo192.png",
-            "type": "image/png",
-            "sizes": "192x192"
-          },
-          {
-            "src": "/logo384.png",
-            "type": "image/png",
-            "sizes": "384x384"
-          },
-          {
-            "src": "/logo512.png",
-            "type": "image/png",
-            "sizes": "512x512"
-          }
-    ],
-    "screenshots": [
-      {
-        "src": "/screen-wide.png",
-        "sizes": "1917x843",
-        "type": "image/png",
-        "form-factor": "wide"
-      },
-      {
-        "src": "/screen-mobile.png",
-        "sizes": "403x714",
-        "type": "image/png",
-        "form-factor": "mobile"
-      }
-      
-    ],
-    "start_url": "/",
-    "display": "standalone",
-    "theme_color": "#FFFFFF",
-    "background_color": "#ffffff"
+          "src": "/logo192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }

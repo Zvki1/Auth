@@ -56,6 +56,11 @@ function App() {
         console.log("Disconnected from the socket  server");
       });
     }
+
+    if ("getInstalledRelatedApps" in window.navigator) {
+      console.log("am propmting");
+      
+    }
   }, []);
 
   return (
